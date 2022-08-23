@@ -59,7 +59,6 @@ Adherent.getAll = (result) => {
             result(null, err);
             return;
         }
-        console.log("Liste de des adhérents : ", res);
         result(null, res);
     });
 };

@@ -1,0 +1,86 @@
+<%- include('includes/header.ejs') %>
+
+<body>
+    <div class="layout">
+        <%- include('includes/navbar.ejs') %>
+
+        <div class="layout-header">
+            <h1 class="header-title">Liste des mandats</h1>
+        </div>
+        <div class="layout-content">
+            <div class="listing">
+                <div class="listing-search">
+                    <div class="searchbox">
+                        <input class="searchbox-input" type="text" placeholder="Recherche"></input>
+                        <div class="searchbox-action"><img width="20px" height="20px" src="/img/search.png"
+                                alt="search"></div>
+                    </div>
+                </div>
+                <div class="listing-action">
+                    <div class="cta">Nouveau mandat</div>
+                </div>
+                <div class="listing-filter">
+                    <div class="filter">
+                        <div class="filter-item filter-selected">Tous</div>
+                        <div class="filter-item">Artisanat</div>
+                        <div class="filter-item">EFJ</div>
+                        <div class="filter-item">ENI</div>
+                        <div class="filter-item">Ouverture Régionale</div>
+                        <div class="filter-item">PE-AT</div>
+                        <div class="filter-item">Social</div>
+                    </div>
+
+                </div>
+                <div class="listing-table">
+                    <table class="table">
+                        <thead class="table-head">
+                            <tr>
+                                <td class="table-cell" width="35%">Institution</td>
+                                <td class="table-cell" width="20%">Catégorie</td>
+                                <td class="table-cell" width="15%">Renouvellement</td>
+                                <td class="table-cell" width="10%">Statut</td>
+                                <td class="table-cell" width="20%">Actions</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% mandats.forEach(mandat=> { %>
+                                <tr class="table-row">
+                                    <td class="table-cell semibold">
+                                        <%= mandat.label %>
+                                    </td>
+                                    <td class="table-cell">
+                                        <%= mandat.categorie %>
+                                    </td>
+
+                                    <td class="table-cell">
+                                        <%= mandat.renouvellement %>
+                                    </td>
+                                    <td class="table-cell">
+                                        <%= mandat.isActive==1 ? "actif" : "inactif" %>
+                                    </td>
+                                    <td class="table-cell table-actions">
+                                        <div name="" class="table-icon" onclick="seemandat('<%= mandat.id %>')"><img
+                                                width="12px" height="12px" src="/img/see.png" alt="see">
+                                        </div>
+                                        <div class="table-icon" onclick="editmandat('<%= mandat.id %>')"><img
+                                                width="12px" height="12px" src="/img/edit.png" alt="edit">
+                                        </div>
+                                        <div class="table-icon" onclick="deletemandat('<%= mandat.id %>')"><img
+                                                width="12px" height="12px" src="/img/remove.png" alt="remove"></div>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+<script src="/js/index.js"></script>
+
+</html>
