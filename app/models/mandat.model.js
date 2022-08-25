@@ -52,7 +52,7 @@ Mandat.findById = (id, result) => {
 
 // Récupérer tous les mandats
 Mandat.getAll = (result) => {
-    let query = "SELECT * FROM mandat";
+    let query = "SELECT * FROM mandat ORDER BY label";
     sql.query(query, (err, res) => {
         if (err) {
             console.log("error: ", err);

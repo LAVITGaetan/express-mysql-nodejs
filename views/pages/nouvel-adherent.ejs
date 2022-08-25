@@ -1,0 +1,110 @@
+<%- include('includes/header.ejs') %>
+
+    <body>
+        <div class="layout">
+
+            <div class="layout-header">
+                <h1 class="header-title">Nouvel adhérent</h1>
+            </div>
+            <%- include('includes/navbar.ejs') %>
+
+                <div class="layout-content">
+                    <form class="form-flex" onsubmit="addAdherent(event)" method="post">
+                        <div class="form-group">
+                            <label for="entreprise" class="form-label">Raison Sociale</label>
+                            <input name="entreprise" id="entreprise" type="text" class="form-input"
+                                placeholder="Réponse">
+                        </div>
+                        <div class="form-group">
+                            <label for="section" class="form-label">Section</label>
+                            <select name="section" id="section" class="form-select">
+                                <option value="null">Choisir une section</option>
+                                <option value="artisanat">Artisanat</option>
+                                <option value="commerce">Commerce</option>
+                                <option value="industrie">Industrie</option>
+                                <option value="services">Services</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="adresse" class="form-label">Adresse de l' entreprise</label>
+                            <input type="text" id="adresse" class="form-input" placeholder="Réponse">
+                        </div>
+                        <div class="form-group">
+                            <label for="titre" class="form-label">Titre du représentant</label>
+                            <input type="text" id="titre" class="form-input" placeholder="Réponse">
+                        </div>
+                        <div class="form-group">
+                            <label for="nom" class="form-label">Nom du représentant</label>
+                            <input type="text" id="nom" class="form-input" placeholder="Réponse">
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom" class="form-label">Prénom du représentant</label>
+                            <input type="text" id="prenom" class="form-input" placeholder="Réponse">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Adresse E-mail</label>
+                            <input type="text" id="email" class="form-input" placeholder="Réponse">
+                        </div>
+                        <div class="form-group">
+                            <label for="telephone" class="form-label">Numéro de téléphone</label>
+                            <input type="text" id="telephone" class="form-input" placeholder="Réponse">
+                        </div>
+                        <div class="form-group">
+                            <label for="identifiant" class="form-label">Mot de passe</label>
+                            <div class="generate-field">
+                            <input maxlength="5" type="text" id="identifiant" class="form-input" placeholder="Réponse">
+                            <div class="generate" onclick="generateCode()"></div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="siteweb" class="form-label">Site web</label>
+                            <input type="text" id="siteweb" class="form-input" placeholder="Réponse">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="cta" value="Confirmer la création">
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </body>
+    <script>
+        function addAdherent(event) {
+            event.preventDefault();
+            let adherent = {
+                entreprise: document.getElementById('entreprise').value,
+                section: document.getElementById('section').value,
+                adresse: document.getElementById('adresse').value,
+                nom: document.getElementById('nom').value,
+                prenom: document.getElementById('prenom').value,
+                email: document.getElementById('email').value,
+                telephone: document.getElementById('telephone').value,
+                identifiant: document.getElementById('identifiant').value,
+                siteweb: document.getElementById('siteweb').value,
+                status: 1
+            }
+            fetch(`http://localhost:7070/api/adherents/`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(adherent)
+            })
+                .then(res => {
+                    console.log("Request complete! response:", res);
+                });
+        }
+        
+        function generateCode() {
+            let field = document.getElementById('identifiant');
+            let result = ''
+            var characters = 'ABCDEFGHIJKLMNPQRSTUVWXYZ0123456789';
+            var charactersLength = characters.length;
+            for (var i = 0; i < 5 ; i++) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            field.value = result;
+        }
+    </script>
+    <script src="/js/index.js"></script>
+    </html>

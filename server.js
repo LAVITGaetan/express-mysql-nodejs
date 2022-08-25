@@ -22,10 +22,6 @@ app.set('view engine', 'ejs')
 // Static Files
 app.use(express.static('public'));
 
-app.get('/', function (req, res) {
-  res.json({ message: "Server running" });
-});
-
 // Session
 
 app.use(session({
@@ -84,6 +80,26 @@ app.get('/adherents', (req, res) => {
     })
 })
 
+
+app.get('/adherent', (req, res) => {
+  const uri = `http://localhost:7070/api/adherents/${req.query.id}`;
+  let adherent = [];
+  fetch(uri)
+    .then((response) => response.json())
+    .then((response) => {
+      adherent.push(response)
+  if (req.session.loggedin) {
+    console.log(adherent);
+    res.render('pages/adherent', { title: "Profil adhérent", adherent : adherent });
+  }
+  else {
+    res.send("Veuillez vous connecter pour accéder à cette page")
+  }
+})
+})
+
+
+
 app.get('/mandats', (req, res) => {
   const uri = `http://localhost:7070/api/mandats/`;
   let mandats = [];
@@ -103,17 +119,8 @@ app.get('/mandats', (req, res) => {
     })
 })
 
-app.get('/login', (req, res) => {
+app.get('/', (req, res) => {
   res.render('pages/login', { title: "Connexion" });
-})
-
-app.get('/logiciels', (req, res) => {
-  if (req.session.loggedin) {
-    res.render('pages/logiciels', { title: "Logiciels" });
-  }
-  else {
-    res.send("Veuillez vous connecter pour accéder à cette page")
-  }
 })
 
 app.get('/accueil', (req, res) => {
@@ -135,9 +142,29 @@ app.get('/fiches', (req, res) => {
   }
 })
 
+
+app.get('/formulaires', (req, res) => {
+  if (req.session.loggedin) {
+    res.render('pages/formulaires', { title: "Formulaires" });
+  }
+  else {
+    res.send("Veuillez vous connecter pour accéder à cette page")
+  }
+})
+
+app.get('/nouvel-adherent', (req, res) => {
+  if (req.session.loggedin) {
+    res.render('pages/nouvel-adherent', { title: "Ajouter un adhérent" });
+  }
+  else {
+    res.send("Veuillez vous connecter pour accéder à cette page")
+  }
+})
+
 const PORT = process.env.PORT || 7070
 
 require("./app/routes/adherent.routes.js")(app);
+require("./app/routes/annuaire.routes.js")(app);
 require("./app/routes/mandat.routes.js")(app);
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

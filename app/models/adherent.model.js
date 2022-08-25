@@ -40,7 +40,7 @@ Adherent.findById = (id, result) => {
 
         // Succés
         if (res.length) {
-            console.log("Adherent trouvé : ", res[0]);
+            console.log(res[0]);
             result(null, res[0]);
             return;
         }
@@ -52,7 +52,7 @@ Adherent.findById = (id, result) => {
 
 // Récupérer tous les adhérents
 Adherent.getAll = (result) => {
-    let query = "SELECT * FROM adherent";
+    let query = "SELECT * FROM adherent ORDER BY `entreprise`";
     sql.query(query, (err, res) => {
         if (err) {
             console.log("error: ", err);

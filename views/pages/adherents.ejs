@@ -1,100 +1,133 @@
 <%- include('includes/header.ejs') %>
 
 
-<body>
-    <div class="layout">
+    <body>
+        <div class="layout">
 
-        <div class="layout-header">
-            <h1 class="header-title">Liste des adhérents</h1>
-        </div>
-        <%- include('includes/navbar.ejs') %>
-
-        <div class="layout-content">
-            <div class="listing">
-                <div class="listing-search">
-                    <div class="searchbox">
-                        <input class="searchbox-input" type="text" placeholder="Recherche"></input>
-                        <div class="searchbox-action"><img width="20px" height="20px" src="/img/search.png"
-                                alt="search"></div>
-                    </div>
-                </div>
-                <div class="listing-action">
-                    <div class="cta">Nouvel adhérent</div>
-                </div>
-                <div class="listing-filter">
-                    <div class="filter">
-                        <div class="filter-item filter-selected">Tous</div>
-                        <div class="filter-item">Artisanat</div>
-                        <div class="filter-item">Commerce</div>
-                        <div class="filter-item">Industrie</div>
-                        <div class="filter-item">Services</div>
-                    </div>
-
-                </div>
-                <div class="listing-table">
-                    <table class="table">
-                        <thead class="table-head">
-                            <tr>
-                                <td class="table-cell" width="25%">Raison Sociale</td>
-                                <td class="table-cell" width="10%">Section</td>
-                                <td class="table-cell" width="15%">Email</td>
-                                <td class="table-cell" width="10%">Identifiant</td>
-                                <td class="table-cell" width="10%">Statut</td>
-                                <td class="table-cell" width="20%">Actions</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% adherents.forEach(adherent=> { %>
-                                <tr class="table-row">
-                                    <td class="table-cell semibold">
-                                        <%= adherent.entreprise %>
-                                    </td>
-                                    <td class="table-cell">
-                                        <%= adherent.section %>
-                                    </td>
-                                    <td class="table-cell">
-                                        <%= adherent.email %>
-                                    </td>
-                                    <td class="table-cell">
-                                        <%= adherent.identifiant %>
-                                    </td>
-                                    <td class="table-cell">
-                                        <%= adherent.status==1 ? "actif" : "inactif" %>
-                                    </td>
-                                    <td class="table-cell table-actions">
-                                        <div name="" class="table-icon" onclick="seeAdherent('<%= adherent.id %>')"><img
-                                                width="12px" height="12px" src="/img/see.png" alt="see">
-                                        </div>
-                                        <div class="table-icon" onclick="editAdherent('<%= adherent.id %>')"><img
-                                                width="12px" height="12px" src="/img/edit.png" alt="edit">
-                                        </div>
-                                        <div class="table-icon" onclick="deleteAdherent('<%= adherent.id %>')"><img
-                                                width="12px" height="12px" src="/img/remove.png" alt="remove"></div>
-                                    </td>
-                                </tr>
-                                <% }) %>
-                        </tbody>
-                    </table>
-
-
-                </div>
+            <div class="layout-header">
+                <h1 class="header-title">Liste des adhérents</h1>
             </div>
+            <%- include('includes/navbar.ejs') %>
 
+                <div class="layout-content">
+                    <div class="listing">
+                        <div class="listing-search">
+                            <div class="searchbox">
+                                <input class="searchbox-input" type="text" placeholder="Recherche"
+                                    onkeyup="searchAdherent()" id="search"></input>
+                                <div onclick="searchAdherent()" class="searchbox-action"><img width="20px" height="20px"
+                                        src="/img/search.png" alt="search"></div>
+                            </div>
+                        </div>
+                        <div class="listing-action">
+                            <a href="/nouvel-adherent" class="cta">Nouvel adhérent</a>
+                        </div>
+                        <div class="listing-filter">
+                            <div class="filter">
+                                <div class="filter-item filter-selected" onclick="changeFilter(0)">Tous</div>
+                                <div class="filter-item" onclick="changeFilter(1)">Artisanat</div>
+                                <div class="filter-item" onclick="changeFilter(2)">Commerce</div>
+                                <div class="filter-item" onclick="changeFilter(3)">Industrie</div>
+                                <div class="filter-item" onclick="changeFilter(4)">Services</div>
+                            </div>
+
+                        </div>
+                        <div class="listing-table">
+                            <table class="table">
+                                <thead class="table-head">
+                                    <tr>
+                                        <td class="table-cell">Raison Sociale</td>
+                                        <td class="table-cell">Section</td>
+                                        <td class="table-cell">Email</td>
+                                        <td class="table-cell">Identifiant</td>
+                                        <td class="table-cell">Statut</td>
+                                        <td class="table-cell">Actions</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% adherents.forEach(adherent=> { %>
+                                        <tr class="table-row">
+                                            <td class="table-cell semibold first-cell js-entreprise">
+                                                <%= adherent.entreprise %>
+                                            </td>
+                                            <td class="table-cell js-section">
+                                                <%= adherent.section %>
+                                            </td>
+                                            <td class="table-cell   ">
+                                                <%= adherent.email %>
+                                            </td>
+                                            <td class="table-cell">
+                                                <%= adherent.identifiant %>
+                                            </td>
+                                            <td class="table-cell">
+                                                <%= adherent.status==1 ? "actif" : "inactif" %>
+                                            </td>
+                                            <td class="table-cell table-actions">
+                                                <a href="/adherent?id=<%= adherent.id %>" class="table-icon">
+                                                    <img width="12px" height="12px" src="/img/edit.png" alt="edit">
+                                                </a>
+                                                <div class="table-icon" onclick="deleteAdherent('<%= adherent.id %>')">
+                                                    <img width="12px" height="12px" src="/img/remove.png" alt="remove">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+
+                </div>
         </div>
-    </div>
 
-</body>
-<script>
-    function deleteAdherent(id) {
-        fetch(`http://localhost:7070/api/adherents/${id}`, {
-            method: "DELETE",
-            headers: {
-                'Content-type': 'application/json'
+    </body>
+    <script>
+        function deleteAdherent(id) {
+            if (confirm('Voulez-vous vraiment supprimer cette adhérent ?')) {
+                fetch(`http://localhost:7070/api/adherents/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                })
+                document.location.reload();
             }
-        })
-        document.location.reload();
-    }
-</script>
-<script src="/js/index.js"></script>
+        }
 
-</html>
+
+        function changeFilter(id) {
+            document.getElementsByClassName('filter-selected')[0].classList.remove('filter-selected');
+            document.getElementsByClassName('filter-item')[id].classList.add('filter-selected');
+            searchAdherent();
+        }
+
+        function searchAdherent() {
+            let query = document.getElementById('search').value.toLowerCase();
+            let item = document.getElementsByClassName('table-row');
+            let length = item.length;
+            let filter = document.getElementsByClassName('filter-selected')[0].innerHTML.toLowerCase();
+            for (let i = 0; i < length; i++) {
+                let entreprise = item[i].getElementsByClassName('js-entreprise')[0].innerHTML.toLowerCase();
+                let section = item[i].getElementsByClassName('js-section')[0].innerHTML.toLowerCase();
+                if (filter === "tous" || filter === section.replace(/\s/g, '')) {
+                    if (entreprise.includes(query)) {
+                        item[i].style.display = 'table-row';
+                        console.log('item matched');
+                    }
+                    else {
+                        item[i].style.display = 'none';
+                        console.log('item hidden by query');
+                    }
+                } else {
+                    item[i].style.display = 'none';
+                    console.log('item hidden by section');
+                }
+
+            }
+        }
+    </script>
+    <script src="/js/index.js"></script>
+
+    </html>

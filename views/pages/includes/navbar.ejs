@@ -4,31 +4,38 @@
             <h2 class="navbar-title">CPME Réunion</h2>
         </div>
         <div class="navbar-content">
-            <a href="/accueil" class="navbar-link"><img src="img/accueil.png" class="navbar-icon">
+            <a href="/accueil" class="navbar-link <% if (title === 'Accueil') { %>
+                <%= 'link-selected' %>
+               <% } %>"><img src="img/accueil.png" class="navbar-icon">
                 <h3 class="navbar-text">Accueil</h3>
             </a>
-            <a href="/adherents" class="navbar-link"><img src="img/adherents.png" class="navbar-icon">
+            <a href="/adherents" class="navbar-link <% if (title === 'Adhérents') { %>
+             <%= 'link-selected' %>
+            <% } %>"><img src="img/adherents.png" class="navbar-icon">
                 <h3 class="navbar-text">Adhérents</h3>
-                </a>
-                <a href="/mandats" class="navbar-link"><img src="img/mandats.png" class="navbar-icon">
-                    <h3 class="navbar-text">Mandats</h3>
-                </a>
-                <a href="/fiches" class="navbar-link"><img src="img/temps.png" class="navbar-icon">
-                    <h3 class="navbar-text">Fiches temps</h3>
-                </a>
-        <a href="/logiciels" class="navbar-link"><img src="img/logiciels.png" class="navbar-icon">
-            <h3 class="navbar-text">Logiciels et codes</h3>
-        </a>
+            </a>
+            <a href="/mandats" class="navbar-link <% if (title === 'Mandats') { %>
+                <%= 'link-selected' %>
+               <% } %>"><img src="img/mandats.png" class="navbar-icon">
+                <h3 class="navbar-text">Mandats</h3>
+            </a>
+            <a href="/formulaires" class="navbar-link <% if (title === 'Formulaires') { %>
+                <%= 'link-selected' %>
+               <% } %>"><img src="img/formulaires.png" class="navbar-icon">
+                <h3 class="navbar-text">Formulaires</h3>
+            </a>
+            <a href="/fiches" class="navbar-link <% if (title === 'Fiches temps') { %>
+                <%= 'link-selected' %>
+               <% } %>"><img src="img/temps.png" class="navbar-icon">
+                <h3 class="navbar-text">Fiches temps</h3>
+            </a>
 
-        <div class="navbar-link"><img src="img/autres.png" class="navbar-icon">
-            <h3 class="navbar-text">Autres</h3>
+        </div>
+        <div class="navbar-footer">
+            <div class="profil">
+                <div class="profil-icon">GL</div>
+                <h4 class="profil-label">Gaetan LAVIT</h4>
+            </div>
         </div>
     </div>
-    <div class="navbar-footer">
-        <div class="profil">
-            <div class="profil-icon">GL</div>
-            <h4 class="profil-label">Gaetan LAVIT</h4>
-        </div>
-    </div>
-</div>
 </div>
