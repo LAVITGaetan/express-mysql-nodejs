@@ -88,7 +88,9 @@
                 body: JSON.stringify(adherent)
             })
                 .then(res => {
-                    console.log("Request complete! response:", res);
+                    console.log("Adhérent ajouté : ", res);
+                    alert('Adhérent ajouté, vous allez être redirigé vers la liste des adhérents')
+                    document.location.assign(`/adherents`)
                 });
         }
 

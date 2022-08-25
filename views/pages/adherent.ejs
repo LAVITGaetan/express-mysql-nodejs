@@ -10,19 +10,20 @@
             <%- include('includes/navbar.ejs') %>
             onclick="deleteAdherent('<%= adherent.id %>')"
                 <div class="layout-content">
-                    <% if (adherent[0].status == 0) { %>
-                     <div class="cta" onclick="enableAdherent('<%= adherent[0].id %>')">Activer l' adhérent'</div>
-                    <% }else {%>
-                        <div class="ctd" onclick="disableAdherent('<%= adherent[0].id %>')">Désactiver l' adhérent'</div>
-
-                    <%} %>
-
-                    <% if (adherent[0].parution == 0) { %>
-                        <div class="cta" onclick="enableAnnuaire('<%= adherent[0].id_annuaire %>')">Activer la parution</div>
+                    <div class="cta-container"><% if (adherent[0].status == 0) { %>
+                        <div class="cta" onclick="enableAdherent('<%= adherent[0].id %>')">Activer l' adhérent'</div>
                        <% }else {%>
-                           <div class="ctd" onclick="disableAnnuaire('<%= adherent[0].id_annuaire %>')">Désactiver la parution</div>
+                           <div class="ctd" onclick="disableAdherent('<%= adherent[0].id %>')">Désactiver l' adhérent</div>
    
-                       <%} %>
+                       <%} %></div>
+                    
+<div class="cta-container"><% if (adherent[0].parution == 0) { %>
+    <div class="cta" onclick="enableAnnuaire('<%= adherent[0].id_annuaire %>')">Activer la parution</div>
+   <% }else {%>
+       <div class="ctd" onclick="disableAnnuaire('<%= adherent[0].id_annuaire %>')">Désactiver la parution</div>
+
+   <%} %></div>
+                    
                     <div class="container">
                         <div class="container-header">Informations générales</div>
                         <div class="container-row"><span class="row-label">Raison Sociale : </span>
