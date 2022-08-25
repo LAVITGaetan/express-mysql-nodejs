@@ -4,68 +4,68 @@
         <div class="layout">
 
             <div class="layout-header">
-                <h1 class="header-title">Nouvel adhérent</h1>
+                <h1 class="header-title">Modifier les informations de l'adhérent</h1>
             </div>
             <%- include('includes/navbar.ejs') %>
 
                 <div class="layout-content">
-                    <form class="form-flex" onsubmit="addAdherent(event)" method="post">
+                    <form class="form-flex" onsubmit="editAdherent(event)" method="post">
                         <div class="form-group">
                             <label for="entreprise" class="form-label">Raison Sociale</label>
-                            <input name="entreprise" id="entreprise" type="text" class="form-input"
-                                placeholder="Réponse">
+                            <input name="entreprise" id="entreprise" type="text" class="form-input" placeholder="Réponse" value="<%= adherent[0].entreprise %>">
                         </div>
                         <div class="form-group">
                             <label for="section" class="form-label">Section</label>
                             <select name="section" id="section" class="form-select">
                                 <option value="null">Choisir une section</option>
-                                <option value="artisanat">Artisanat</option>
-                                <option value="commerce">Commerce</option>
-                                <option value="industrie">Industrie</option>
-                                <option value="services">Services</option>
+                                <option value="artisanat" <%= adherent[0].section === 'artisanat' ? 'selected' : '' %>>Artisanat</option>
+                                <option value="commerce" <%= adherent[0].section === 'commerce' ? 'selected' : '' %>>Commerce</option>
+                                <option value="industrie" <%= adherent[0].section === 'industrie' ? 'selected' : '' %>>Industrie</option>
+                                <option value="services" <%= adherent[0].section === 'services' ? 'selected' : '' %>>Services</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="adresse" class="form-label">Adresse de l' entreprise</label>
-                            <input type="text" id="adresse" class="form-input" placeholder="Réponse">
+                            <input type="text" id="adresse" class="form-input" placeholder="Réponse" value="<%= adherent[0].adresse %>">
                         </div>
                         <div class="form-group">
                             <label for="nom" class="form-label">Nom du représentant</label>
-                            <input type="text" id="nom" class="form-input" placeholder="Réponse">
+                            <input type="text" id="nom" class="form-input" placeholder="Réponse" value="<%= adherent[0].nom %>">
                         </div>
                         <div class="form-group">
                             <label for="prenom" class="form-label">Prénom du représentant</label>
-                            <input type="text" id="prenom" class="form-input" placeholder="Réponse">
+                            <input type="text" id="prenom" class="form-input" placeholder="Réponse" value="<%= adherent[0].prenom %>">
                         </div>
                         <div class="form-group">
                             <label for="email" class="form-label">Adresse E-mail</label>
-                            <input type="text" id="email" class="form-input" placeholder="Réponse">
+                            <input type="text" id="email" class="form-input" placeholder="Réponse" value="<%= adherent[0].email %>">
                         </div>
                         <div class="form-group">
                             <label for="telephone" class="form-label">Numéro de téléphone</label>
-                            <input type="text" id="telephone" class="form-input" placeholder="Réponse">
+                            <input type="text" id="telephone" class="form-input" placeholder="Réponse" value="<%= adherent[0].telephone %>">
                         </div>
                         <div class="form-group">
                             <label for="identifiant" class="form-label">Mot de passe</label>
                             <div class="generate-field">
-                            <input maxlength="5" type="text" id="identifiant" class="form-input" placeholder="Réponse">
+                            <input maxlength="5" type="text" id="identifiant" class="form-input" placeholder="Réponse" value="<%= adherent[0].identifiant %>">
                             <div class="generate" onclick="generateCode()"></div>
 
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="siteweb" class="form-label">Site web</label>
-                            <input type="text" id="siteweb" class="form-input" placeholder="Réponse">
+                            <input type="text" id="siteweb" class="form-input" placeholder="Réponse" value="<%= adherent[0].siteweb %>">
                         </div>
-                        <div class="form-group">
-                            <input type="submit" class="cta" value="Confirmer la création">
+                        <div class="form-action">
+                            <input type="submit" class="cta" value="Modifier un adhérent">
                         </div>
                     </form>
                 </div>
         </div>
     </body>
     <script>
-        function addAdherent(event) {
+        function editAdherent(event) {
+            let id = '<%= adherent[0].id %>'
             event.preventDefault();
             let adherent = {
                 entreprise: document.getElementById('entreprise').value,
@@ -79,8 +79,8 @@
                 siteweb: document.getElementById('siteweb').value,
                 status: 1
             }
-            fetch(`http://localhost:7070/api/adherents/`, {
-                method: "POST",
+            fetch(`http://localhost:7070/api/adherents/${id}`, {
+                method: "PUT",
                 headers: {
                     'Content-type': 'application/json'
                 },

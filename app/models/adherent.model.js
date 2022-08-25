@@ -23,6 +23,9 @@ Adherent.create = (newAdherent, result) => {
             return;
         }
         console.log("Nouvel adhérent crée : ", { id: res.insertId, ...newAdherent });
+
+        // Création d'un annuaire lié à l'adhérent
+        sql.query("INSERT INTO annuaire SET id_adherent = ?", res.insertId)
         result(null, { id: res.insertId, ...newAdherent });
     });
 };
@@ -94,7 +97,7 @@ Adherent.updateById = (id, adherent, result) => {
                 result({ kind: "not_found" }, null);
                 return;
             }
-            
+
             console.log("adherent: ", { id: id, ...adherent });
             result(null, { id: id, ...adherent });
         }

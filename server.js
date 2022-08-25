@@ -82,14 +82,13 @@ app.get('/adherents', (req, res) => {
 
 
 app.get('/adherent', (req, res) => {
-  const uri = `http://localhost:7070/api/adherents/${req.query.id}`;
+  const uri = `http://localhost:7070/api/annuaires/all/${req.query.id}`;
   let adherent = [];
   fetch(uri)
     .then((response) => response.json())
     .then((response) => {
-      adherent.push(response)
+      adherent.push(response[0])
   if (req.session.loggedin) {
-    console.log(adherent);
     res.render('pages/adherent', { title: "Profil adhérent", adherent : adherent });
   }
   else {
@@ -99,6 +98,21 @@ app.get('/adherent', (req, res) => {
 })
 
 
+app.get('/edit-adherent', (req, res) => {
+  const uri = `http://localhost:7070/api/adherents/${req.query.id}`;
+  let adherent = [];
+  fetch(uri)
+    .then((response) => response.json())
+    .then((response) => {
+      adherent.push(response)
+  if (req.session.loggedin) {
+    res.render('pages/edit-adherent', { title: "Modifer un adhérent", adherent : adherent });
+  }
+  else {
+    res.send("Veuillez vous connecter pour accéder à cette page")
+  }
+})
+})
 
 app.get('/mandats', (req, res) => {
   const uri = `http://localhost:7070/api/mandats/`;

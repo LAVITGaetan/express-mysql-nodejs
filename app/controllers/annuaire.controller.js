@@ -67,6 +67,23 @@ exports.findOne = (req, res) => {
     });
 };
 
+// Récupérer un annuaire avec l'id adhérent
+exports.findAdherent = (req, res) => {
+    Annuaire.getAdherent(req.params.id, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Annuaire introuvable, id adhérent: ${req.params.id}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Une erreur est survenue en récupérant l' annuaire, id adhérent : " + req.params.id
+                });
+            }
+        } else res.send(data);
+    })
+}
+
 // Mettre à jour un annuaire
 exports.update = (req, res) => {
     // Valider la requête

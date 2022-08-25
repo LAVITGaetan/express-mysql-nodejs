@@ -10,8 +10,31 @@
             <%- include('includes/navbar.ejs') %>
             
                 <div class="layout-content">
-
-<h1>Adhérent : <%= adherent[0].entreprise %></h1>
+                    <div class="container">
+                        <div class="container-header">Informations générales</div>
+                        <div class="container-row"><span class="row-label">Raison Sociale : </span><%= adherent[0].entreprise %></div>
+                        <div class="container-row"><span class="row-label">Section : </span><%= adherent[0].section %></div>
+                        <div class="container-row"><span class="row-label">Adresse : </span><%= adherent[0].adresse %></div>
+                        <div class="container-row"><span class="row-label">Représentant : </span><%= adherent[0].prenom %> <%= adherent[0].nom %></div>
+                        <div class="container-row"><span class="row-label">Email : </span><%= adherent[0].email %></div>
+                        <div class="container-row"><span class="row-label">Téléphone : </span><%= adherent[0].telephone %></div>
+                        <div class="container-row"><span class="row-label">Identifiant : </span><%= adherent[0].identifiant %></div>
+                        <div class="container-row"><span class="row-label">Site web : </span><%= adherent[0].siteweb %></div>
+                        
+                        <div class="container-action"><a href="/edit-adherent?id=<%= adherent[0].id %>" class="cta">Modifier</div></a>
+                    </div>
+                    <div class="container">
+                        <div class="container-header">Parution dans l'annuaire</div>
+                        <div class="container-row"><span class="row-label">Logo : </span><a href="<%= adherent[0].logo %>"><%= adherent[0].logo %></a></div>
+                        <div class="container-row"><span class="row-label">Activité : </span><%= adherent[0].activite %></div>
+                        <div class="container-row"><span class="row-label">Titre du contact : </span><%= adherent[0].contact_titre %></div>
+                        <div class="container-row"><span class="row-label">Nom du contact : </span><%= adherent[0].contact_nom %> </div>
+                        <div class="container-row"><span class="row-label">Prénom du contact : </span><%= adherent[0].contact_prenom %></div>
+                        <div class="container-row"><span class="row-label">Email du contact : </span><%= adherent[0].contact_email %></div>
+                        <div class="container-row"><span class="row-label">Téléphone du contact : </span><%= adherent[0].contact_telephone %></div>
+                        <div class="container-row"><span class="row-label">Parution : </span><%= adherent[0].parution === 1 ? 'activée' : 'desactivée' %></div>
+                        <div class="container-action"><div class="cta">Modifier</div></div>
+                    </div>
                 </div>
         </div>
 

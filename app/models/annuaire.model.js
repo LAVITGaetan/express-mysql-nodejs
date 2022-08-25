@@ -62,6 +62,19 @@ Annuaire.getAll = (result) => {
     });
 };
 
+// Récupérer un annuaire avec l'id adhérent
+Annuaire.getAdherent = (id, result) => {
+    let query = `SELECT * FROM annuaire INNER JOIN adherent ON annuaire.id_adherent = adherent.id WHERE adherent.id = ${id}`;
+    sql.query(query, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        result(null, res);
+    });
+};
+
 // Récupérer les annuaires actifs
 Annuaire.getActive = (result) => {
     sql.query("SELECT * FROM annuaire WHERE parution= '1'", (err, res) => {
