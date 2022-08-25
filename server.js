@@ -150,6 +150,25 @@ app.get('/mandats', (req, res) => {
     })
 })
 
+app.get('/portraits', (req, res) => {
+  const uri = `http://localhost:7070/api/portraits/`;
+  let portraits = [];
+  fetch(uri)
+    .then((response) => response.json())
+    .then((response) => {
+      response.forEach(item => {
+        portraits.push(item)
+      });
+      if (req.session.loggedin) {
+        res.render('pages/portraits', { portraits: portraits, title: "Portraits" });
+      }
+      else {
+        res.send("Veuillez vous connecter pour accéder à cette page")
+      }
+
+    })
+})
+
 app.get('/', (req, res) => {
   res.render('pages/login', { title: "Connexion" });
 })
@@ -192,11 +211,20 @@ app.get('/nouvel-adherent', (req, res) => {
   }
 })
 
+app.get('/nouveau-portrait', (req, res) => {
+  if (req.session.loggedin) {
+    res.render('pages/nouveau-portrait', { title: "Ajouter un portrait" });
+  }
+  else {
+    res.send("Veuillez vous connecter pour accéder à cette page")
+  }
+})
 const PORT = process.env.PORT || 7070
 
 require("./app/routes/adherent.routes.js")(app);
 require("./app/routes/annuaire.routes.js")(app);
 require("./app/routes/mandat.routes.js")(app);
+require("./app/routes/portrait.routes.js")(app);
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 })

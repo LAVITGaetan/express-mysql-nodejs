@@ -1,0 +1,70 @@
+<%- include('includes/header.ejs') %>
+
+    <body>
+        <div class="layout">
+            <%- include('includes/navbar.ejs') %>
+
+                <div class="layout-header">
+                    <h1 class="header-title">Liste des mandats</h1>
+                </div>
+                <div class="layout-content">
+                    <a href="/nouveau-portrait" class="cta">Nouveau portrait</a>
+                    <div class="flex">
+                        <% portraits.forEach(portrait => { %>
+                            <div class="card">
+                                <div class="card-figure">
+                                    <img class="card-image" src="<%= portrait.image %>" alt="portrait">
+                                </div>
+                                <div class="card-title"><%= portrait.prenom %> <%= portrait.nom %></div>
+                                <div class="card-action">Voir</div>
+                                <div class="card-top" onclick="deletePortrait('<%= portrait.id %>')">x</div>
+                            </div>
+                        <% }) %>
+
+                    </div>
+                </div>
+        </div>
+
+    </body>
+
+    <script>
+function deletePortrait(id) {
+            if (confirm('Voulez-vous vraiment supprimer ce portrait ?')) {
+                fetch(`http://localhost:7070/api/portraits/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                })
+                document.location.reload();
+            }
+        }
+
+        function searchPortrait() {
+            let query = document.getElementById('search').value.toLowerCase();
+            let item = document.getElementsByClassName('table-row');
+            let length = item.length;
+            let filter = document.getElementsByClassName('filter-selected')[0].innerHTML.toLowerCase();
+            for (let i = 0; i < length; i++) {
+                let label = item[i].getElementsByClassName('js-label')[0].innerHTML.toLowerCase();
+                let categorie = item[i].getElementsByClassName('js-categorie')[0].innerHTML.toLowerCase();
+                if (filter === "tous" || filter === categorie.replace(/\s/g, '')) {
+                    if (label.includes(query)) {
+                        item[i].style.display = 'table-row';
+                        console.log('item matched');
+                    }
+                    else {
+                        item[i].style.display = 'none';
+                        console.log('item hidden by query');
+                    }
+                } else {
+                    item[i].style.display = 'none';
+                    console.log('item hidden by section');
+                }
+
+            }
+        }
+    </script>
+    <script src="/js/index.js"></script>
+
+    </html>
