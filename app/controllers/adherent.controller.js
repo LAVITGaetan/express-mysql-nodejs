@@ -111,3 +111,37 @@ exports.delete = (req, res) => {
         } else res.send({ message: `Adhérent supprimé !` });
     });
 };
+
+//Désactiver un adhérent
+exports.disable = (req, res) => {
+    Adherent.disable(req.params.id, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found Adherent with id ${req.params.id}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: `Impossible de supprimer l' adhérent, id : ${req.params.id}.`
+                });
+            }
+        } else res.send({ message: `Adhérent désactivé !` });
+    });
+};
+
+//Désactiver un adhérent
+exports.enable = (req, res) => {
+    Adherent.enable(req.params.id, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found Adherent with id ${req.params.id}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: `Impossible de supprimer l' adhérent, id : ${req.params.id}.`
+                });
+            }
+        } else res.send({ message: `Adhérent activé !` });
+    });
+};

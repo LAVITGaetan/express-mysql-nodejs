@@ -20,5 +20,12 @@ module.exports = app => {
     // Supprimer un adhérent
     router.delete("/:id", adherents.delete);
 
+    // Désactiver un adhérent
+    router.put("/disable/:id", adherents.disable);
+
+    // Activer un adhérent
+    router.put("/enable/:id", adherents.enable);
+
+
     app.use('/api/adherents', router);
 };

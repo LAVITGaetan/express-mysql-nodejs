@@ -128,3 +128,37 @@ exports.delete = (req, res) => {
         } else res.send({ message: `Annuaire supprimé !` });
     });
 };
+
+//Désactiver un annuaire
+exports.disable = (req, res) => {
+    Annuaire.disable(req.params.id, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found Annuaire with id ${req.params.id}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: `Impossible de désactiver l' annuaire, id : ${req.params.id}.`
+                });
+            }
+        } else res.send({ message: `Annuaire désactivé !` });
+    });
+};
+
+//Activer un annuaire
+exports.enable = (req, res) => {
+    Annuaire.enable(req.params.id, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found Annuaire with id ${req.params.id}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: `Impossible de d' activer l' annuaire, id : ${req.params.id}.`
+                });
+            }
+        } else res.send({ message: `Annuaire activé !` });
+    });
+};

@@ -23,5 +23,11 @@ module.exports = app => {
     // Supprimer un annuaire
     router.delete("/:id", annuaires.delete);
 
+        // Désactiver un annuaire
+        router.put("/disable/:id", annuaires.disable);
+
+        // Activer un annuaire
+        router.put("/enable/:id", annuaires.enable);
+
     app.use('/api/annuaires', router);
 };

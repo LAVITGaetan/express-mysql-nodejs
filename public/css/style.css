@@ -162,6 +162,22 @@ body {
   border-radius: 3px;
 }
 
+.ctd {
+  border: none;
+  outline: none;
+  text-decoration: none;
+  padding: 1em;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.03em;
+  font-size: 16px;
+  font-family: Montserrat;
+  width: fit-content;
+  cursor: pointer;
+  background-color: #cc0700;
+  border-radius: 3px;
+}
+
 /* Searchbar */
 .searchbox {
   width: 100%;
@@ -286,7 +302,7 @@ body {
   background-color: #fff;
   border-spacing: 0;
   border-radius: 3px;
-  box-shadow: 2px 5px 10px 0px #00c4cc20;
+  box-shadow: 2px 5px 10px 2px #00c4cc20;
 }
 
 .table-head {
@@ -400,6 +416,8 @@ body {
   margin-top: 30px;
 }
 
+
+/* Form */
 .form-container {
   width: 100%;
   padding: 1em 5%;
@@ -499,68 +517,13 @@ body {
   color: #0a2439;
 }
 
-/* Card */
-
-.card {
-  background-color: #fff;
-  border-radius: 0px;
-  padding: 1em;
-  box-shadow: 2px 5px 10px 0px #00c4cc20;
-}
-
-.card-header {
-  width: 100%;
-  display: flex;
-  margin-bottom: 1.5em;
-  align-items: center;
-}
-
-.card-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 48px;
-}
-
-.card-header_title {
-  width: calc(100% - 48px);
-  padding-left: 10px;
-}
-
-.card-title {
-  font-size: 17px;
-  color: #0a2439;
-  font-weight: 700;
-}
-
-.row-label {
-  color: #0a2439;
-  font-weight: 600;
-}
-
-.card-row {
-  margin-bottom: 1em;
-  font-size: 15px;
-}
-
-.card-action {
-  background-color: #00c4cc;
-  color: #fff;
-  font-weight: 600;
-  font-size: 15px;
-  padding: 0.75em 1em;
-  border-radius: 3px;
-  margin-top: 1.5em;
-  width: fit-content;
-}
-
 /* Container */
-
 .container {
   width: 45%;
   margin-right: 5%;
   float: left;
   padding: 0 0 1em 0;
-  box-shadow: 2px 5px 10px 0px #00c4cc20;
+  box-shadow: 2px 5px 10px 2px #00c4cc20;
   border-radius: 3px;
   margin-bottom: 1em;
 }
@@ -568,9 +531,9 @@ body {
   background-color: #0a2439;
   color: #fff;
   font-size: 18px;
-padding: 1em 5%;
-font-weight: 600;
-margin-bottom: 1em;
+  padding: 1em 5%;
+  font-weight: 600;
+  margin-bottom: 1em;
 }
 
 .container-row {
@@ -579,6 +542,17 @@ margin-bottom: 1em;
 }
 
 .container-action {
-  margin-top: 2em;
+  margin-top: 1.5em;
   padding: 0 5%;
+}
+
+.container-cta {
+  text-decoration: none;
+  color: #00c4cc;
+  font-weight: 600;
+  border: 2px solid #00c4cc;
+  padding: 0.5em 1em;
+  display: block;
+  border-radius: 3px;
+  width: fit-content;
 }

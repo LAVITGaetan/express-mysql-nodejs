@@ -64,7 +64,7 @@ Annuaire.getAll = (result) => {
 
 // Récupérer un annuaire avec l'id adhérent
 Annuaire.getAdherent = (id, result) => {
-    let query = `SELECT * FROM annuaire INNER JOIN adherent ON annuaire.id_adherent = adherent.id WHERE adherent.id = ${id}`;
+    let query = `SELECT *, annuaire.id AS id_annuaire FROM annuaire INNER JOIN adherent ON annuaire.id_adherent = adherent.id WHERE adherent.id = ${id}`;
     sql.query(query, (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -91,8 +91,8 @@ Annuaire.getActive = (result) => {
 // Mettre à jour un annuaire
 Annuaire.updateById = (id, annuaire, result) => {
     sql.query(
-        "UPDATE annuaire SET id_adherent = ?, logo = ?, activite = ?, contact_titre = ?, contact_nom = ?, contact_email = ?, contact_telephone = ?, parution = ? WHERE id = ?",
-        [annuaire.id_adherent, annuaire.logo, annuaire.activite, annuaire.contact_titre, annuaire.contact_nom, annuaire.contact_email, annuaire.contact_telephone, annuaire.parution, id],
+        "UPDATE annuaire SET logo = ?, activite = ?, contact_titre = ?, contact_nom = ?, contact_prenom = ?, contact_email = ?, contact_telephone = ?, parution = ? WHERE id = ?",
+        [annuaire.logo, annuaire.activite, annuaire.contact_titre, annuaire.contact_nom, annuaire.contact_prenom, annuaire.contact_email, annuaire.contact_telephone, annuaire.parution, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -128,6 +128,44 @@ Annuaire.remove = (id, result) => {
             return;
         }
         console.log("Annuaire supprimé");
+        result(null, res);
+    });
+};
+
+// Désactiver un annuaire
+Annuaire.disable = (id, result) => {
+    sql.query("UPDATE annuaire SET parution = 0 WHERE id = ?", id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+
+        // id introuvable
+        if (res.affectedRows == 0) {
+            result({ kind: "not_found" }, null);
+            return;
+        }
+        console.log("Annuaire désactivé");
+        result(null, res);
+    });
+};
+
+// Activer un annuaire
+Annuaire.enable = (id, result) => {
+    sql.query("UPDATE annuaire SET parution = 1 WHERE id = ?", id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+
+        // id introuvable
+        if (res.affectedRows == 0) {
+            result({ kind: "not_found" }, null);
+            return;
+        }
+        console.log("Annuaire activé");
         result(null, res);
     });
 };

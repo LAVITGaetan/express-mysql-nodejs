@@ -118,7 +118,45 @@ Adherent.remove = (id, result) => {
             result({ kind: "not_found" }, null);
             return;
         }
-        console.log("Adherent supprimé");
+        console.log("Adherent activé");
+        result(null, res);
+    });
+};
+
+// Désactiver un adhérent
+Adherent.disable = (id, result) => {
+    sql.query("UPDATE adherent SET status = 0 WHERE id = ?", id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+
+        // id introuvable
+        if (res.affectedRows == 0) {
+            result({ kind: "not_found" }, null);
+            return;
+        }
+        console.log("Adherent désactivé");
+        result(null, res);
+    });
+};
+
+// Activer un adhérent
+Adherent.enable = (id, result) => {
+    sql.query("UPDATE adherent SET status = 1 WHERE id = ?", id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+
+        // id introuvable
+        if (res.affectedRows == 0) {
+            result({ kind: "not_found" }, null);
+            return;
+        }
+        console.log("Adherent désactivé");
         result(null, res);
     });
 };
