@@ -39,7 +39,7 @@
                                         <td class="table-cell" width="30%">Institution</td>
                                         <td class="table-cell">Catégorie</td>
                                         <td class="table-cell">Renouvellement</td>
-                                        <td class="table-cell">Statut</td>
+                                        <td class="table-cell">Duree</td>
                                         <td class="table-cell">Actions</td>
                                     </tr>
                                 </thead>
@@ -57,13 +57,13 @@
                                                 <%= mandat.renouvellement %>
                                             </td>
                                             <td class="table-cell">
-                                                <%= mandat.isActive==1 ? "actif" : "inactif" %>
+                                                <%= mandat.duree %>
                                             </td>
                                             <td class="table-cell table-actions">
-                                                <div class="table-icon" onclick="editmandat('<%= mandat.id %>')"><img
-                                                        width="12px" height="12px" src="/img/edit.png" alt="edit">
-                                                </div>
-                                                <div class="table-icon" onclick="deletemandat('<%= mandat.id %>')"><img
+                                                <a href="/mandat?id=<%= mandat.id %>" class="table-icon">
+                                                    <img width="12px" height="12px" src="/img/edit.png" alt="edit">
+                                                </a>
+                                                <div class="table-icon" onclick="deleteMandat('<%= mandat.id %>')"><img
                                                         width="12px" height="12px" src="/img/remove.png" alt="remove">
                                                 </div>
                                             </td>
@@ -82,6 +82,19 @@
     </body>
 
     <script>
+
+function deleteMandat(id) {
+            if (confirm('Voulez-vous vraiment supprimer ce mandat ?')) {
+                fetch(`http://localhost:7070/api/mandats/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                })
+                document.location.reload();
+            }
+        }
+
         function changeFilter(id) {
             document.getElementsByClassName('filter-selected')[0].classList.remove('filter-selected');
             document.getElementsByClassName('filter-item')[id].classList.add('filter-selected');

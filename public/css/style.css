@@ -229,6 +229,7 @@ body {
     top: 0;
     right: 0;
     width: 24px;
+    cursor: pointer;
     border-radius: 3px;
     height: 24px;
     background-color: rgb(218, 74, 69);

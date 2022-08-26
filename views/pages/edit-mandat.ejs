@@ -1,0 +1,98 @@
+<%- include('includes/header.ejs') %>
+
+    <body>
+        <div class="layout">
+
+            <div class="layout-header">
+                <h1 class="header-title">Modifier les informations du mandat</h1>
+            </div>
+            <%- include('includes/navbar.ejs') %>
+
+                <div class="layout-content">
+                    <form class="form-flex" onsubmit="editMandat(event)" method="post">
+                        <div class="form-group">
+                            <label for="label" class="form-label">Label</label>
+                            <input id="label" type="text" class="form-input"
+                                placeholder="Réponse" value="<%= mandat[0].label %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input id="nom" type="text" class="form-input"
+                                placeholder="Réponse" value="<%= mandat[0].nom %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="categorie" class="form-label">Catégorie</label>
+                            <select id="categorie" class="form-select">
+                                <option value="null">Choisir une section</option>
+                                <option value="artisanat" <%=mandat[0].categorie==='artisanat' ? 'selected' : '' %>
+                                    >Artisanat</option>
+                                <option value="efj" <%=mandat[0].categorie==='efj' ? 'selected' : '' %>
+                                    >EFJ</option>
+                                <option value="eni" <%=mandat[0].categorie==='eni' ? 'selected' : '' %>
+                                    >ENI</option>
+                                <option value="ouverture-regionale" <%=mandat[0].categorie==='ouverture-regionale' ? 'selected' : '' %>
+                                    >Ouverture Régionale</option>
+                                    <option value="pe-at" <%=mandat[0].categorie==='pe-at' ? 'selected' : '' %>
+                                        >PE-AT</option>
+                                        <option value="social" <%=mandat[0].categorie==='social' ? 'selected' : '' %>
+                                            >Social</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="mission" class="form-label">Mission</label>
+                            <input type="text" id="mission" class="form-input" placeholder="Réponse"
+                                value="<%= mandat[0].mission %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="composition" class="form-label">Composition</label>
+                            <input type="text" id="composition" class="form-input" placeholder="Réponse"
+                                value="<%= mandat[0].composition %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="renouvellement" class="form-label">Renouvellement</label>
+                            <input type="text" id="renouvellement" class="form-input" placeholder="Réponse"
+                                value="<%= mandat[0].renouvellement %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Durée</label>
+                            <input type="text" id="duree" class="form-input" placeholder="Réponse"
+                                value="<%= mandat[0].duree %>">
+                        </div>
+                       
+                        <div class="form-action">
+                            <input type="submit" class="cta" value="Modifier un mandat">
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </body>
+    <script>
+        function editMandat(event) {
+            let id = '<%= mandat[0].id %>'
+            event.preventDefault();
+            let mandat = {
+                label: document.getElementById('label').value,
+                nom: document.getElementById('nom').value,
+                categorie: document.getElementById('categorie').value,
+                mission: document.getElementById('mission').value,
+                composition: document.getElementById('composition').value,
+                renouvellement: document.getElementById('renouvellement').value,
+                duree: document.getElementById('duree').value,
+            }
+            fetch(`http://localhost:7070/api/mandats/${id}`, {
+                method: "PUT",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(mandat)
+            })
+                .then(res => {
+                    console.log("Request complete! response:", res);
+                    alert('Mandat ajouté, vous allez être redirigé vers la liste des mandats')
+                    document.location.assign(`/mandats`)
+                });
+        }
+    </script>
+    <script src="/js/index.js"></script>
+
+    </html>

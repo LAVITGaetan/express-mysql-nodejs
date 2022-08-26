@@ -19,6 +19,11 @@
                <% } %>"><img src="img/mandats.png" class="navbar-icon">
                 <h3 class="navbar-text">Mandats</h3>
             </a>
+            <a href="/portraits" class="navbar-link <% if (title === 'Portraits') { %>
+                <%= 'link-selected' %>
+               <% } %>"><img src="img/portrait.png" class="navbar-icon">
+                <h3 class="navbar-text">Portraits</h3>
+            </a>
             <a href="/formulaires" class="navbar-link <% if (title === 'Formulaires') { %>
                 <%= 'link-selected' %>
                <% } %>"><img src="img/formulaires.png" class="navbar-icon">

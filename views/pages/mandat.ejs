@@ -1,0 +1,98 @@
+<%- include('includes/header.ejs') %>
+
+
+    <body>
+        <div class="layout">
+
+            <div class="layout-header">
+                <h1 class="header-title">Mandat</h1>
+            </div>
+            <%- include('includes/navbar.ejs') %>
+                    <div class="layout-content">
+
+
+                        <div class="container">
+                            <div class="container-header">Informations générales</div>
+                            <div class="container-row"><span class="row-label">Label : </span>
+                                <%= mandat[0].label %>
+                            </div>
+                            <div class="container-row"><span class="row-label">Nom : </span>
+                                <%= mandat[0].nom %>
+                            </div>
+                            <div class="container-row"><span class="row-label">Catégorie : </span>
+                                <%= mandat[0].categorie %>
+                            </div>
+                            <div class="container-row"><span class="row-label">Composition : </span>
+                                <%= mandat[0].composition %>
+                            </div>
+                            <div class="container-row"><span class="row-label">Mission : </span>
+                                <%= mandat[0].mission %>
+                            </div>
+                            <div class="container-row"><span class="row-label">Renouvellement : </span>
+                                <%= mandat[0].renouvellement %>
+                            </div>
+                            <div class="container-row"><span class="row-label">Durée : </span>
+                                <%= mandat[0].duree %>
+                            </div>
+                            <div class="container-action"><a href="/edit-mandat?id=<%= mandat[0].id %>"
+                                    class="container-cta">Modifier</div></a>
+                        </div>
+                        <div class="container">
+                            <div class="container-header">Assigner un mandataire</div>
+                            
+                            <div class="container-action"><a href=""
+                                    class="container-cta">Ajouter</div></a>
+                        </div>
+                    </div>
+        </div>
+
+    </body>
+    <script>
+        function enableAdherent(id) {
+            if (confirm('Voulez-vous vraiment activer cette adhérent ?')) {
+                fetch(`http://localhost:7070/api/mandats/enable/${id}`, {
+                    method: "PUT",
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                })
+                document.location.reload();
+            }
+        }
+        function disableAdherent(id) {
+            if (confirm('Voulez-vous vraiment désactiver cette adhérent ?')) {
+                fetch(`http://localhost:7070/api/mandats/disable/${id}`, {
+                    method: "PUT",
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                })
+                document.location.reload();
+            }
+        }
+        function enableAnnuaire(id) {
+            if (confirm('Voulez-vous vraiment activer cette annuaire ?')) {
+                fetch(`http://localhost:7070/api/annuaires/enable/${id}`, {
+                    method: "PUT",
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                })
+                document.location.reload();
+            }
+        }
+        function disableAnnuaire(id) {
+            if (confirm('Voulez-vous vraiment désactiver cette annuaire ?')) {
+                fetch(`http://localhost:7070/api/annuaires/disable/${id}`, {
+                    method: "PUT",
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                })
+                document.location.reload();
+            }
+        }
+    </script>
+    <script src="/js/index.js"></script>
+
+    </html>

@@ -2,16 +2,13 @@ const sql = require("./db.js");
 
 // Constructeur
 const Mandat = function (mandat) {
-    this.entreprise = mandat.entreprise;
-    this.section = mandat.section;
-    this.adresse = mandat.adresse;
+    this.label = mandat.label;
     this.nom = mandat.nom;
-    this.prenom = mandat.prenom;
-    this.email = mandat.email;
-    this.telephone = mandat.telephone;
-    this.identifiant = mandat.identifiant;
-    this.siteweb = mandat.siteweb;
-    this.status = mandat.status;
+    this.categorie = mandat.categorie;
+    this.mission = mandat.mission;
+    this.composition = mandat.composition;
+    this.renouvellement = mandat.renouvellement;
+    this.duree = mandat.duree;
 };
 
 // Ajouter un mandat
@@ -64,24 +61,11 @@ Mandat.getAll = (result) => {
     });
 };
 
-// Récupérer les mandats actifs
-Mandat.getActive = (result) => {
-    sql.query("SELECT * FROM mandat WHERE isActive= '1'", (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(null, err);
-            return;
-        }
-        console.log("Mandats actifs: ", res);
-        result(null, res);
-    });
-};
-
 // Mettre à jour un mandat
 Mandat.updateById = (id, mandat, result) => {
     sql.query(
-        "UPDATE mandat SET entreprise = ?, section = ?, adresse = ?, nom = ?, prenom = ?, email = ?, telephone = ?, identifiant = ?, siteweb = ?, status = ? WHERE id = ?",
-        [mandat.label, mandat.nom, mandat.categorie, mandat.mission, mandat.composition, nombre_mandataires.email, noms_mandataires.telephone, renouvellement.identifiant, duree.siteweb, isActive.status, id],
+        "UPDATE mandat SET label = ?, nom = ?, categorie = ?, mission = ?, composition = ?, renouvellement = ?, duree = ? WHERE id = ?",
+        [mandat.label, mandat.nom, mandat.categorie, mandat.mission, mandat.composition, mandat.renouvellement, mandat.duree, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);

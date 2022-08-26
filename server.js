@@ -97,6 +97,23 @@ app.get('/adherent', (req, res) => {
     })
 })
 
+app.get('/mandat', (req, res) => {
+  const uri = `http://localhost:7070/api/mandats/${req.query.id}`;
+  let mandat = [];
+  fetch(uri)
+    .then((response) => response.json())
+    .then((response) => {
+      mandat.push(response)
+      if (req.session.loggedin) {
+        res.render('pages/mandat', { title: "Mandat", mandat: mandat });
+      }
+      else {
+        res.send("Veuillez vous connecter pour accéder à cette page")
+      }
+    })
+})
+
+
 
 app.get('/edit-adherent', (req, res) => {
   const uri = `http://localhost:7070/api/adherents/${req.query.id}`;
@@ -107,6 +124,22 @@ app.get('/edit-adherent', (req, res) => {
       adherent.push(response)
       if (req.session.loggedin) {
         res.render('pages/edit-adherent', { title: "Modifer un adhérent", adherent: adherent });
+      }
+      else {
+        res.send("Veuillez vous connecter pour accéder à cette page")
+      }
+    })
+})
+
+app.get('/edit-mandat', (req, res) => {
+  const uri = `http://localhost:7070/api/mandats/${req.query.id}`;
+  let mandat = [];
+  fetch(uri)
+    .then((response) => response.json())
+    .then((response) => {
+      mandat.push(response)
+      if (req.session.loggedin) {
+        res.render('pages/edit-mandat', { title: "Modifer un mandat", mandat: mandat });
       }
       else {
         res.send("Veuillez vous connecter pour accéder à cette page")
@@ -205,6 +238,15 @@ app.get('/formulaires', (req, res) => {
 app.get('/nouvel-adherent', (req, res) => {
   if (req.session.loggedin) {
     res.render('pages/nouvel-adherent', { title: "Ajouter un adhérent" });
+  }
+  else {
+    res.send("Veuillez vous connecter pour accéder à cette page")
+  }
+})
+
+app.get('/nouveau-mandat', (req, res) => {
+  if (req.session.loggedin) {
+    res.render('pages/nouveau-mandat', { title: "Ajouter un mandat" });
   }
   else {
     res.send("Veuillez vous connecter pour accéder à cette page")

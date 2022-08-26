@@ -11,7 +11,7 @@
                     <a href="/nouveau-portrait" class="cta">Nouveau portrait</a>
                     <div class="flex">
                         <% portraits.forEach(portrait => { %>
-                            <div class="card">
+                            <div class="card portrait">
                                 <div class="card-figure">
                                     <img class="card-image" src="<%= portrait.image %>" alt="portrait">
                                 </div>
@@ -42,7 +42,7 @@ function deletePortrait(id) {
 
         function searchPortrait() {
             let query = document.getElementById('search').value.toLowerCase();
-            let item = document.getElementsByClassName('table-row');
+            let item = document.getElementsByClassName('portrait');
             let length = item.length;
             let filter = document.getElementsByClassName('filter-selected')[0].innerHTML.toLowerCase();
             for (let i = 0; i < length; i++) {

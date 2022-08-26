@@ -8,9 +8,6 @@ module.exports = app => {
     // Récupérer tous les adhérents
     router.get("/", mandats.findAll);
 
-    // Récupérer tous les adhérents actifs
-    router.get("/active", mandats.findAllActive);
-
     // Récupérer un adhérent
     router.get("/:id", mandats.findOne);
 

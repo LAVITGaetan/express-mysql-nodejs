@@ -1,6 +1,6 @@
 const Mandat = require('../models/mandat.model.js')
 
-// Ajouter un nouvel mandat
+// Ajouter un nouveau mandat
 exports.create = (req, res) => {
 
     // Valider la requête
@@ -28,19 +28,6 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
 
     Mandat.getAll((err, data) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Une erreur est survenue pendant la récupération des mandats"
-            });
-        else res.send(data);
-    });
-}
-
-// Récupérer les mandats actifs
-exports.findAllActive = (req, res) => {
-
-    Mandat.getActive((err, data) => {
         if (err)
             res.status(500).send({
                 message:
