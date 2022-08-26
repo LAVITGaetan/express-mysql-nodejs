@@ -5,19 +5,30 @@
             <%- include('includes/navbar.ejs') %>
 
                 <div class="layout-header">
-                    <h1 class="header-title">Liste des mandats</h1>
+                    <h1 class="header-title">Nos mandataires</h1>
                 </div>
                 <div class="layout-content">
-                    <a href="/nouveau-portrait" class="cta">Nouveau portrait</a>
+                    <div class="flex-between">
+                        <div class="searchbox">
+                            <input class="searchbox-input" type="text" placeholder="Recherche"
+                                onkeyup="searchPortrait()" id="search"></input>
+                            <div onclick="searchPortrait()" class="searchbox-action"><img width="20px" height="20px"
+                                    src="/img/search.png" alt="search"></div>
+                        </div>
+                    <a href="/nouveau-portrait" class="no-decoration"><div class="cta">Nouveau portrait</div></a>
+
+                    </div>
+                    
                     <div class="flex">
                         <% portraits.forEach(portrait => { %>
                             <div class="card portrait">
                                 <div class="card-figure">
                                     <img class="card-image" src="<%= portrait.image %>" alt="portrait">
                                 </div>
-                                <div class="card-title"><%= portrait.prenom %> <%= portrait.nom %></div>
-                                <div class="card-action">Voir</div>
-                                <div class="card-top" onclick="deletePortrait('<%= portrait.id %>')">x</div>
+                                <div class="card-title js-mandataire"><%= portrait.prenom %> <%= portrait.nom %></div>
+                                <div class="card-subtitle"><%= 'count' %> mandats</div>
+                                <a href="/edit-portrait?id=<%= portrait.id %>" class="no-decoration"><div class="card-action">Modifier</div></a>
+                                <div class="card-top" onclick="deletePortrait('<%= portrait.id %>')"><img width="12px" height="12px" src="/img/remove.png" alt="remove"></div>
                             </div>
                         <% }) %>
 
@@ -44,12 +55,9 @@ function deletePortrait(id) {
             let query = document.getElementById('search').value.toLowerCase();
             let item = document.getElementsByClassName('portrait');
             let length = item.length;
-            let filter = document.getElementsByClassName('filter-selected')[0].innerHTML.toLowerCase();
             for (let i = 0; i < length; i++) {
-                let label = item[i].getElementsByClassName('js-label')[0].innerHTML.toLowerCase();
-                let categorie = item[i].getElementsByClassName('js-categorie')[0].innerHTML.toLowerCase();
-                if (filter === "tous" || filter === categorie.replace(/\s/g, '')) {
-                    if (label.includes(query)) {
+                let mandataire = item[i].getElementsByClassName('js-mandataire')[0].innerHTML.toLowerCase();
+                    if (mandataire.includes(query)) {
                         item[i].style.display = 'table-row';
                         console.log('item matched');
                     }
@@ -57,13 +65,8 @@ function deletePortrait(id) {
                         item[i].style.display = 'none';
                         console.log('item hidden by query');
                     }
-                } else {
-                    item[i].style.display = 'none';
-                    console.log('item hidden by section');
                 }
-
             }
-        }
     </script>
     <script src="/js/index.js"></script>
 

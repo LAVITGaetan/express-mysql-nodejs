@@ -75,6 +75,8 @@
             })
                 .then(res => {
                     console.log("Request complete! response:", res);
+                    alert('Annuaire modifié, vous allez être redirigé vers la liste des adhérents')
+                    document.location.assign(`/adherents`)
                 });
         }
 

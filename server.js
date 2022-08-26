@@ -147,6 +147,22 @@ app.get('/edit-mandat', (req, res) => {
     })
 })
 
+app.get('/edit-portrait', (req, res) => {
+  const uri = `http://localhost:7070/api/portraits/${req.query.id}`;
+  let portrait = [];
+  fetch(uri)
+    .then((response) => response.json())
+    .then((response) => {
+      portrait.push(response)
+      if (req.session.loggedin) {
+        res.render('pages/edit-portrait', { title: "Modifer un portrait", portrait: portrait });
+      }
+      else {
+        res.send("Veuillez vous connecter pour accéder à cette page")
+      }
+    })
+})
+
 app.get('/edit-annuaire', (req, res) => {
   const uri = `http://localhost:7070/api/annuaires/all/${req.query.id}`;
   let annuaire = [];
@@ -207,13 +223,22 @@ app.get('/', (req, res) => {
 })
 
 app.get('/accueil', (req, res) => {
-  if (req.session.loggedin) {
-    res.render('pages/accueil', { title: "Accueil" });
+  const uri = `http://localhost:7070/api/adherents/`;
+  let adherents = [];
+  fetch(uri)
+    .then((response) => response.json())
+    .then((response) => {
+      response.forEach(item => {
+        adherents.push(item)
+      });
+      if (req.session.loggedin) {
+        res.render('pages/accueil', { adherents: adherents, title: "Accueil" });
+      }
+      else {
+        res.send("Veuillez vous connecter pour accéder à cette page")
+      }
 
-  }
-  else {
-    res.send("Veuillez vous connecter pour accéder à cette page")
-  }
+    })
 })
 
 app.get('/fiches', (req, res) => {
@@ -267,6 +292,7 @@ require("./app/routes/adherent.routes.js")(app);
 require("./app/routes/annuaire.routes.js")(app);
 require("./app/routes/mandat.routes.js")(app);
 require("./app/routes/portrait.routes.js")(app);
+require("./app/routes/representation.routes.js")(app)
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 })

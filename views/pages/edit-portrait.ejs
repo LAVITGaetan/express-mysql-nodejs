@@ -1,0 +1,62 @@
+<%- include('includes/header.ejs') %>
+
+    <body>
+        <div class="layout">
+
+            <div class="layout-header">
+                <h1 class="header-title">Modifier les informations du portrait</h1>
+            </div>
+            <%- include('includes/navbar.ejs') %>
+
+                <div class="layout-content">
+                    <form class="form-flex" onsubmit="editPortrait(event)" method="post">
+                        <div class="form-group">
+                            <label for="image" class="form-label">Image</label>
+                            <input id="image" type="text" class="form-input"
+                                placeholder="Réponse" value="<%= portrait[0].image %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input id="nom" type="text" class="form-input"
+                                placeholder="Réponse" value="<%= portrait[0].nom %>">
+                        </div>
+                       
+                        <div class="form-group">
+                            <label for="prenom" class="form-label">Prénom</label>
+                            <input type="text" id="prenom" class="form-input" placeholder="Réponse"
+                                value="<%= portrait[0].prenom %>">
+                        </div>
+                       
+                        <div class="form-action">
+                            <input type="submit" class="cta" value="Modifier un portrait">
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </body>
+    <script>
+        function editPortrait(event) {
+            let id = '<%= portrait[0].id %>'
+            event.preventDefault();
+            let portrait = {
+                image: document.getElementById('image').value,
+                nom: document.getElementById('nom').value,
+                prenom: document.getElementById('prenom').value,
+            }
+            fetch(`http://localhost:7070/api/portraits/${id}`, {
+                method: "PUT",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(portrait)
+            })
+                .then(res => {
+                    console.log("Request complete! response:", res);
+                    alert('Portrait modifié, vous allez être redirigé vers la liste des portraits')
+                    document.location.assign(`/portraits`)
+                });
+        }
+    </script>
+    <script src="/js/index.js"></script>
+
+    </html>
