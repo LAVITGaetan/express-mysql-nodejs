@@ -12,33 +12,83 @@
                     <div class="container">
                         <div class="container-header">Informations générales</div>
                         <div class="container-row">
-                            <img width="128px" height="128px" class="row-image" src="<%= portrait[0].image %>" >
+                            <img width="128px" height="128px" class="row-image" src="<%= portrait[0].image %>">
                         </div>
                         <div class="container-row">
-                        <span class="row-label"><%= portrait[0].prenom %> <%= portrait[0].nom %></span>
+                            <span class="row-label">
+                                <%= portrait[0].prenom %>
+                                    <%= portrait[0].nom %>
+                            </span>
 
                         </div>
                         <div class="container-row">
-                            <div class="row-label">Mandats : <%= representations.length %></div>
+                            <div class="row-label">Mandats : <%= representations.length %>
+                            </div>
                         </div>
                         <div class="container-action"><a href="/edit-portrait?id=<%= portrait[0].id %>"
                                 class="container-cta">Modifier</div></a>
                     </div>
                     <div class="container">
                         <div class="container-header">Mandats</div>
-                        <% representations.forEach(representation => { %>
-                         <div class="container-row">Mandat : <%= mandats.find(mandat => mandat.id === representation.id_mandat).label %> 
-                            <div onclick="deleteRepresentation('<%= representation.id %>')" class="row-delete">Supprimer</div>
-                         </div>
-                        <% }) %>
-                        <div class="container-action"><a href="" class="container-cta">Ajouter</div></a>
+                        <% representations.forEach(representation=> { %>
+                            <div class="container-row">Mandat : <%= mandats.find(mandat=> mandat.id ===
+                                    representation.id_mandat).label %>
+                                    <div onclick="deleteRepresentation('<%= representation.id %>')" class="row-delete">
+                                        Supprimer</div>
+                            </div>
+                            <% }) %>
+                                <div class="container-action">
+                                    <div href="" class="container-cta" onclick="showModal()">Ajouter</div>
+                                </div>
                     </div>
                 </div>
         </div>
+        <div id="modal">
+            <h6 id="modal-title">Assignation</h6>
+            <div id="modal-content">
+                <select id="titre" class="form-select">
+                    <option value="null">Choisir un titre</option>
+                    <option value="titulaire">Titulaire</option>
+                    <option value="suppléant">Suppléant</option>
+                </select>
+                <select class="form-select" id="mandat">
+                    <option value="null">Choisir un mandat</option>
+                    <% mandats.forEach(mandat=> { %>
+                        <option value="<%= mandat.id %> ">
+                            <%= mandat.label %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+            <div class="flex-between">
+                <div id="modal-close" onclick="closeModal()">Annuler</div>
+                <div id="modal-submit" onclick="addRepresentation()">Confirmer</div>
+            </div>
 
+        </div>
     </body>
-<script>
-            function deleteRepresentation(id) {
+    <script>
+        function addRepresentation() {
+            let representation = {
+                id_mandat: document.getElementById('mandat').value,
+                id_portrait: '<%= portrait[0].id %>',
+                titre: document.getElementById('titre').value,
+            }
+            fetch(`http://localhost:7070/api/representations/`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(representation)
+            })
+                .then(res => {
+                    console.log("Représentation ajouté : ", res);
+                    alert('Représentation ajouté')
+                    document.location.reload();
+                });
+        }
+
+        function deleteRepresentation(id) {
             if (confirm('Voulez-vous vraiment supprimer cette représentation ?')) {
                 fetch(`http://localhost:7070/api/representations/${id}`, {
                     method: "DELETE",
@@ -49,7 +99,17 @@
                 document.location.reload();
             }
         }
-</script>
+
+        function showModal() {
+            let modal = document.getElementById('modal');
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            let modal = document.getElementById('modal');
+            modal.style.display = "none";
+        }
+    </script>
     <script src="/js/index.js"></script>
 
     </html>
