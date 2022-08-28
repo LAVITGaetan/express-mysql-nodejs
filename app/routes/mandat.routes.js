@@ -11,6 +11,9 @@ module.exports = app => {
     // Récupérer un adhérent
     router.get("/:id", mandats.findOne);
 
+    // Récupérer les représentations d' un portrait
+    router.get("/:id/representations", mandats.findRepresentations)
+
     // Metre à jour un adhérent
     router.put("/:id", mandats.update);
 

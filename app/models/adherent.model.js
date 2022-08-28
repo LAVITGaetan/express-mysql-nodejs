@@ -55,7 +55,7 @@ Adherent.findById = (id, result) => {
 
 // Récupérer tous les adhérents
 Adherent.getAll = (result) => {
-    let query = "SELECT * FROM adherent ORDER BY `entreprise`";
+    let query = "SELECT * FROM adherent ORDER BY id DESC";
     sql.query(query, (err, res) => {
         if (err) {
             console.log("error: ", err);

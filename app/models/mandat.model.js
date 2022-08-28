@@ -61,6 +61,20 @@ Mandat.getAll = (result) => {
     });
 };
 
+// Récupérer toutes les representations d' un mandats
+Mandat.getRepresentations = (id, result) => {
+    let query = `SELECT * FROM representation WHERE id_mandat = ${id}`;
+    sql.query(query, (err, res) => {
+        if(err) {
+            console.log('Une erreur est survenue : ', err);
+            result(null, err)
+            return;
+        }
+        console.log('Liste des representations :', res);
+        result(null, res)
+    })
+}
+
 // Mettre à jour un mandat
 Mandat.updateById = (id, mandat, result) => {
     sql.query(

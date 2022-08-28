@@ -100,20 +100,72 @@ app.get('/adherent', (req, res) => {
 app.get('/mandat', (req, res) => {
   const uri = `http://localhost:7070/api/mandats/${req.query.id}`;
   let mandat = [];
-  fetch(uri)
+  let representations = [];
+  let portraits = [];
+  const result = fetch(uri)
     .then((response) => response.json())
     .then((response) => {
       mandat.push(response)
-      if (req.session.loggedin) {
-        res.render('pages/mandat', { title: "Mandat", mandat: mandat });
-      }
-      else {
-        res.send("Veuillez vous connecter pour accéder à cette page")
-      }
+      return fetch(`${uri}/representations`)
+        .then((response) => response.json())
+        .then((response) => {
+          response.forEach(item => {
+            representations.push(item)
+          })
+          return fetch(`http://localhost:7070/api/portraits`)
+            .then((response) => response.json())
+            .then((response) => {
+              response.forEach(item => {
+                portraits.push(item)
+              })
+            })
+        })
     })
+
+  result.then(r => {
+    if (req.session.loggedin) {
+      res.render('pages/mandat', { title: "Mandat", mandat: mandat, representations: representations, portraits: portraits });
+    }
+    else {
+      res.send("Veuillez vous connecter pour accéder à cette page")
+    }
+  })
 })
 
+app.get('/portrait', (req, res) => {
+  const uri = `http://localhost:7070/api/portraits/${req.query.id}`;
+  let portrait = [];
+  let representations = [];
+  let mandats = [];
+  const result = fetch(uri)
+    .then((response) => response.json())
+    .then((response) => {
+      portrait.push(response)
+      return fetch(`${uri}/representations`)
+        .then((response) => response.json())
+        .then((response) => {
+          response.forEach(item => {
+            representations.push(item)
+          })
+          return fetch(`http://localhost:7070/api/mandats`)
+            .then((response) => response.json())
+            .then((response) => {
+              response.forEach(item => {
+                mandats.push(item)
+              })
+            })
+        })
+    })
 
+  result.then(r => {
+    if (req.session.loggedin) {
+      res.render('pages/portrait', { title: "Portrait", portrait: portrait, representations: representations, mandats: mandats });
+    }
+    else {
+      res.send("Veuillez vous connecter pour accéder à cette page")
+    }
+  })
+})
 
 app.get('/edit-adherent', (req, res) => {
   const uri = `http://localhost:7070/api/adherents/${req.query.id}`;

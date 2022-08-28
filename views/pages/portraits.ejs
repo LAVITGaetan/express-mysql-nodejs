@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="card-title js-mandataire"><%= portrait.prenom %> <%= portrait.nom %></div>
                                 <div class="card-subtitle"><%= 'count' %> mandats</div>
-                                <a href="/edit-portrait?id=<%= portrait.id %>" class="no-decoration"><div class="card-action">Modifier</div></a>
+                                <a href="/portrait?id=<%= portrait.id %>" class="no-decoration"><div class="card-action">Voir</div></a>
                                 <div class="card-top" onclick="deletePortrait('<%= portrait.id %>')"><img width="12px" height="12px" src="/img/remove.png" alt="remove"></div>
                             </div>
                         <% }) %>

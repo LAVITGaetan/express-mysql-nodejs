@@ -43,6 +43,20 @@ Portrait.findById = (id, result) => {
     });
 };
 
+// Récupérer toutes les representations d' un portrait
+Portrait.getRepresentations = (id, result) => {
+    let query = `SELECT * FROM representation WHERE id_portrait = ${id}`;
+    sql.query(query, (err, res) => {
+        if(err) {
+            console.log('Une erreur est survenue : ', err);
+            result(null, err)
+            return;
+        }
+        console.log('Liste des representations :', res);
+        result(null, res)
+    })
+}
+
 // Récupérer tous les portraits
 Portrait.getAll = (result) => {
     let query = "SELECT * FROM portrait ORDER BY id";

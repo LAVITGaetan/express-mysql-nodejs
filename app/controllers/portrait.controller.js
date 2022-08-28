@@ -54,6 +54,22 @@ exports.findOne = (req, res) => {
     });
 };
 
+exports.findRepresentations = (req, res) => {
+    Portrait.getRepresentations(req.params.id, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Portrait introuvable, id : ${req.params.id}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Une erreur est survenue en récupérant le portrait, id : " + req.params.id
+                });
+            }
+        } else res.send(data);
+    })
+}
+
 // Mettre à jour un portrait
 exports.update = (req, res) => {
     // Valider la requête

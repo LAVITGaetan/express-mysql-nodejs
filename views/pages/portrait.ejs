@@ -1,0 +1,55 @@
+<%- include('includes/header.ejs') %>
+
+
+    <body>
+        <div class="layout">
+
+            <div class="layout-header">
+                <h1 class="header-title">Portrait</h1>
+            </div>
+            <%- include('includes/navbar.ejs') %>
+                <div class="layout-content">
+                    <div class="container">
+                        <div class="container-header">Informations générales</div>
+                        <div class="container-row">
+                            <img width="128px" height="128px" class="row-image" src="<%= portrait[0].image %>" >
+                        </div>
+                        <div class="container-row">
+                        <span class="row-label"><%= portrait[0].prenom %> <%= portrait[0].nom %></span>
+
+                        </div>
+                        <div class="container-row">
+                            <div class="row-label">Mandats : <%= representations.length %></div>
+                        </div>
+                        <div class="container-action"><a href="/edit-portrait?id=<%= portrait[0].id %>"
+                                class="container-cta">Modifier</div></a>
+                    </div>
+                    <div class="container">
+                        <div class="container-header">Mandats</div>
+                        <% representations.forEach(representation => { %>
+                         <div class="container-row">Mandat : <%= mandats.find(mandat => mandat.id === representation.id_mandat).label %> 
+                            <div onclick="deleteRepresentation('<%= representation.id %>')" class="row-delete">Supprimer</div>
+                         </div>
+                        <% }) %>
+                        <div class="container-action"><a href="" class="container-cta">Ajouter</div></a>
+                    </div>
+                </div>
+        </div>
+
+    </body>
+<script>
+            function deleteRepresentation(id) {
+            if (confirm('Voulez-vous vraiment supprimer cette représentation ?')) {
+                fetch(`http://localhost:7070/api/representations/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                })
+                document.location.reload();
+            }
+        }
+</script>
+    <script src="/js/index.js"></script>
+
+    </html>
