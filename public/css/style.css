@@ -27,7 +27,7 @@ body {
 
 .layout-navbar {
   grid-area: 1 / 1 / 3 / 2;
-  background-color: #fff;
+  background-color: #0a2439;
 }
 
 .layout-header {
@@ -62,7 +62,7 @@ body {
 
 .navbar-title {
   font-weight: 800;
-  color: #0a2439;
+  color: #fff;
   padding-bottom: 0.5em;
   position: relative;
   letter-spacing: 0.03em;
@@ -79,7 +79,7 @@ body {
   padding: 0 10%;
   z-index: 10;
   text-decoration: none;
-  color: #0a2439;
+  color: #fff;
   position: relative;
 }
 
@@ -89,7 +89,7 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #0a2439;
+  background-color: #00c4cc10;
   left: 0;
   top: 0;
   clip-path: circle(0% at 0% 0%);
@@ -101,11 +101,11 @@ body {
 }
 
 .navbar-link:hover .navbar-text {
-  color: #fff;
+  color: #00c4cc;
 }
 
 .link-selected {
-  background: #233a4d;
+  background: #00c4cc10;
   color: #fff;
 }
 
@@ -442,7 +442,7 @@ body {
 }
 
 .table-head {
-  background: #233a4d;
+  background: #0a2439;
   height: 60px;
   color: #fff;
   border-radius: 3px;
@@ -691,98 +691,6 @@ body {
   width: fit-content;
 }
 
-/* Accueil */
-/* 
-.index {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(6, 1fr);
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
-
-  padding: 1em 0;
-}
-
-.index1 {
-  grid-area: 1 / 1 / 3 / 2;
-}
-.index2 {
-  grid-area: 1 / 2 / 3 / 3;
-}
-.index3 {
-  grid-area: 1 / 3 / 2 / 4;
-}
-.index4 {
-  grid-area: 2 / 3 / 3 / 4;
-}
-.index5 {
-  grid-area: 3 / 1 / 5 / 2;
-}
-.index6 {
-  grid-area: 3 / 2 / 5 / 3;
-}
-.index7 {
-  grid-area: 5 / 1 / 7 / 2;
-}
-.index8 {
-  grid-area: 5 / 2 / 7 / 3;
-}
-.index9 {
-  grid-area: 3 / 3 / 7 / 4;
-}
-
-.index-card {
-  transition: 0.3s ease;
-  padding: 1em;
-  box-shadow: 0px 2px 5px 2px #20bfc126;
-  height: 100%;
-  width: 100%;
-  cursor: pointer;
-  position: relative;
-}
-
-.index-card:hover .card-design {
-  width: 32px;
-  height: 32px;
-}
-
-.filledcard {
-  background-color: #0a2439;
-  height: 100%;
-  border-radius: 3px;
-  width: 100%;
-}
-
-.filledcard-row {
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  padding: 1em 10%;
-  width: 90%;
-  margin: auto;
-  position: relative;
-  display: block;
-}
-
-.filledcard-row:before {
-  content: "";
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 8px;
-  left: 0;
-  top: calc(50% - 4px);
-  background-color: #00c4cc;
-}
-
-.filledcard-title {
-  color: #00c4cc;
-  text-align: center;
-  font-weight: 700;
-  font-size: 18px;
-  padding: 1em;
-} */
-
 /*Modal*/
 
 #modal {
@@ -998,6 +906,7 @@ body {
   height: 100%;
   width: 100%;
   padding: 1em;
+  border-left: 5px solid #0a2439;
 }
 
 .index-cta {
@@ -1008,18 +917,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
-  color: #FFFFFF;
+  color: #ffffff;
   border-radius: 3px;
-}
-
-.index-graph {
-  width: 100%;
-  height: 100%;
-  border: 5px solid #00c4cc20;
 }
 
 .index-last {
@@ -1029,15 +932,15 @@ body {
 }
 
 .last-title {
-  font-family: 'Montserrat';
-font-style: normal;
-font-weight: 700;
-font-size: 18px;
-color: #FFFFFF;
-text-align: center;
-width: 100%;
-padding: 1em;
-border-bottom: 5px solid #00c4cc;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  color: #ffffff;
+  text-align: center;
+  width: 100%;
+  padding: 1em;
+  border-bottom: 5px solid #00c4cc;
 }
 
 .last-row {
@@ -1053,9 +956,132 @@ border-bottom: 5px solid #00c4cc;
 }
 
 .last-row-title {
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
-  color: #FFFFFF;
+  color: #ffffff;
+  max-width: 10ch;
+  line-height: 18px;
+  max-height: 18px;
+  overflow: hidden;
+}
+
+.index-graph {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 50px 1fr 50px;
+  grid-column-gap: 20px;
+  grid-row-gap: 10px;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border: 5px solid #00c4cc20;
+  padding: 0 20px;
+}
+
+.graph1 {
+  grid-area: 1 / 1 / 2 / 5;
+}
+.graph2 {
+  grid-area: 2 / 1 / 3 / 2;
+  display: flex;
+  align-items: end;
+}
+.graph3 {
+  grid-area: 2 / 2 / 3 / 3;
+  display: flex;
+  align-items: end;
+}
+.graph4 {
+  grid-area: 2 / 3 / 3 / 4;
+  display: flex;
+  align-items: end;
+}
+.graph5 {
+  grid-area: 2 / 4 / 3 / 5;
+  display: flex;
+  align-items: end;
+}
+.graph6 {
+  grid-area: 3 / 1 / 4 / 2;
+}
+.graph7 {
+  grid-area: 3 / 2 / 4 / 3;
+}
+.graph8 {
+  grid-area: 3 / 3 / 4 / 4;
+}
+.graph9 {
+  grid-area: 3 / 4 / 4 / 5;
+}
+
+.graph-title {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  padding-top: 20px;
+  color: #0a2439;
+}
+
+.graph-stat {
+  color: #00c4cc;
+  font-weight: 800;
+}
+
+.graph-legend {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.legend-icon {
+  width: 12px;
+  height: 12px;
+  border-radius: 8px;
+}
+
+.icon-odd {
+  background-color: #0a2439;
+}
+
+.icon-even {
+  background-color: #00c4cc;
+}
+
+.legend-text {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  color: #0a2439;
+  padding-left: 8px;
+}
+
+.graph-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00c4cc99;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.item-odd {
+  background-color: #0a2439;
+}
+
+.item-even {
+  background-color: #00c4cc;
+}
+
+.graph-count {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  color: #ffffff;
+  display: block;
 }

@@ -26,7 +26,65 @@
                             <div class="index-cta">Nouvel adhérent</div>
                         </div>
                         <div class="index4">
-                            <div class="index-graph"></div>
+                            <div class="index-graph">
+                                <div class="graph1">
+                                    <div class="graph-title">Répartition des adhérents <span class="graph-stat">
+                                        (<%= adherents.length %>)
+                                    </span></div>
+                                </div>
+                                <div class="graph2">
+                                    <div id="js-graph1" class="graph-item item-even">
+                                        <span class="graph-count">
+                                            <%= adherents.filter(adherent=> adherent.section === 'artisanat').length %>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="graph3">
+                                    <div id="js-graph2" class="graph-item item-odd">
+                                        <span class="graph-count">
+                                            <%= adherents.filter(adherent=> adherent.section === 'commerce').length %>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="graph4">
+                                    <div id="js-graph3" class="graph-item item-even">
+                                        <span class="graph-count">
+                                            <%= adherents.filter(adherent=> adherent.section === 'industrie').length %>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="graph5">
+                                    <div id="js-graph4" class="graph-item item-odd">
+                                        <span class="graph-count">
+                                            <%= adherents.filter(adherent=> adherent.section === 'services').length %>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="graph6">
+                                    <div class="graph-legend">
+                                        <div class="legend-icon icon-even"></div>
+                                        <p class="legend-text">Artisanat</p>
+                                    </div>
+                                </div>
+                                <div class="graph7">
+                                    <div class="graph-legend">
+                                        <div class="legend-icon icon-odd"></div>
+                                        <p class="legend-text">Commerce</p>
+                                    </div>
+                                </div>
+                                <div class="graph8">
+                                    <div class="graph-legend">
+                                        <div class="legend-icon icon-even"></div>
+                                        <p class="legend-text">Industrie</p>
+                                    </div>
+                                </div>
+                                <div class="graph9">
+                                    <div class="graph-legend">
+                                        <div class="legend-icon icon-odd"></div>
+                                        <p class="legend-text">Services</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="index5">
                             <div class="index-last">
@@ -46,6 +104,37 @@
         </div>
 
     </body>
+    <script>
+        let graphItem1 = document.getElementById('js-graph1')
+        let graphItem2 = document.getElementById('js-graph2')
+        let graphItem3 = document.getElementById('js-graph3')
+        let graphItem4 = document.getElementById('js-graph4')
+        let total = '<%= adherents.length %>';
+        let artisanatCount = '<%= adherents.filter(el => el.section ==="artisanat").length %>' / total * 100;
+        let commerceCount = '<%= adherents.filter(el => el.section ==="commerce").length %>' / total * 100;
+        let industrieCount = '<%= adherents.filter(el => el.section ==="industrie").length %>' / total * 100;
+        let servicesCount = '<%= adherents.filter(el => el.section ==="services").length %>' / total * 100;
+
+        let maximum = Math.max(artisanatCount, commerceCount, industrieCount, servicesCount);
+        switch (maximum) {
+            case artisanatCount:
+                console.log('artisanat is max');
+                break;
+            case commerceCount:
+                console.log('commerce is max');
+                break; case industrieCount:
+                console.log('industrie is max');
+                break; case servicesCount:
+                console.log('services is max');
+                break;
+            default:
+                break;
+        }
+        graphItem1.style.height = `${artisanatCount / maximum * 100}%`;
+        graphItem2.style.height = `${commerceCount / maximum * 100}%`;
+        graphItem3.style.height = `${industrieCount / maximum * 100}%`;
+        graphItem4.style.height = `${servicesCount / maximum * 100}%`;
+    </script>
     <script src="/js/index.js"></script>
 
     </html>
