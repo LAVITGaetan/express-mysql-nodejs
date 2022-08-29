@@ -417,7 +417,13 @@ body {
   position: relative;
   padding-bottom: 0.5em;
 }
-
+.subtitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0a2439;
+  position: relative;
+  padding-bottom: 0.5em;
+}
 /* Design */
 .navbar-title:after {
   content: "";
@@ -821,4 +827,17 @@ padding: 1em 0;}
 
   #modal-content .form-select {
     margin-bottom: 1em;
+  }
+
+  .card-cta {
+    width: 300px; 
+    margin: 1em;
+    background-color: #00c4cc90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
   }

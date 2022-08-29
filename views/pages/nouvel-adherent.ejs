@@ -64,10 +64,26 @@
                     </form>
                 </div>
         </div>
+
+        <div id="modal">
+            <h6 id="modal-title">Nouvel adhérent crée</h6>
+            <div id="modal-content">
+                <div id="modal-entreprise"></div>
+                <div id="modal-email"></div>
+                <div id="modal-identifiant"></div>
+            </div>
+            <div class="flex-between">
+                <div id="modal-submit" onclick="closeModal()">Ok</div>
+            </div>
+
+        </div>
     </body>
     <script>
         function addAdherent(event) {
             event.preventDefault();
+            let entreprise = document.getElementById('entreprise').value;
+            let email = document.getElementById('email').value;
+            let identifiant = document.getElementById('identifiant').value;
             let adherent = {
                 entreprise: document.getElementById('entreprise').value,
                 section: document.getElementById('section').value,
@@ -89,8 +105,7 @@
             })
                 .then(res => {
                     console.log("Adhérent ajouté : ", res);
-                    alert('Adhérent ajouté, vous allez être redirigé vers la liste des adhérents')
-                    document.location.assign(`/adherents`)
+                    showModal(entreprise, email, identifiant);
                 });
         }
 
@@ -103,6 +118,23 @@
                 result += characters.charAt(Math.floor(Math.random() * charactersLength));
             }
             field.value = result;
+        }
+
+        function showModal(entreprise, email, identifiant) {
+            let modal = document.getElementById('modal');
+            let modalEntreprise = document.getElementById('modal-entreprise');
+            let modalEmail = document.getElementById('modal-email');
+            let modalIdentifiant = document.getElementById('modal-identifiant');
+            modalEntreprise.innerHTML = entreprise;
+            modalEmail.innerHTML = email;
+            modalIdentifiant.innerHTML = identifiant;
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            let modal = document.getElementById('modal');
+            modal.style.display = "none";
+            document.location.assign(`/adherents`)
         }
     </script>
     <script src="/js/index.js"></script>
