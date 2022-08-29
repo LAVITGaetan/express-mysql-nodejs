@@ -1,4 +1,57 @@
 const fetch = require('node-fetch');
+const connection = require('../models/db.js')
+
+exports.auth = (req, res) => {
+    let email = req.body.identifiant;
+    let password = req.body.password;
+  
+    if (email && password) {
+      connection.query('SELECT * FROM user WHERE email = ? AND password = ?', [email, password], function (error, results, fields) {
+        // Afficher une erreur potentielle
+        if (error) throw error;
+  
+        //Si un résultat est trouvé
+        if (results.length > 0) {
+  
+          // Stockage des infos
+          req.session.loggedin = true;
+          req.session.email = email;
+  
+          // Redirection vers l' accueil
+          res.redirect('/accueil');
+        } else {
+          res.send('Identifiant ou mot de passe incorrect');
+        }
+        res.end();
+      });
+    } else {
+      res.send('Merci de renseigner un email et un mot de passe');
+      res.end();
+    }
+  }
+
+  exports.login = (req, res) => {
+    res.render('pages/login', { title: "Connexion" });
+  }
+
+exports.index = (req, res) => {
+    const uri = `http://localhost:7070/api/adherents/`;
+    let adherents = [];
+    fetch(uri)
+      .then((response) => response.json())
+      .then((response) => {
+        response.forEach(item => {
+          adherents.push(item)
+        });
+        if (req.session.loggedin) {
+          res.render('pages/accueil', { adherents: adherents, title: "Accueil" });
+        }
+        else {
+          res.send("Veuillez vous connecter pour accéder à cette page")
+        }
+  
+      })
+  }
 
 exports.adherents = (req, res) => {
     const uri = `http://localhost:7070/api/adherents/`;

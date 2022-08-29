@@ -5,9 +5,8 @@ module.exports = app => {
     // Ajouter une représentation
     router.post("/", representations.create);
 
-    // Récupérer tous les representations
+    // Récupérer toutes les representations
     router.get("/", representations.findAll);
-
 
     // Récupérer une représentation
     router.get("/:id", representations.findOne);

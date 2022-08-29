@@ -14,7 +14,7 @@ module.exports = app => {
     // Récupérer un adhérent
     router.get("/:id", adherents.findOne);
 
-    // Metre à jour un adhérent
+    // Mettre à jour un adhérent
     router.put("/:id", adherents.update);
 
     // Supprimer un adhérent

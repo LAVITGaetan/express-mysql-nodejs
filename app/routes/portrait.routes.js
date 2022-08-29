@@ -14,7 +14,7 @@ module.exports = app => {
     // Récupérer les représentations d' un portrait
     router.get("/:id/representations", portraits.findRepresentations)
 
-    // Metre à jour un portrait
+    // Mettre à jour un portrait
     router.put("/:id", portraits.update);
 
     // Supprimer un portrait

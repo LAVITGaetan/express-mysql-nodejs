@@ -14,8 +14,8 @@ module.exports = app => {
     // Récupérer un annuaire
     router.get("/:id", annuaires.findOne);
 
-        // Récupérer un annuaire via l'id adhérent
-        router.get("/all/:id", annuaires.findAdherent);
+    // Récupérer un annuaire via l'id adhérent
+    router.get("/all/:id", annuaires.findAdherent);
 
     // Metre à jour un annuaire
     router.put("/:id", annuaires.update);
@@ -23,11 +23,11 @@ module.exports = app => {
     // Supprimer un annuaire
     router.delete("/:id", annuaires.delete);
 
-        // Désactiver un annuaire
-        router.put("/disable/:id", annuaires.disable);
+    // Désactiver un annuaire
+    router.put("/disable/:id", annuaires.disable);
 
-        // Activer un annuaire
-        router.put("/enable/:id", annuaires.enable);
+    // Activer un annuaire
+    router.put("/enable/:id", annuaires.enable);
 
     app.use('/api/annuaires', router);
 };
