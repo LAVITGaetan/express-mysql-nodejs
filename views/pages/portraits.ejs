@@ -26,7 +26,7 @@
                                 <img class="card-image" src="<%= portrait.image %>">
                             </div>
                             <div class="portrait-card-title js-mandataire"><%= portrait.prenom %> <%= portrait.nom %></div>
-                            <div class="portrait-card-subtitle">5 mandats</div>
+                            <div class="portrait-card-subtitle"><%= representations.filter(el => el.id_portrait === portrait.id).length %>  mandats</div>
                             <a href="/portrait?id=<%= portrait.id %>" class="no-decoration card-edit">
                                 <img src="img/edit.png" width="12px" height="12px" alt="edit">
                             </a>
