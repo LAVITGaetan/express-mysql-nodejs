@@ -11,94 +11,32 @@
                 <div class="layout-content">
                     <div class="index">
                         <div class="index1">
-                            <a class="no-decoration" href="/adherents">
-                                <div class="index-card">
-                                    <div class="card-design"></div>
-                                    <div class="card-icon">
-                                        <img src="img/adherents.png" width="24px" height="24px">
-                                    </div>
-                                    <div class="card-title">Adhérents</div>
-                                    <div class="card-text">Gérer l' ensemble de nos adhérents et leur parution</div>
-                                </div>
-                            </a>
-
+                            <div class="index-card">
+                                <div class="card-icon"><img src="img/adherents.png" width="24px" height="24px"></div>
+                                <h3 class="card-title">Nos adhérents</h3>
+                            </div>
                         </div>
                         <div class="index2">
-                            <a href="/mandats" class="no-decoration">
-                                <div class="index-card">
-                                    <div class="card-design"></div>
-                                    <div class="card-icon">
-                                        <img src="img/mandats.png" width="24px" height="24px">
-                                    </div>
-                                    <div class="card-title">Mandats</div>
-                                    <div class="card-text">Gérer l' ensemble des mandats et leurs mandataires</div>
-                                </div>
-                            </a>
-                            
+                            <div class="index-card">
+                                <div class="card-icon"><img src="img/temps.png" width="24px" height="24px"></div>
+                                <h3 class="card-title">Ma fiche mensuelle</h3>
+                            </div>
                         </div>
                         <div class="index3">
-                            <a href="/nouvel-adherent" class="no-decoration">
-                                <div class="cta-card">Nouvel adhérent</div>
-                                </a>
+                            <div class="index-cta">Nouvel adhérent</div>
                         </div>
                         <div class="index4">
-                            <a href="/nouveau-portrait" class="no-decoration">
-                                <div class="cta-card">Nouveau portrait</div>
-</a>
+                            <div class="index-graph"></div>
                         </div>
                         <div class="index5">
-                            <a href="/portraits" class="no-decoration">
-                                <div class="index-card">
-                                <div class="card-design"></div>
-                                <div class="card-icon">
-                                    <img src="img/portrait.png" width="24px" height="24px">
-                                </div>
-                                <div class="card-title">Portraits</div>
-                                <div class="card-text">Gérer l' ensemble des portraits de nos mandataires</div>
-                            </div>
-                        </a>
-                        </div>
-                            <a href="" class="no-decoration">
-                                <div class="index6">
-                            <div class="index-card">
-                                <div class="card-design"></div>
-                                <div class="card-icon">
-                                    <img src="img/formulaires.png" width="24px" height="24px">
-                                </div>
-                                <div class="card-title">Sondages</div>
-                                <div class="card-text">Créer ou récupérer un sondage de la CPME Réunion</div>
-                            </div>
-                        </a>
-                        </div>
-                            <a href="" class="no-decoration">
-                                <div class="index7">
-                            <div class="index-card">
-                                <div class="card-design"></div>
-                                <div class="card-icon">
-                                    <img src="img/temps.png" width="24px" height="24px">
-                                </div>
-                                <div class="card-title">Fiches temps</div>
-                                <div class="card-text">Automatisez la gestion de vos fiches temps</div>
-                            </div>
-                        </a>
-                        </div>
-                        <div class="index8">
-                            <a href="" class="no-decoration">
-                                <div class="index-card">
-                                <div class="card-design"></div>
-                                <div class="card-icon">
-                                    <img src="img/adherents.png" width="24px" height="24px">
-                                </div>
-                                <div class="card-title">Autres</div>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="index9">
-                            <div class="filledcard">
-                                <div class="filledcard-title">Derniers adhérents</div>
-                                <% for( let i = 0; i < 5; i++ ) { %>
-                                    <a href="/adherent?id=<%= adherents[i].id %> " class="filledcard-row">
-                                    <%= adherents[i].entreprise  %> 
+                            <div class="index-last">
+                                <h3 class="last-title">Derniers adhérents</h3>
+                                <% for( let i=0; i < 5; i++ ) { %>
+                                    <a href="/adherent?id=<%= adherents[i].id %> " class="last-row no-decoration">
+                                        <span class="last-row-title">
+                                            <%= adherents[i].entreprise %>
+                                        </span>
+                                        <img src="img/go.png" width="24px" height="24px">
                                     </a>
                                     <% } %>
                             </div>
