@@ -177,7 +177,7 @@ body {
   font-family: Montserrat;
   width: fit-content;
   cursor: pointer;
-  background-color: rgb(218, 74, 69);
+  background-color: #FE7968;
   border-radius: 3px;
 }
 
@@ -847,8 +847,9 @@ body {
   grid-template-rows: 130px 1fr;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
-  min-height: calc(100% - 20px);
+  min-height: 100%;
   overflow: auto;
+  padding: 20px 0;
 }
 
 .index1 {
@@ -868,12 +869,12 @@ body {
 }
 
 .index-card {
-  box-shadow: 2px 2px 8px 3px #1fc1c31a;
+  box-shadow: 5px 5px 10px 5px #1fc1c31a;
   background-color: #fff;
   height: 100%;
   width: 100%;
   padding: 1em;
-  border-left: 5px solid #0a2439;
+  border-left: 5px solid #233a4d;
 }
 
 .index-cta {
@@ -937,8 +938,8 @@ body {
 .index-graph {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 50px 1fr 50px;
-  grid-column-gap: 20px;
+  grid-template-rows: 100px 1fr 50px;
+  grid-column-gap: 30px;
   grid-row-gap: 10px;
   width: 100%;
   height: 100%;
@@ -1008,13 +1009,6 @@ body {
   width: 12px;
   height: 12px;
   border-radius: 8px;
-}
-
-.icon-odd {
-  background-color: #0a2439;
-}
-
-.icon-even {
   background-color: #00c4cc;
 }
 
@@ -1031,18 +1025,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #00c4cc99;
+  background-color: #233a4d;
   width: 100%;
   margin: 0 auto;
 }
 
-.item-odd {
-  background-color: #0a2439;
-}
-
-.item-even {
-  background-color: #00c4cc;
-}
 
 .graph-count {
   font-family: "Montserrat";

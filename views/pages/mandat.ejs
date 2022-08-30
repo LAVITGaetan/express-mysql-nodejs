@@ -10,7 +10,7 @@
             <%- include('includes/navbar.ejs') %>
                 <div class="layout-content">
 
-
+<div class="ctd" onclick="deleteMandat('<%= mandat[0].id %>')">Supprimer</div>
                     <div class="container full">
                         <div class="container-header">
                             <%= mandat[0].label %>
@@ -37,32 +37,37 @@
                         <div class="container-action"><a href="/edit-mandat?id=<%= mandat[0].id %>"
                                 class="container-cta">Modifier</div></a>
                     </div>
-
+<div class="flex-between"><h2 class="subtitle">Portraits liés</h2><div class="cta" onclick="showModal()">Lier un portrait</div>
+</div>
+                    
                     <div class="flex">
 
-                        <div class="card-cta" onclick="showModal()">Lier un portrait</div>
-
+                        
                         <% representations.forEach(representation=> { %>
-                            <div class="card portrait">
+
+
+
+
+                            <div class="portrait-card">
+                                <div class="card-header"></div>
                                 <div class="card-figure">
                                     <img class="card-image"
-                                        src="<%= portraits.find(el => el.id === representation.id_portrait).image %>"
-                                        alt="portrait">
+                                        src="<%= portraits.find(el => el.id === representation.id_portrait).image %>">
                                 </div>
-                                <div class="card-title js-mandataire">
+                                <div class="portrait-card-title js-mandataire">
                                     <%= portraits.find(el=> el.id === representation.id_portrait).prenom %> <%=
-                                            portraits.find(el=> el.id === representation.id_portrait).nom %>
-                                </div>
-                                <div class="card-subtitle">
-                                    <%= representation.titre %>
+                                            portraits.find(el=> el.id === representation.id_portrait).nom %> %>
                                 </div>
                                 <a href="/portrait?id=<%= portraits.find(el => el.id === representation.id_portrait).id %>"
-                                    class="no-decoration">
-                                    <div class="card-action">Voir</div>
+                                    class="no-decoration card-edit">
+                                    <img src="img/edit.png" width="12px" height="12px" alt="edit">
                                 </a>
-                                <div class="card-top" onclick="deleteRepresentation('<%= representation.id %>')"><img
-                                        width="12px" height="12px" src="/img/remove.png" alt="remove"></div>
+                                <div class="card-delete" onclick="deleteRepresentation('<%= representation.id %>')">
+                                    <img src="img/delete.png" width="12px" height="12px" alt="delete">
+                                </div>
                             </div>
+
+
                             <% }) %>
                     </div>
 
@@ -135,6 +140,18 @@
         function closeModal() {
             let modal = document.getElementById('modal');
             modal.style.display = "none";
+        }
+
+        function deleteMandat(id) {
+            if (confirm('Voulez-vous vraiment supprimer ce mandat ?')) {
+                fetch(`http://localhost:7070/api/mandats/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                })
+                document.location.assign('/mandats');
+            }
         }
     </script>
 
