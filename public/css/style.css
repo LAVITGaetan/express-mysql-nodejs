@@ -1028,6 +1028,7 @@ body {
   background-color: #233a4d;
   width: 100%;
   margin: 0 auto;
+  border-bottom: 5px solid #00c4cc;
 }
 
 
@@ -1120,4 +1121,24 @@ background-color: #00c4cc;
 
 .card-delete {
   right: 16px;
+}
+
+.container-item {
+  border: 2px solid #0a243910;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1em;
+}
+
+.item-delete {
+  width: 32px;
+  height: 32px;
+  background-color: #00c4cc;
+  display: flex;
+  align-items: center;
+  border-radius: 32px;
+  justify-content: center;
+  cursor: pointer;
 }

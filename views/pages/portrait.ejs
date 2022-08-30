@@ -31,10 +31,10 @@
                     <div class="container">
                         <div class="container-header">Mandats</div>
                         <% representations.forEach(representation=> { %>
-                            <div class="container-row">Mandat : <%= mandats.find(mandat=> mandat.id ===
-                                    representation.id_mandat).label %>
-                                    <div onclick="deleteRepresentation('<%= representation.id %>')" class="row-delete">
-                                        Supprimer</div>
+                            <div class="container-item"><p class="row-label"><%= mandats.find(mandat=> mandat.id ===
+                                    representation.id_mandat).label %></p>
+                                    <div onclick="deleteRepresentation('<%= representation.id %>')" class="item-delete">
+                                        <img src="img/delete.png" width="12px" height="12px" alt="supprimer"></div>
                             </div>
                             <% }) %>
                                 <div class="container-action">
