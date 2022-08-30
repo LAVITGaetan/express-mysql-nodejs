@@ -63,8 +63,9 @@
                                                 <a href="/mandat?id=<%= mandat.id %>" class="table-icon">
                                                     <img width="12px" height="12px" src="/img/edit.png" alt="edit">
                                                 </a>
-                                                <div class="table-icon" onclick="deleteMandat('<%= mandat.id %>')"><img
-                                                        width="12px" height="12px" src="/img/remove.png" alt="remove">
+                                                <div class="table-icon table-delete"
+                                                    onclick="deleteMandat('<%= mandat.id %>')"><img width="12px"
+                                                        height="12px" src="/img/remove.png" alt="remove">
                                                 </div>
                                             </td>
                                         </tr>
@@ -83,7 +84,7 @@
 
     <script>
 
-function deleteMandat(id) {
+        function deleteMandat(id) {
             if (confirm('Voulez-vous vraiment supprimer ce mandat ?')) {
                 fetch(`http://localhost:7070/api/mandats/${id}`, {
                     method: "DELETE",

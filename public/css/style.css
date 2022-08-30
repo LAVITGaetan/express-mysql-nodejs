@@ -177,7 +177,7 @@ body {
   font-family: Montserrat;
   width: fit-content;
   cursor: pointer;
-  background-color: #FE7968;
+  background-color: #ff4545;
   border-radius: 3px;
 }
 
@@ -208,7 +208,7 @@ body {
   align-items: center;
   justify-content: center;
   margin-bottom: 1em;
-  border-radius: 3px;
+  border-radius: 48px;
 }
 
 
@@ -290,7 +290,6 @@ body {
   max-width: 400px;
   border-left: 3px solid #00c4cc;
   box-shadow: 0 10px 15px 3px #0a243910;
-  border-radius: 3px;
 }
 
 .searchbox-input {
@@ -298,7 +297,6 @@ body {
   height: 50px;
   outline: none;
   border: none;
-  border-radius: 3px;
   padding-left: 10px;
 }
 .searchbox-action {
@@ -309,7 +307,6 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border-radius: 3px;
 }
 
 /* Filter */
@@ -445,7 +442,7 @@ body {
   transition: 0.2s ease;
   width: 32px;
   height: 32px;
-  background-color: #20bec1c4;
+  background-color: #00c4cc;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -454,8 +451,8 @@ body {
   border-radius: 32px;
 }
 
-.table-icon:hover {
-  background-color: #00c4cc;
+.table-delete {
+  background-color: #ff4545;
 }
 
 .table-row {
@@ -874,7 +871,7 @@ body {
   height: 100%;
   width: 100%;
   padding: 1em;
-  border-left: 5px solid #233a4d;
+  cursor: pointer;
 }
 
 .index-cta {
@@ -908,16 +905,15 @@ body {
   text-align: center;
   width: 100%;
   padding: 1em;
-  border-bottom: 5px solid #00c4cc;
+  border-bottom: 5px solid #233a4d;
 }
 
 .last-row {
-  background-color: #233a4d;
-  border-radius: 3px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 90%;
+  border: 2px solid #00c4cc90;
   margin: 1em auto;
   height: 45px;
   padding: 0 1em;
@@ -1106,7 +1102,6 @@ background-color: #00c4cc;
   width: 32px;
   height: 32px;
   position: absolute;
-  background-color: #00c4cc;
   border-radius: 32px;
   display: flex;
   align-items: center;
@@ -1117,10 +1112,12 @@ background-color: #00c4cc;
 
 .card-edit {
   left: 16px;
+  background-color: #00c4cc;
 }
 
 .card-delete {
   right: 16px;
+  background-color: #ff4545;
 }
 
 .container-item {
@@ -1135,10 +1132,22 @@ background-color: #00c4cc;
 .item-delete {
   width: 32px;
   height: 32px;
-  background-color: #00c4cc;
+  background-color: #ff4545;
   display: flex;
   align-items: center;
   border-radius: 32px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.back {
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  margin-right: 8px;
+  background-color: #00c4cc;
+  display: flex;
+  align-items: center;
   justify-content: center;
   cursor: pointer;
 }

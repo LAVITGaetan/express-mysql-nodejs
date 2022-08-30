@@ -4,10 +4,17 @@ const Representation = require('../models/representation.model.js')
 exports.create = (req, res) => {
 
     // Valider la requête
-    if (!req.body) {
+    if (!req.body.id_mandat) {
         res.status(400).send({
-            message: "Le contenu ne peut être vide"
+            message: "Le champ id_mandat doit être complété"
         });
+        return;
+    }
+    if (!req.body.id_portrait) {
+        res.status(400).send({
+            message: "Le champ id_portrait doit être complété"
+        });
+        return;
     }
 
     // Récupérer les données envoyées
@@ -57,12 +64,18 @@ exports.findOne = (req, res) => {
 // Mettre à jour un representation
 exports.update = (req, res) => {
     // Valider la requête
-    if (!req.body) {
+    if (!req.body.id_mandat) {
         res.status(400).send({
-            message: "Le contenu ne peut être vide"
+            message: "Le champ id_mandat doit être complété"
         });
+        return;
     }
-    console.log(req.body);
+    if (!req.body.id_portrait) {
+        res.status(400).send({
+            message: "Le champ id_portrait doit être complété"
+        });
+        return;
+    }
     Representation.updateById(
         req.params.id,
         new Representation(req.body),

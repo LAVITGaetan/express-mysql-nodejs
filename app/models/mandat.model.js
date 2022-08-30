@@ -19,7 +19,6 @@ Mandat.create = (newMandat, result) => {
             result(err, null);
             return;
         }
-        console.log("Nouvel mandat crée : ", { id: res.insertId, ...newMandat });
         result(null, { id: res.insertId, ...newMandat });
     });
 };
@@ -56,7 +55,6 @@ Mandat.getAll = (result) => {
             result(null, err);
             return;
         }
-        console.log("Liste de des mandats : ", res);
         result(null, res);
     });
 };
@@ -70,7 +68,6 @@ Mandat.getRepresentations = (id, result) => {
             result(null, err)
             return;
         }
-        console.log('Liste des representations :', res);
         result(null, res)
     })
 }
@@ -93,8 +90,6 @@ Mandat.updateById = (id, mandat, result) => {
                 result({ kind: "not_found" }, null);
                 return;
             }
-            
-            console.log("mandat: ", { id: id, ...mandat });
             result(null, { id: id, ...mandat });
         }
     );

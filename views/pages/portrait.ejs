@@ -9,6 +9,7 @@
             </div>
             <%- include('includes/navbar.ejs') %>
                 <div class="layout-content">
+                    <div class="ctd" onclick="deletePortrait('<%= portrait[0].id %>')">Supprimer le portrait</div>
                     <div class="container">
                         <div class="container-header">Informations générales</div>
                         <div class="container-row">
@@ -68,6 +69,19 @@
         </div>
     </body>
     <script>
+
+function deletePortrait(id) {
+            if (confirm('Voulez-vous vraiment supprimer ce portrait ?')) {
+                fetch(`http://localhost:7070/api/portraits/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                })
+                document.location.assign('/portraits');
+            }
+        }
+
         function addRepresentation() {
             let representation = {
                 id_mandat: document.getElementById('mandat').value,

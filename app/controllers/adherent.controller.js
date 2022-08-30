@@ -4,11 +4,56 @@ const Adherent = require('../models/adherent.model.js')
 exports.create = (req, res) => {
 
     // Valider la requête
-    if (!req.body) {
+    if (!req.body.entreprise) {
         res.status(400).send({
-            message: "Le contenu ne peut être vide"
+            message: "Le champ entreprise doit être complété"
         });
+        return;
     }
+    if (!req.body.section) {
+        res.status(400).send({
+            message: "Le champ section doit être complété"
+        });
+        return;
+    }
+    if (!req.body.adresse) {
+        res.status(400).send({
+            message: "Le champ adresse doit être complété"
+        });
+        return;
+    }
+    if (!req.body.nom) {
+        res.status(400).send({
+            message: "Le champ nom doit être complété"
+        });
+        return;
+    }
+    if (!req.body.prenom) {
+        res.status(400).send({
+            message: "Le champ prenom doit être complété"
+        });
+        return;
+    }
+    if (!req.body.email) {
+        res.status(400).send({
+            message: "Le champ email doit être complété"
+        });
+        return;
+    }
+    if (!req.body.telephone) {
+        res.status(400).send({
+            message: "Le champ téléphone doit être complété"
+        });
+        return;
+    }
+    if (!req.body.identifiant) {
+        res.status(400).send({
+            message: "Le champ identifiant doit être complété"
+        });
+        return;
+    }
+
+    req.body.status = 1;
 
     // Récupérer les données envoyées
     const adherent = new Adherent(req.body);
@@ -70,12 +115,56 @@ exports.findOne = (req, res) => {
 // Mettre à jour un adhérent
 exports.update = (req, res) => {
     // Valider la requête
-    if (!req.body) {
+    if (!req.body.entreprise) {
         res.status(400).send({
-            message: "Le contenu ne peut être vide"
+            message: "Le champ entreprise doit être complété"
         });
+        return;
     }
-    console.log(req.body);
+    if (!req.body.section) {
+        res.status(400).send({
+            message: "Le champ section doit être complété"
+        });
+        return;
+    }
+    if (!req.body.adresse) {
+        res.status(400).send({
+            message: "Le champ adresse doit être complété"
+        });
+        return;
+    }
+    if (!req.body.nom) {
+        res.status(400).send({
+            message: "Le champ nom doit être complété"
+        });
+        return;
+    }
+    if (!req.body.prenom) {
+        res.status(400).send({
+            message: "Le champ prenom doit être complété"
+        });
+        return;
+    }
+    if (!req.body.email) {
+        res.status(400).send({
+            message: "Le champ email doit être complété"
+        });
+        return;
+    }
+    if (!req.body.telephone) {
+        res.status(400).send({
+            message: "Le champ téléphone doit être complété"
+        });
+        return;
+    }
+    if (!req.body.identifiant) {
+        res.status(400).send({
+            message: "Le champ identifiant doit être complété"
+        });
+        return;
+    }
+    req.body.status = 1;
+    
     Adherent.updateById(
         req.params.id,
         new Adherent(req.body),

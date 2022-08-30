@@ -4,12 +4,36 @@ const Mandat = require('../models/mandat.model.js')
 exports.create = (req, res) => {
 
     // Valider la requête
-    if (!req.body) {
+    if (!req.body.label) {
         res.status(400).send({
-            message: "Le contenu ne peut être vide"
+            message: "Le champ label doit être complété"
         });
+        return;
     }
-
+    if (!req.body.nom) {
+        res.status(400).send({
+            message: "Le champ nom doit être complété"
+        });
+        return;
+    }
+    if (!req.body.categorie) {
+        res.status(400).send({
+            message: "Le champ catégorie doit être complété"
+        });
+        return;
+    }
+    if (!req.body.mission) {
+        res.status(400).send({
+            message: "Le champ mission doit être complété"
+        });
+        return;
+    }
+    if (!req.body.composition) {
+        res.status(400).send({
+            message: "Le champ composition doit être complété"
+        });
+        return;
+    }
     // Récupérer les données envoyées
     const mandat = new Mandat(req.body);
 
@@ -72,13 +96,37 @@ exports.findRepresentations = (req, res) => {
 
 // Mettre à jour un mandat
 exports.update = (req, res) => {
-    // Valider la requête
-    if (!req.body) {
-        res.status(400).send({
-            message: "Le contenu ne peut être vide"
-        });
-    }
-    console.log(req.body);
+// Valider la requête
+if (!req.body.label) {
+    res.status(400).send({
+        message: "Le champ label doit être complété"
+    });
+    return;
+}
+if (!req.body.nom) {
+    res.status(400).send({
+        message: "Le champ nom doit être complété"
+    });
+    return;
+}
+if (!req.body.categorie) {
+    res.status(400).send({
+        message: "Le champ catégorie doit être complété"
+    });
+    return;
+}
+if (!req.body.mission) {
+    res.status(400).send({
+        message: "Le champ mission doit être complété"
+    });
+    return;
+}
+if (!req.body.composition) {
+    res.status(400).send({
+        message: "Le champ composition doit être complété"
+    });
+    return;
+}
     Mandat.updateById(
         req.params.id,
         new Mandat(req.body),

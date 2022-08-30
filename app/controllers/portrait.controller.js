@@ -4,10 +4,13 @@ const Portrait = require('../models/portrait.model.js')
 exports.create = (req, res) => {
 
     // Valider la requête
-    if (!req.body) {
-        res.status(400).send({
-            message: "Le contenu ne peut être vide"
-        });
+    if(!req.body.nom) {
+        res.send({message: "Le nom doit être renseigné"})
+        return;
+    }
+    if(!req.body.prenom) {
+        res.send({message: "Le prénom doit être renseigné"})
+        return;
     }
 
     // Récupérer les données envoyées
@@ -73,12 +76,14 @@ exports.findRepresentations = (req, res) => {
 // Mettre à jour un portrait
 exports.update = (req, res) => {
     // Valider la requête
-    if (!req.body) {
-        res.status(400).send({
-            message: "Le contenu ne peut être vide"
-        });
+    if(!req.body.nom) {
+        res.send({message: "Le nom doit être renseigné"})
+        return;
     }
-    console.log(req.body);
+    if(!req.body.prenom) {
+        res.send({message: "Le prénom doit être renseigné"})
+        return;
+    }
     Portrait.updateById(
         req.params.id,
         new Portrait(req.body),

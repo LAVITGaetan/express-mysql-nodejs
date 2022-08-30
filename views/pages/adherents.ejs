@@ -5,7 +5,13 @@
         <div class="layout">
 
             <div class="layout-header">
-                <h1 class="header-title">Liste des adhérents</h1>
+                <div class="flex">
+                    <div class="back" onclick="history.back()">
+                        <img src="img/back.png" width="12px" height="12px" alt="retour">
+                    </div>
+                    <h1 class="header-title">Liste des adhérents</h1>
+
+                </div>
             </div>
             <%- include('includes/navbar.ejs') %>
 
@@ -66,7 +72,8 @@
                                                 <a href="/adherent?id=<%= adherent.id %>" class="table-icon">
                                                     <img width="12px" height="12px" src="/img/edit.png" alt="edit">
                                                 </a>
-                                                <div class="table-icon" onclick="deleteAdherent('<%= adherent.id %>')">
+                                                <div class="table-icon table-delete"
+                                                    onclick="deleteAdherent('<%= adherent.id %>')">
                                                     <img width="12px" height="12px" src="/img/remove.png" alt="remove">
                                                 </div>
                                             </td>

@@ -12,13 +12,13 @@
                     <form class="form-flex" onsubmit="editAdherent(event)" method="post">
                         <div class="form-group">
                             <label for="entreprise" class="form-label">Raison Sociale</label>
-                            <input name="entreprise" id="entreprise" type="text" class="form-input"
+                            <input required name="entreprise" id="entreprise" type="text" class="form-input"
                                 placeholder="Réponse" value="<%= adherent[0].entreprise %>">
                         </div>
                         <div class="form-group">
                             <label for="section" class="form-label">Section</label>
-                            <select name="section" id="section" class="form-select">
-                                <option value="null">Choisir une section</option>
+                            <select required name="section" id="section" class="form-select">
+                                <option value="">Choisir une section</option>
                                 <option value="artisanat" <%=adherent[0].section==='artisanat' ? 'selected' : '' %>
                                     >Artisanat</option>
                                 <option value="commerce" <%=adherent[0].section==='commerce' ? 'selected' : '' %>
@@ -31,33 +31,33 @@
                         </div>
                         <div class="form-group">
                             <label for="adresse" class="form-label">Adresse de l' entreprise</label>
-                            <input type="text" id="adresse" class="form-input" placeholder="Réponse"
+                            <input required type="text" id="adresse" class="form-input" placeholder="Réponse"
                                 value="<%= adherent[0].adresse %>">
                         </div>
                         <div class="form-group">
                             <label for="nom" class="form-label">Nom du représentant</label>
-                            <input type="text" id="nom" class="form-input" placeholder="Réponse"
+                            <input required type="text" id="nom" class="form-input" placeholder="Réponse"
                                 value="<%= adherent[0].nom %>">
                         </div>
                         <div class="form-group">
                             <label for="prenom" class="form-label">Prénom du représentant</label>
-                            <input type="text" id="prenom" class="form-input" placeholder="Réponse"
+                            <input required type="text" id="prenom" class="form-input" placeholder="Réponse"
                                 value="<%= adherent[0].prenom %>">
                         </div>
                         <div class="form-group">
                             <label for="email" class="form-label">Adresse E-mail</label>
-                            <input type="text" id="email" class="form-input" placeholder="Réponse"
+                            <input pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Format d'email invalide" required type="text" id="email" class="form-input" placeholder="Réponse"
                                 value="<%= adherent[0].email %>">
                         </div>
                         <div class="form-group">
                             <label for="telephone" class="form-label">Numéro de téléphone</label>
-                            <input type="text" id="telephone" class="form-input" placeholder="Réponse"
+                            <input required type="text" id="telephone" class="form-input" placeholder="Réponse"
                                 value="<%= adherent[0].telephone %>">
                         </div>
                         <div class="form-group">
                             <label for="identifiant" class="form-label">Mot de passe</label>
                             <div class="generate-field">
-                                <input maxlength="5" type="text" id="identifiant" class="form-input"
+                                <input required maxlength="5" type="text" id="identifiant" class="form-input"
                                     placeholder="Réponse" value="<%= adherent[0].identifiant %>">
                                 <div class="generate" onclick="generateCode()"></div>
 
