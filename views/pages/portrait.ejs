@@ -13,7 +13,13 @@
                     <div class="container">
                         <div class="container-header">Informations générales</div>
                         <div class="container-row">
-                            <img width="128px" height="128px" class="row-image" src="<%= portrait[0].image %>">
+                            <% if (portrait[0].image !=='' ) { %>
+                                <img width="128px" height="128px" class="row-image" src="<%= portrait[0].image %>">
+
+                                <% } else {%>
+                            Aucune image associée au portrait
+<%}%>
+
                         </div>
                         <div class="container-row">
                             <span class="row-label">
@@ -29,15 +35,25 @@
                         <div class="container-action"><a href="/edit-portrait?id=<%= portrait[0].id %>"
                                 class="container-cta">Modifier</div></a>
                     </div>
+                    
                     <div class="container">
                         <div class="container-header">Mandats</div>
-                        <% representations.forEach(representation=> { %>
-                            <div class="container-item"><p class="row-label"><%= mandats.find(mandat=> mandat.id ===
-                                    representation.id_mandat).label %></p>
+                        <% if (representations.length > 0) { %>
+                            <% representations.forEach(representation=> { %>
+                                <div class="container-item">
+                                    <p class="row-label">
+                                        <%= mandats.find(mandat=> mandat.id ===
+                                            representation.id_mandat).label %> (<%= representation.titre %>)
+                                    </p>
                                     <div onclick="deleteRepresentation('<%= representation.id %>')" class="item-delete">
-                                        <img src="img/delete.png" width="12px" height="12px" alt="supprimer"></div>
-                            </div>
-                            <% }) %>
+                                        <img src="img/delete.png" width="12px" height="12px" alt="supprimer">
+                                    </div>
+                                </div>
+                                <% }) %>
+                        <% }else {%>
+                            <div class="container-row">Ce portrait est assigné à aucun mandat</div>
+                        <%} %>
+                        
                                 <div class="container-action">
                                     <div href="" class="container-cta" onclick="showModal()">Ajouter</div>
                                 </div>
@@ -47,11 +63,8 @@
         <div id="modal">
             <h6 id="modal-title">Assignation</h6>
             <div id="modal-content">
-                <select id="titre" class="form-select">
-                    <option value="null">Choisir un titre</option>
-                    <option value="titulaire">Titulaire</option>
-                    <option value="suppléant">Suppléant</option>
-                </select>
+                <label class="form-label" for="titre">Rôle</label>
+                <input style="margin-bottom:1em" type="text" id="titre" placeholder="Rôle" class="form-input">
                 <select class="form-select" id="mandat">
                     <option value="null">Choisir un mandat</option>
                     <% mandats.forEach(mandat=> { %>
@@ -70,7 +83,7 @@
     </body>
     <script>
 
-function deletePortrait(id) {
+        function deletePortrait(id) {
             if (confirm('Voulez-vous vraiment supprimer ce portrait ?')) {
                 fetch(`http://localhost:7070/api/portraits/${id}`, {
                     method: "DELETE",

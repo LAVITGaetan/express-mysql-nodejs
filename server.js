@@ -67,5 +67,5 @@ require("./app/routes/mandat.routes.js")(app);
 require("./app/routes/portrait.routes.js")(app);
 require("./app/routes/representation.routes.js")(app)
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Serveur actif à l'adresse http://localhost:${PORT}`);
 })

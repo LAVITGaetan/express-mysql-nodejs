@@ -15,26 +15,36 @@
                             <div onclick="searchPortrait()" class="searchbox-action"><img width="20px" height="20px"
                                     src="/img/search.png" alt="search"></div>
                         </div>
-                    <a href="/nouveau-portrait" class="no-decoration"><div class="cta">Nouveau portrait</div></a>
+                        <a href="/nouveau-portrait" class="no-decoration">
+                            <div class="cta">Nouveau portrait</div>
+                        </a>
 
                     </div>
                     <div class="flex">
-                        <% portraits.forEach(portrait => { %>
-                        <div class="portrait-card">
-                            <div class="card-header"></div>
-                            <div class="card-figure">
-                                <img class="card-image" src="<%= portrait.image %>">
+                        <% portraits.forEach(portrait=> { %>
+                            <div class="portrait portrait-card">
+                                <div class="card-header"></div>
+                                <div class="card-figure">
+                                    <% if (portrait.image !=='' ) { %>
+                                        <img class="card-image" src="<%= portrait.image %>">
+                                        <% } %>
+
+                                </div>
+                                <div class="portrait-card-title js-mandataire">
+                                    <%= portrait.prenom %>
+                                        <%= portrait.nom %>
+                                </div>
+                                <div class="portrait-card-subtitle">
+                                    <%= representations.filter(el=> el.id_portrait === portrait.id).length %> mandats
+                                </div>
+                                <a href="/portrait?id=<%= portrait.id %>" class="no-decoration card-edit">
+                                    <img src="img/edit.png" width="12px" height="12px" alt="edit">
+                                </a>
+                                <div class="card-delete" onclick="deletePortrait('<%= portrait.id %>')">
+                                    <img src="img/delete.png" width="12px" height="12px" alt="delete">
+                                </div>
                             </div>
-                            <div class="portrait-card-title js-mandataire"><%= portrait.prenom %> <%= portrait.nom %></div>
-                            <div class="portrait-card-subtitle"><%= representations.filter(el => el.id_portrait === portrait.id).length %>  mandats</div>
-                            <a href="/portrait?id=<%= portrait.id %>" class="no-decoration card-edit">
-                                <img src="img/edit.png" width="12px" height="12px" alt="edit">
-                            </a>
-                            <div class="card-delete" onclick="deletePortrait('<%= portrait.id %>')">
-                                <img src="img/delete.png" width="12px" height="12px" alt="delete">
-                            </div>
-                        </div>
-                        <% }) %>
+                            <% }) %>
 
                     </div>
                 </div>
@@ -43,7 +53,7 @@
     </body>
 
     <script>
-function deletePortrait(id) {
+        function deletePortrait(id) {
             if (confirm('Voulez-vous vraiment supprimer ce portrait ?')) {
                 fetch(`http://localhost:7070/api/portraits/${id}`, {
                     method: "DELETE",
@@ -61,16 +71,16 @@ function deletePortrait(id) {
             let length = item.length;
             for (let i = 0; i < length; i++) {
                 let mandataire = item[i].getElementsByClassName('js-mandataire')[0].innerHTML.toLowerCase();
-                    if (mandataire.includes(query)) {
-                        item[i].style.display = 'table-row';
-                        console.log('item matched');
-                    }
-                    else {
-                        item[i].style.display = 'none';
-                        console.log('item hidden by query');
-                    }
+                if (mandataire.includes(query)) {
+                    item[i].style.display = 'table-row';
+                    console.log('item matched');
+                }
+                else {
+                    item[i].style.display = 'none';
+                    console.log('item hidden by query');
                 }
             }
+        }
     </script>
     <script src="/js/index.js"></script>
 

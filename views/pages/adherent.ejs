@@ -61,37 +61,40 @@
                         <div class="container-action"><a href="/edit-adherent?id=<%= adherent[0].id %>"
                                 class="container-cta">Modifier</div></a>
                     </div>
-                    <div class="container">
-                        <div class="container-header">Parution dans l'annuaire</div>
-                        <div class="container-row"><span class="row-label">Logo : </span><a
-                                href="<%= adherent[0].logo %>">
-                                <%= adherent[0].logo %>
-                            </a></div>
-                        <div class="container-row"><span class="row-label">Activité : </span>
-                            <%= adherent[0].activite %>
+                    <% if (adherent[0].parution == 1) { %>
+                        <div class="container">
+                            <div class="container-header">Parution dans l'annuaire</div>
+                            <div class="container-row"><span class="row-label">Logo : </span><a
+                                    href="<%= adherent[0].logo %>">
+                                    <%= adherent[0].logo %>
+                                </a></div>
+                            <div class="container-row"><span class="row-label">Activité : </span>
+                                <%= adherent[0].activite %>
+                            </div>
+                            <div class="container-row"><span class="row-label">Titre du contact : </span>
+                                <%= adherent[0].contact_titre %>
+                            </div>
+                            <div class="container-row"><span class="row-label">Nom du contact : </span>
+                                <%= adherent[0].contact_nom %>
+                            </div>
+                            <div class="container-row"><span class="row-label">Prénom du contact : </span>
+                                <%= adherent[0].contact_prenom %>
+                            </div>
+                            <div class="container-row"><span class="row-label">Email du contact : </span>
+                                <%= adherent[0].contact_email %>
+                            </div>
+                            <div class="container-row"><span class="row-label">Téléphone du contact : </span>
+                                <%= adherent[0].contact_telephone %>
+                            </div>
+                            <div class="container-row"><span class="row-label">Parution : </span>
+                                <%= adherent[0].parution===1 ? 'activée' : 'desactivée' %>
+                            </div>
+                            <div class="container-action"><a href="/edit-annuaire?id=<%= adherent[0].id %>"
+                                    class="container-cta">Modifier</div></a>
                         </div>
-                        <div class="container-row"><span class="row-label">Titre du contact : </span>
-                            <%= adherent[0].contact_titre %>
-                        </div>
-                        <div class="container-row"><span class="row-label">Nom du contact : </span>
-                            <%= adherent[0].contact_nom %>
-                        </div>
-                        <div class="container-row"><span class="row-label">Prénom du contact : </span>
-                            <%= adherent[0].contact_prenom %>
-                        </div>
-                        <div class="container-row"><span class="row-label">Email du contact : </span>
-                            <%= adherent[0].contact_email %>
-                        </div>
-                        <div class="container-row"><span class="row-label">Téléphone du contact : </span>
-                            <%= adherent[0].contact_telephone %>
-                        </div>
-                        <div class="container-row"><span class="row-label">Parution : </span>
-                            <%= adherent[0].parution===1 ? 'activée' : 'desactivée' %>
-                        </div>
-                        <div class="container-action"><a href="/edit-annuaire?id=<%= adherent[0].id %>"
-                                class="container-cta">Modifier</div></a>
                     </div>
-                </div>
+                    <% } %>
+                    
         </div>
 
     </body>

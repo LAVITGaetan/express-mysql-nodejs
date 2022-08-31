@@ -10,7 +10,7 @@
             <%- include('includes/navbar.ejs') %>
                 <div class="layout-content">
 
-<div class="ctd" onclick="deleteMandat('<%= mandat[0].id %>')">Supprimer</div>
+                    <div class="ctd" onclick="deleteMandat('<%= mandat[0].id %>')">Supprimer</div>
                     <div class="container full">
                         <div class="container-header">
                             <%= mandat[0].label %>
@@ -37,12 +37,14 @@
                         <div class="container-action"><a href="/edit-mandat?id=<%= mandat[0].id %>"
                                 class="container-cta">Modifier</div></a>
                     </div>
-<div class="flex-between"><h2 class="subtitle">Portraits liés</h2><div class="cta" onclick="showModal()">Lier un portrait</div>
-</div>
-                    
+                    <div class="flex-between">
+                        <h2 class="subtitle">Portraits liés</h2>
+                        <div class="cta" onclick="showModal()">Lier un portrait</div>
+                    </div>
+
                     <div class="flex">
 
-                        
+
                         <% representations.forEach(representation=> { %>
 
 
@@ -51,12 +53,18 @@
                             <div class="portrait-card">
                                 <div class="card-header"></div>
                                 <div class="card-figure">
-                                    <img class="card-image"
+                                    <% if (portraits.find(el => el.id === representation.id_portrait).image !== '') { %>
+                                        <img class="card-image"
                                         src="<%= portraits.find(el => el.id === representation.id_portrait).image %>">
+                                    <% } %>
+                                    
                                 </div>
                                 <div class="portrait-card-title js-mandataire">
                                     <%= portraits.find(el=> el.id === representation.id_portrait).prenom %> <%=
                                             portraits.find(el=> el.id === representation.id_portrait).nom %> %>
+                                </div>
+                                <div class="portrait-card-subtitle">
+                                    <%= representation.titre %>
                                 </div>
                                 <a href="/portrait?id=<%= portraits.find(el => el.id === representation.id_portrait).id %>"
                                     class="no-decoration card-edit">
