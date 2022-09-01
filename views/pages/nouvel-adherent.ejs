@@ -9,7 +9,11 @@
             <%- include('includes/navbar.ejs') %>
 
                 <div class="layout-content">
-                    <form class="form-flex" onsubmit="addAdherent(event)" method="post">
+                    <form class="form-flex" action="/nouvel-adherent" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="image" class="form-label">Logo de l' entreprise</label>
+                            <input type="file" name="image" />
+                        </div>
                         <div class="form-group">
                             <label for="entreprise" class="form-label">Raison Sociale</label>
                             <input required name="entreprise" id="entreprise" type="text" class="form-input"
@@ -27,28 +31,28 @@
                         </div>
                         <div class="form-group">
                             <label for="adresse" class="form-label">Adresse de l' entreprise</label>
-                            <input required type="text" id="adresse" class="form-input" placeholder="Réponse">
+                            <input required type="text" name="adresse" class="form-input" placeholder="Réponse">
                         </div>
                         <div class="form-group">
                             <label for="nom" class="form-label">Nom du représentant</label>
-                            <input required type="text" id="nom" class="form-input" placeholder="Réponse">
+                            <input required type="text" name="nom" class="form-input" placeholder="Réponse">
                         </div>
                         <div class="form-group">
                             <label for="prenom" class="form-label">Prénom du représentant</label>
-                            <input required type="text" id="prenom" class="form-input" placeholder="Réponse">
+                            <input required type="text" name="prenom" class="form-input" placeholder="Réponse">
                         </div>
                         <div class="form-group">
                             <label for="email" class="form-label">Adresse E-mail</label>
-                            <input pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Format d'email invalide" required type="text" id="email" class="form-input" placeholder="Réponse">
+                            <input pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Format d'email invalide" required type="text" name="email" class="form-input" placeholder="Réponse">
                         </div>
                         <div class="form-group">
                             <label for="telephone" class="form-label">Numéro de téléphone</label>
-                            <input required type="text" id="telephone" class="form-input" placeholder="Réponse">
+                            <input required type="text" name="telephone" class="form-input" placeholder="Réponse">
                         </div>
                         <div class="form-group">
                             <label for="identifiant" class="form-label">Mot de passe</label>
                             <div class="generate-field">
-                                <input required maxlength="5" type="text" id="identifiant" class="form-input"
+                                <input required maxlength="5" id="identifiant" type="text" name="identifiant" class="form-input"
                                     placeholder="Réponse">
                                 <div class="generate" onclick="generateCode()"></div>
 

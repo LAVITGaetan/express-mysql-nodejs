@@ -7,6 +7,7 @@
 
 body {
   font-family: Montserrat;
+  background-color: #e6f9fa50;
 }
 
 .semibold {
@@ -796,6 +797,7 @@ body {
     height: 100%;
     box-shadow: 0px 5px 10px 5px #1fc1c31a;
     border-top: 5px solid #0a2439;
+    background-color: #fff;
 }
 
 .last-title {
@@ -817,7 +819,7 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 90%;
-  border: 3px solid #233a4d;
+  border: 3px solid #00c4cc90;
   margin: 1em auto;
   height: 45px;
   padding: 0 1em;
@@ -889,7 +891,7 @@ body {
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
-  font-size: 17px;
+  font-size: 20px;
   padding-top: 20px;
   color: #0a2439;
 }
@@ -929,7 +931,8 @@ body {
   background-color: #0A2439;
   width: 100%;
   margin: 0 auto;
-  border-top: 5px solid #00c4cc;
+  border: 5px solid #233a4d;
+  border-bottom: none;
 }
 
 
@@ -972,9 +975,10 @@ body {
   padding: 10px 5%;
   font-size: 16px;
   color: #0A2439;
-  background-color: #00c4cc10;
+  background-color: #00c4cc50;
   width: fit-content;
   position: relative;
+  margin-left: 5%;
 }
 
 .adherent-card-email {
@@ -1022,6 +1026,7 @@ body {
 .card-image {
   width: 100%;
   height: 100%;
+  border-radius: 100%;
 }
 
 .add-photo {

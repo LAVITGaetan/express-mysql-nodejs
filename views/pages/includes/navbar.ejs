@@ -4,6 +4,11 @@
             <a href="/accueil" class="navbar-title no-decoration">CPME Réunion</a>
         </div>
         <div class="navbar-content">
+            <a href="/accueil" class="navbar-link <% if (title === 'Accueil') { %>
+                <%= 'link-selected' %>
+               <% } %>"><img src="img/home.png" class="navbar-icon">
+                   <h3 class="navbar-text">Accueil</h3>
+               </a>
             <a href="/adherents" class="navbar-link <% if (title === 'Adhérents') { %>
              <%= 'link-selected' %>
             <% } %>"><img src="img/adherents.png" class="navbar-icon">
@@ -18,11 +23,6 @@
                 <%= 'link-selected' %>
                <% } %>"><img src="img/portrait.png" class="navbar-icon">
                 <h3 class="navbar-text">Portraits</h3>
-            </a>
-            <a href="/fiches" class="navbar-link <% if (title === 'Fiches temps') { %>
-                <%= 'link-selected' %>
-               <% } %>"><img src="img/temps.png" class="navbar-icon">
-                <h3 class="navbar-text">Fiches temps</h3>
             </a>
             <a href="/formulaires" class="navbar-link <% if (title === 'Formulaires') { %>
                 <%= 'link-selected' %>

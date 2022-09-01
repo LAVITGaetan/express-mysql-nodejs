@@ -180,6 +180,56 @@ const uri = `http://localhost:7070/api/portraits/${req.body.id}`;
 
 });
 
+
+//upload
+app.post('/nouvel-adherent', (req, res) => {
+  const uri = `http://localhost:7070/api/adherents/`;
+  let entreprise = req.body.entreprise;
+  let section = req.body.section;
+  let adresse = req.body.adresse;
+  let nom = req.body.nom;
+  let prenom = req.body.prenom;
+  let email = req.body.email;
+  let telephone = req.body.telephone;
+  let identifiant = req.body.identifiant;
+  let siteweb = req.body.siteweb;
+  if (req.files) {
+    const { image } = req.files;
+    path = entreprise + '_' + image.name
+    image.mv(__dirname + '/public/upload/' + entreprise + '_' + image.name);
+  }
+  else {
+    path = '';
+  }
+
+  fetch(`${uri}`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ logo: path, entreprise: entreprise, section: section, adresse : adresse, nom : nom, prenom : prenom, email : email, telephone, telephone, identifiant : identifiant, siteweb : siteweb, status : 1  })
+  })
+
+  let adherents = [];
+  const result = fetch(uri)
+    .then((response) => response.json())
+    .then((response) => {
+      response.forEach(item => {
+        adherents.push(item)
+      })
+    })
+
+  result.then(r => {
+    if (req.session.loggedin) {
+      res.render('pages/adherents', { adherents: adherents, title: "Adhérents", message: `${entreprise} ajoutée` });
+    }
+    else {
+      res.send("Veuillez vous connecter pour accéder à cette page")
+    }
+  })
+});
+
 const PORT = process.env.PORT || 7070
 
 require("./app/routes/adherent.routes.js")(app);

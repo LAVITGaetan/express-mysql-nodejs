@@ -2,6 +2,7 @@ const sql = require("./db.js");
 
 // Constructeur
 const Adherent = function (adherent) {
+    this.logo = adherent.logo;
     this.entreprise = adherent.entreprise;
     this.section = adherent.section;
     this.adresse = adherent.adresse;
@@ -82,8 +83,8 @@ Adherent.getActive = (result) => {
 // Mettre à jour un adhérent
 Adherent.updateById = (id, adherent, result) => {
     sql.query(
-        "UPDATE adherent SET entreprise = ?, section = ?, adresse = ?, nom = ?, prenom = ?, email = ?, telephone = ?, identifiant = ?, siteweb = ?, status = ? WHERE id = ?",
-        [adherent.entreprise, adherent.section, adherent.adresse, adherent.nom, adherent.prenom, adherent.email, adherent.telephone, adherent.identifiant, adherent.siteweb, adherent.status, id],
+        "UPDATE adherent SET logo = ?, entreprise = ?, section = ?, adresse = ?, nom = ?, prenom = ?, email = ?, telephone = ?, identifiant = ?, siteweb = ?, status = ? WHERE id = ?",
+        [adherent.logo, adherent.entreprise, adherent.section, adherent.adresse, adherent.nom, adherent.prenom, adherent.email, adherent.telephone, adherent.identifiant, adherent.siteweb, adherent.status, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
