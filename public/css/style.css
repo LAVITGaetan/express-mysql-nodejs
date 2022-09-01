@@ -815,7 +815,7 @@ body {
   grid-row-gap: 20px;
   min-height: 100%;
   overflow: auto;
-  padding: 20px 0;
+  padding: 20px;
 }
 
 .index1 {
@@ -865,10 +865,12 @@ body {
   border-radius: 3px;
 }
 
+
 .index-last {
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to left top, #0a2439, #11293e, #172f43, #1d3448, #233a4d);
+    width: 100%;
+    height: 100%;
+    box-shadow: 5px 5px 10px 5px #1fc1c31a;
+    border-top: 5px solid #0a2439;
 }
 
 .last-title {
@@ -876,10 +878,13 @@ body {
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
-  color: #ffffff;
+  color: #fff;
+  background-color: #0A2439;
   text-align: center;
   width: 100%;
   padding: 1em;
+  border-bottom-left-radius:50% 20% ;
+  border-bottom-right-radius:50% 20% ;
 }
 
 .last-row {
@@ -887,7 +892,7 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 90%;
-  border: 2px solid #00c4cc90;
+  border: 3px solid #00c4cc50;
   margin: 1em auto;
   height: 45px;
   padding: 0 1em;
@@ -898,7 +903,7 @@ body {
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
-  color: #ffffff;
+  color: #0A2439;
   max-width: 10ch;
   line-height: 18px;
   max-height: 18px;
@@ -925,7 +930,7 @@ body {
   grid-area: 2 / 1 / 3 / 2;
   display: flex;
   align-items: end;
-  min-height: 106px;
+  min-height: 105px;
 }
 .graph3 {
   grid-area: 2 / 2 / 3 / 3;
@@ -996,10 +1001,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #233a4d;
+  background-color: #0A2439;
   width: 100%;
   margin: 0 auto;
-  border: 3px solid #00c4cc;
+  border-top: 5px solid #00c4cc;
 }
 
 
@@ -1021,7 +1026,7 @@ body {
   background-color: #fff;
   padding: 0 0 1em 0;
   margin: 20px 20px 20px 0;
-  border-top: 3px solid #00c4cc;
+  border-top: 5px solid #00c4cc;
 }
 
 .adherent-card:hover .card-edit, .adherent-card:hover .card-delete {
