@@ -1,11 +1,18 @@
 <%- include('includes/header.ejs') %>
 
     <body>
+        <% if (message !== '') { %>
+            <div style="display: block;" id="modal">
+                <div id="modal-title"><%= message %> </div>
+                <div id="modal-close" onclick="closeModal()">Ok</div>
+            </div>
+                     
+                    <% } %>
         <div class="layout">
             <%- include('includes/navbar.ejs') %>
 
                 <div class="layout-header">
-                    <h1 class="header-title">Nos mandataires</h1>
+                    <h1 class="header-title">Les portraits de mandataires</h1>
                 </div>
                 <div class="layout-content">
                     <div class="flex-between">
@@ -26,9 +33,9 @@
                                 <div class="card-header"></div>
                                 <div class="card-figure">
                                     <% if (portrait.image !=='' ) { %>
-                                        <img class="card-image" src="<%= portrait.image %>">
+                                        <img class="card-image" src="upload/<%= portrait.image %>">
                                         <% }else{ %>
-                                        <img class="add-photo" width="24px" height="24px" src="img/add-photo.png">
+                                        <img class="add-photo" width="24px" height="24px" src="img/no-photo.png">
                                             <% } %>
 
                                 </div>
@@ -55,6 +62,12 @@
     </body>
 
     <script>
+
+function closeModal() {
+            let modal = document.getElementById('modal');
+            modal.style.display = "none";
+        }
+
         function deletePortrait(id) {
             if (confirm('Voulez-vous vraiment supprimer ce portrait ?')) {
                 fetch(`http://localhost:7070/api/portraits/${id}`, {
@@ -63,7 +76,7 @@
                         'Content-type': 'application/json'
                     }
                 })
-                document.location.reload();
+                document.location.assign('/portraits');
             }
         }
 

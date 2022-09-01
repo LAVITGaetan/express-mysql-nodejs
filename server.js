@@ -4,6 +4,8 @@ const app = express();
 const session = require('express-session');
 const services = require('./app/services/render.js');
 const fileUpload = require('express-fileupload');
+const fetch = require('node-fetch');
+const { response } = require('express');
 
 var corsOptions = {
   origin: "http://localhost:7070"
@@ -24,7 +26,7 @@ app.use(express.static('public'));
 
 app.use(fileUpload({
   limits: {
-      fileSize: 10000000, // Around 10MB
+    fileSize: 10000000, // Around 10MB
   },
   abortOnLimit: true,
 }))
@@ -69,13 +71,52 @@ app.get('/edit-annuaire', services.editAnnuaire)
 
 //upload
 app.post('/upload', (req, res) => {
+  const uri = `http://localhost:7070/api/portraits/`;
+  let nom = req.body.nom;
+  let prenom = req.body.prenom;
+  if (req.files) {
     const { image } = req.files;
+    path = nom + prenom + '_' + image.name
+    image.mv(__dirname + '/public/upload/' + nom + prenom + '_' + image.name);
+  }
+  else {
+    path = '';
+  }
 
-    // If no image submitted, exit
-    if (!image) return res.sendStatus(400);
+  fetch(`${uri}`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ image: path, nom: nom, prenom: prenom })
+  })
 
-    // Ajouter l' image au dossier "upload"
-    image.mv(__dirname + '/upload/' + image.name);
+  let portraits = [];
+  let representations = [];
+  const result = fetch(uri)
+    .then((response) => response.json())
+    .then((response) => {
+      response.forEach(item => {
+        portraits.push(item)
+      })
+      return fetch(`http://localhost:7070/api/representations/`)
+        .then((response) => response.json())
+        .then((response) => {
+          response.forEach(item => {
+            representations.push(item)
+          })
+        })
+    })
+
+  result.then(r => {
+    if (req.session.loggedin) {
+      res.render('pages/portraits', { portraits: portraits, title: "Portraits", representations: representations, message: `${prenom} ${nom} ajouté` });
+    }
+    else {
+      res.send("Veuillez vous connecter pour accéder à cette page")
+    }
+  })
 });
 
 const PORT = process.env.PORT || 7070

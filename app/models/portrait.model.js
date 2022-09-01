@@ -59,7 +59,7 @@ Portrait.getRepresentations = (id, result) => {
 
 // Récupérer tous les portraits
 Portrait.getAll = (result) => {
-    let query = "SELECT * FROM portrait ORDER BY nom";
+    let query = "SELECT * FROM portrait ORDER BY prenom";
     sql.query(query, (err, res) => {
         if (err) {
             console.log("error: ", err);

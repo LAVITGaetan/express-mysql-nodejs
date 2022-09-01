@@ -9,51 +9,25 @@
             <%- include('includes/navbar.ejs') %>
 
                 <div class="layout-content">
-                    <form class="form-flex" onsubmit="addPortrait(event)" method="post">
+                    <form class="form-flex" action="/upload" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="image" class="form-label">Image</label>
-                            <input name="image" id="image" type="text" class="form-input"
-                                placeholder="Réponse">
-                        </div>
-                        <div class="form-group">
-                            <label for="nom" class="form-label">Nom du mandataire</label>
-                            <input required type="text" id="nom" class="form-input" placeholder="Réponse">
+                            <label for="image" class="form-label">image</label>
+                            <input type="file" name="image" />
                         </div>
                         <div class="form-group">
-                            <label for="prenom" class="form-label">Prénom du mandataire</label>
-                            <input required type="text" id="prenom" class="form-input" placeholder="Réponse">
+                            <label for="image" class="form-label">Nom</label>
+                            <input required type="text" class="form-input" name="nom" />
+
                         </div>
-                        <div class="form-action">
-                            <input type="submit" class="cta" value="Confirmer la création">
+                        <div class="form-group">
+                            <label for="image" class="form-label">Prénom</label>
+                            <input required class="form-input" type="text" name="prenom" />
                         </div>
+                        <button class="cta" type="submit">Ajouter</button>
                     </form>
                 </div>
         </div>
     </body>
-    <script>
-
-
-        function addPortrait(event) {
-            event.preventDefault();
-            let portrait = {
-                image: document.getElementById('image').value,
-                nom: document.getElementById('nom').value,
-                prenom: document.getElementById('prenom').value,
-            }
-            fetch(`http://localhost:7070/api/portraits/`, {
-                method: "POST",
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify(portrait)
-            })
-                .then(res => {
-                    console.log("Portrait ajouté : ", res);
-                    alert('Portrait ajouté, vous allez être redirigé vers la liste des portraits')
-                    document.location.assign(`/portraits`)
-                });
-        }
-    </script>
     <script src="/js/index.js"></script>
 
     </html>

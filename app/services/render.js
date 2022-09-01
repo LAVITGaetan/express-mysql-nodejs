@@ -216,7 +216,7 @@ exports.portraits = (req, res) => {
 
         result.then(r => {
             if (req.session.loggedin) {
-                res.render('pages/portraits', { portraits: portraits, title: "Portraits", representations: representations });
+                res.render('pages/portraits', { portraits: portraits, title: "Portraits", representations: representations, message : '' });
             }
             else {
                 res.send("Veuillez vous connecter pour accéder à cette page")

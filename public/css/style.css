@@ -1188,15 +1188,3 @@ background-color: #00c4cc50;
   justify-content: center;
   cursor: pointer;
 }
-
-.back {
-  width: 32px;
-  height: 32px;
-  border-radius: 32px;
-  margin-right: 8px;
-  background-color: #00c4cc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
