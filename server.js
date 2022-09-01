@@ -181,7 +181,7 @@ const uri = `http://localhost:7070/api/portraits/${req.body.id}`;
 });
 
 
-//upload
+// nouvel adhérent
 app.post('/nouvel-adherent', (req, res) => {
   const uri = `http://localhost:7070/api/adherents/`;
   let entreprise = req.body.entreprise;
@@ -228,6 +228,63 @@ app.post('/nouvel-adherent', (req, res) => {
       res.send("Veuillez vous connecter pour accéder à cette page")
     }
   })
+});
+
+
+//upload
+app.post('/edit-adherent', (req, res) => {
+  let entreprise = req.body.entreprise;
+  let section = req.body.section;
+  let adresse = req.body.adresse;
+  let nom = req.body.nom;
+  let prenom = req.body.prenom;
+  let email = req.body.email;
+  let telephone = req.body.telephone;
+  let identifiant = req.body.identifiant;
+  let siteweb = req.body.siteweb;
+  if (req.files) {
+    const { image } = req.files;
+    path = entreprise + '_' + image.name
+    image.mv(__dirname + '/public/upload/' + entreprise + '_' + image.name);
+  }
+  else {
+    path = '';
+  }
+  let bodyAdherent = {
+    logo : path,
+    entreprise : entreprise,
+    section : section,
+    adresse : adresse,
+    nom : nom,
+    prenom : prenom,
+    email : email,
+    telephone : telephone,
+    identifiant : identifiant,
+    siteweb : siteweb,
+    status : 1
+}
+
+  fetch(`http://localhost:7070/api/adherents/${req.body.id}`, {
+    method: "PUT",
+    headers: {
+      'Accept': 'application/json',
+        'Content-type': 'application/json'
+    },
+    body: JSON.stringify(bodyAdherent)
+})
+const uri = `http://localhost:7070/api/annuaires/all/${req.body.id}`;
+let adherent = [];
+fetch(uri)
+    .then((response) => response.json())
+    .then((response) => {
+        adherent.push(response[0])
+        if (req.session.loggedin) {
+            res.render('pages/adherent', { title: "Profil adhérent", adherent: adherent, message : 'Adhérent modifié' });
+        }
+        else {
+            res.send("Veuillez vous connecter pour accéder à cette page")
+        }
+    })
 });
 
 const PORT = process.env.PORT || 7070
