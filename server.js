@@ -145,7 +145,7 @@ app.post('/edit-portrait', (req, res) => {
     },
     body: JSON.stringify(bodyPortrait)
 })
-const uri = `http://localhost:7070/api/portraits/${req.query.id}`;
+const uri = `http://localhost:7070/api/portraits/${req.body.id}`;
     let portrait = [];
     let representations = [];
     let mandats = [];
