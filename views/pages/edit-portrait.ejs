@@ -9,27 +9,29 @@
             <%- include('includes/navbar.ejs') %>
 
                 <div class="layout-content">
-                    <form class="form-flex" onsubmit="editPortrait(event)" method="post">
+                    <form class="form-flex" action="/edit-portrait" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="image" class="form-label">Image</label>
-                            <input id="image" type="text" class="form-input"
-                                placeholder="Réponse" value="<%= portrait[0].image %>">
+                            <label for="image" class="form-label">image</label>
+                            <% if (portrait[0].image !== "") { %>
+                                <img width="128px" height="128px" class="row-image" src="upload/<%= portrait[0].image %>">                             
+                            <% } else{%>
+                                <div class="empty-image">
+                                    <img class="add-photo" width="64px" height="64px" src="img/no-photo.png">
+                                </div>
+                                <% } %>
+                            <input type="file" name="image" />
                         </div>
                         <div class="form-group">
-                            <label for="nom" class="form-label">Nom</label>
-                            <input required id="nom" type="text" class="form-input"
-                                placeholder="Réponse" value="<%= portrait[0].nom %>">
+                            <label for="image" class="form-label">Nom</label>
+                            <input required type="text" class="form-input" name="nom" value="<%=portrait[0].nom %>" />
+
                         </div>
-                       
                         <div class="form-group">
-                            <label for="prenom" class="form-label">Prénom</label>
-                            <input required type="text" id="prenom" class="form-input" placeholder="Réponse"
-                                value="<%= portrait[0].prenom %>">
+                            <label for="image" class="form-label">Prénom</label>
+                            <input required class="form-input" type="text" name="prenom" value="<%=portrait[0].prenom %>"  />
                         </div>
-                       
-                        <div class="form-action">
-                            <input type="submit" class="cta" value="Modifier un portrait">
-                        </div>
+                        <input type="hidden" name="id" value="<%= portrait[0].id %> ">
+                        <button class="cta" type="submit">Ajouter</button>
                     </form>
                 </div>
         </div>

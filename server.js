@@ -119,6 +119,67 @@ app.post('/upload', (req, res) => {
   })
 });
 
+//upload
+app.post('/edit-portrait', (req, res) => {
+  let nom = req.body.nom;
+  let prenom = req.body.prenom;
+  if (req.files) {
+    const { image } = req.files;
+    path = nom + prenom + '_' + image.name
+    image.mv(__dirname + '/public/upload/' + nom + prenom + '_' + image.name);
+  }
+  else {
+    path = '';
+  }
+  let bodyPortrait = {
+    image: path,
+    nom: nom,
+    prenom: prenom,
+}
+
+  fetch(`http://localhost:7070/api/portraits/${req.body.id}`, {
+    method: "PUT",
+    headers: {
+      'Accept': 'application/json',
+        'Content-type': 'application/json'
+    },
+    body: JSON.stringify(bodyPortrait)
+})
+const uri = `http://localhost:7070/api/portraits/${req.query.id}`;
+    let portrait = [];
+    let representations = [];
+    let mandats = [];
+    const result = fetch(uri)
+        .then((response) => response.json())
+        .then((response) => {
+            portrait.push(response)
+            return fetch(`${uri}/representations`)
+                .then((response) => response.json())
+                .then((response) => {
+                    response.forEach(item => {
+                        representations.push(item)
+                    })
+                    return fetch(`http://localhost:7070/api/mandats`)
+                        .then((response) => response.json())
+                        .then((response) => {
+                            response.forEach(item => {
+                                mandats.push(item)
+                            })
+                        })
+                })
+        })
+
+    result.then(r => {
+        if (req.session.loggedin) {
+            res.render('pages/portrait', { title: "Portrait", portrait: portrait, representations: representations, mandats: mandats });
+        }
+        else {
+            res.send("Veuillez vous connecter pour accéder à cette page")
+        }
+    })
+
+});
+
 const PORT = process.env.PORT || 7070
 
 require("./app/routes/adherent.routes.js")(app);

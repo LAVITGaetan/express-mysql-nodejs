@@ -1188,3 +1188,13 @@ background-color: #00c4cc50;
   justify-content: center;
   cursor: pointer;
 }
+
+.empty-image {
+  width: 128px;
+  height: 128px;
+  background-color: #233a4d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+}

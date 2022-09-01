@@ -52,14 +52,13 @@ Portrait.getRepresentations = (id, result) => {
             result(null, err)
             return;
         }
-        console.log('Liste des representations :', res);
         result(null, res)
     })
 }
 
 // Récupérer tous les portraits
 Portrait.getAll = (result) => {
-    let query = "SELECT * FROM portrait ORDER BY prenom";
+    let query = "SELECT * FROM portrait ORDER BY nom";
     sql.query(query, (err, res) => {
         if (err) {
             console.log("error: ", err);

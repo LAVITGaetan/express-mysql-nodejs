@@ -17,7 +17,9 @@
                                 <img width="128px" height="128px" class="row-image" src="upload/<%= portrait[0].image %>">
 
                                 <% } else {%>
-                            Aucune image associée au portrait
+                                    <div class="empty-image">
+                                        <img class="add-photo" width="64px" height="64px" src="img/no-photo.png">
+                                    </div>
 <%}%>
 
                         </div>
@@ -55,7 +57,7 @@
                         <%} %>
                         
                                 <div class="container-action">
-                                    <div href="" class="container-cta" onclick="showModal()">Ajouter</div>
+                                    <div class="container-cta" onclick="showModal()">Lier un mandat</div>
                                 </div>
                     </div>
                 </div>
