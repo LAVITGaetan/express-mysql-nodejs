@@ -12,14 +12,14 @@
                     <div class="index">
                         <div class="index1">
                             <div class="index-card">
-                                <div class="card-icon"><img src="img/adherents.png" width="24px" height="24px"></div>
-                                <h3 class="card-title">Nos adhérents</h3>
+                                <div class="card-icon"><span class="card-stat"><%= adherents.length %> </span></div>
+                                <h3 class="card-title">Adhérents</h3>
                             </div>
                         </div>
                         <div class="index2">
                             <div class="index-card">
-                                <div class="card-icon"><img src="img/temps.png" width="24px" height="24px"></div>
-                                <h3 class="card-title">Ma fiche mensuelle</h3>
+                                <div class="card-icon"><span class="card-stat">0</span></div>
+                                <h3 class="card-title">Réponses au dernier sondage</h3>
                             </div>
                         </div>
                         <div class="index3">
@@ -28,9 +28,7 @@
                         <div class="index4">
                             <div class="index-graph">
                                 <div class="graph1">
-                                    <div class="graph-title">Répartition des adhérents <span class="graph-stat">
-                                        (<%= adherents.length %>)
-                                    </span></div>
+                                    <div class="graph-title">Répartition des adhérents par section</div>
                                 </div>
                                 <div class="graph2">
                                     <div id="js-graph1" class="graph-item item-even">

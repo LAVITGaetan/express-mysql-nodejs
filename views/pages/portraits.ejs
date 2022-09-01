@@ -27,7 +27,9 @@
                                 <div class="card-figure">
                                     <% if (portrait.image !=='' ) { %>
                                         <img class="card-image" src="<%= portrait.image %>">
-                                        <% } %>
+                                        <% }else{ %>
+                                        <img class="add-photo" width="24px" height="24px" src="img/add-photo.png">
+                                            <% } %>
 
                                 </div>
                                 <div class="portrait-card-title js-mandataire">
