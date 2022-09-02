@@ -63,7 +63,7 @@ exports.adherents = (req, res) => {
                 adherents.push(item)
             });
             if (req.session.loggedin) {
-                res.render('pages/adherents', { adherents: adherents, title: "Adhérents" });
+                res.render('pages/adherents', { adherents: adherents, title: "Adhérents", message : '' });
             }
             else {
                 res.send("Veuillez vous connecter pour accéder à cette page")
@@ -123,7 +123,7 @@ exports.mandats = (req, res) => {
                 mandats.push(item)
             });
             if (req.session.loggedin) {
-                res.render('pages/mandats', { mandats: mandats, title: "Mandats" });
+                res.render('pages/mandats', { mandats: mandats, title: "Mandats", message : '' });
             }
             else {
                 res.send("Veuillez vous connecter pour accéder à cette page")
@@ -159,7 +159,7 @@ exports.mandat = (req, res) => {
 
     result.then(r => {
         if (req.session.loggedin) {
-            res.render('pages/mandat', { title: "Mandat", mandat: mandat, representations: representations, portraits: portraits });
+            res.render('pages/mandat', { title: "Mandat", mandat: mandat, representations: representations, portraits: portraits, message : '' });
         }
         else {
             res.send("Veuillez vous connecter pour accéder à cette page")

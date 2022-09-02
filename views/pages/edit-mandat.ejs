@@ -9,20 +9,31 @@
             <%- include('includes/navbar.ejs') %>
 
                 <div class="layout-content">
-                    <form class="form-flex" onsubmit="editMandat(event)" method="post">
+                    <form class="form-flex" action="/edit-mandat" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="image" class="form-label">Logo de l' entreprise</label>
+                            <% if (mandat[0].logo !== "") { %>
+                                <img width="128px" height="128px" class="row-image" src="upload/<%= mandat[0].logo %>">                             
+                            <% } else{%>
+                                <div class="empty-image">
+                                    <img class="add-photo" width="64px" height="64px" src="img/no-photo.png">
+                                </div>
+                                <% } %>
+                            <input type="file" name="image" />
+                        </div>
                         <div class="form-group">
                             <label for="label" class="form-label">Label</label>
-                            <input required id="label" type="text" class="form-input"
+                            <input name="label" required id="label" type="text" class="form-input"
                                 placeholder="Réponse" value="<%= mandat[0].label %>">
                         </div>
                         <div class="form-group">
                             <label for="nom" class="form-label">Nom</label>
-                            <input required id="nom" type="text" class="form-input"
+                            <input name="nom" required id="nom" type="text" class="form-input"
                                 placeholder="Réponse" value="<%= mandat[0].nom %>">
                         </div>
                         <div class="form-group">
                             <label for="categorie" class="form-label">Catégorie</label>
-                            <select required id="categorie" class="form-select">
+                            <select name="categorie" required id="categorie" class="form-select">
                                 <option value="">Choisir une section</option>
                                 <option value="artisanat" <%=mandat[0].categorie==='artisanat' ? 'selected' : '' %>
                                     >Artisanat</option>
@@ -40,24 +51,25 @@
                         </div>
                         <div class="form-group">
                             <label for="mission" class="form-label">Mission</label>
-                            <input required type="text" id="mission" class="form-input" placeholder="Réponse"
+                            <input name="mission" required type="text" id="mission" class="form-input" placeholder="Réponse"
                                 value="<%= mandat[0].mission %>">
                         </div>
                         <div class="form-group">
                             <label for="composition" class="form-label">Composition</label>
-                            <input required type="text" id="composition" class="form-input" placeholder="Réponse"
+                            <input required name="composition" type="text" id="composition" class="form-input" placeholder="Réponse"
                                 value="<%= mandat[0].composition %>">
                         </div>
                         <div class="form-group">
                             <label for="renouvellement" class="form-label">Renouvellement</label>
-                            <input type="text" id="renouvellement" class="form-input" placeholder="Réponse"
+                            <input type="text" name="renouvellement" id="renouvellement" class="form-input" placeholder="Réponse"
                                 value="<%= mandat[0].renouvellement %>">
                         </div>
                         <div class="form-group">
                             <label for="email" class="form-label">Durée</label>
-                            <input type="text" id="duree" class="form-input" placeholder="Réponse"
+                            <input type="text" name="duree" id="duree" class="form-input" placeholder="Réponse"
                                 value="<%= mandat[0].duree %>">
                         </div>
+                        <input type="hidden" name="id" value="<%= mandat[0].id %> ">
                        
                         <div class="form-action">
                             <input type="submit" class="cta" value="Modifier un mandat">

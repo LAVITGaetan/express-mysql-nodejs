@@ -2,6 +2,7 @@ const sql = require("./db.js");
 
 // Constructeur
 const Mandat = function (mandat) {
+    this.logo = mandat.logo;
     this.label = mandat.label;
     this.nom = mandat.nom;
     this.categorie = mandat.categorie;
@@ -75,8 +76,8 @@ Mandat.getRepresentations = (id, result) => {
 // Mettre à jour un mandat
 Mandat.updateById = (id, mandat, result) => {
     sql.query(
-        "UPDATE mandat SET label = ?, nom = ?, categorie = ?, mission = ?, composition = ?, renouvellement = ?, duree = ? WHERE id = ?",
-        [mandat.label, mandat.nom, mandat.categorie, mandat.mission, mandat.composition, mandat.renouvellement, mandat.duree, id],
+        "UPDATE mandat SET logo = ?, label = ?, nom = ?, categorie = ?, mission = ?, composition = ?, renouvellement = ?, duree = ? WHERE id = ?",
+        [mandat.logo, mandat.label, mandat.nom, mandat.categorie, mandat.mission, mandat.composition, mandat.renouvellement, mandat.duree, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);

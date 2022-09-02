@@ -1,6 +1,7 @@
 <%- include('includes/header.ejs') %>
 
     <body>
+        <%- include('includes/message.ejs') %>
         <div class="layout">
             <%- include('includes/navbar.ejs') %>
 
@@ -34,15 +35,33 @@
                         </div>
                         <div class="listing-table">
                             <div class="flex">
-                                <% mandats.forEach(mandat => { %>
-                                    <div class="adherent-card mandat">
-                                        <h3 class="adherent-card-title js-label"><%= mandat.label %></h3>
-                                        <h5 class="adherent-card-subtitle js-categorie"><%= mandat.categorie %></h5>
-                                        <p class="adherent-card-email"><%= mandat.renouvellement %> (<%= mandat.duree %>)</p>
-                                        <a href="/mandat?id=<%= mandat.id %>" class="card-edit"><img src="img/edit.png" width="12px" height="12px" alt="edit"></a>
-                                        <div onclick="deleteMandat('<%= mandat.id %>')" class="card-delete"><img src="img/delete.png" width="12px" height="12px" alt="delete"></div>
+                                <% mandats.forEach(mandat=> { %>
+                                    <div class="mandat card">
+                                        <div class="card-header"></div>
+                                        <div class="card-figure">
+                                            <% if (mandat.logo !=='' ) { %>
+                                                <img class="card-image" src="upload/<%= mandat.logo %>">
+                                                <% }else{ %>
+                                                    <img class="add-photo" width="24px" height="24px"
+                                                        src="img/no-photo.png">
+                                                    <% } %>
+
+                                        </div>
+                                        <div class="card-title js-label">
+                                            <%= mandat.label %>
+                                        </div>
+                                        <div class="card-subtitle js-categorie">
+                                            <%= mandat.categorie %> 
+                                        </div>
+                                        <a href="/mandat?id=<%= mandat.id %>" class="no-decoration card-edit">
+                                            <img src="img/edit.png" width="12px" height="12px" alt="edit">
+                                        </a>
+                                        <div class="card-delete" onclick="deleteMandat('<%= mandat.id %>')">
+                                            <img src="img/delete.png" width="12px" height="12px" alt="delete">
+                                        </div>
                                     </div>
-                                <% }) %>
+                                    <% }) %>
+
                             </div>
                         </div>
                     </div>
@@ -62,9 +81,15 @@
                         'Content-type': 'application/json'
                     }
                 })
-                document.location.reload();
+                document.location.assign('/mandats');
             }
         }
+
+        function closeModal() {
+            let modal = document.getElementById('modal');
+            modal.style.display = "none";
+        }
+
 
         function changeFilter(id) {
             document.getElementsByClassName('filter-selected')[0].classList.remove('filter-selected');

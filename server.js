@@ -287,6 +287,108 @@ fetch(uri)
     })
 });
 
+// nouveau mandat
+app.post('/nouveau-mandat', (req, res) => {
+  const uri = `http://localhost:7070/api/mandats/`;
+  let label = req.body.label;
+  let nom = req.body.nom;
+  let categorie = req.body.categorie;
+  let mission = req.body.mission;
+  let composition = req.body.composition;
+  let renouvellement = req.body.renouvellement;
+  let duree = req.body.duree;
+  if (req.files) {
+    const { image } = req.files;
+    path = label + '_' + image.name
+    image.mv(__dirname + '/public/upload/' + label + '_' + image.name);
+  }
+  else {
+    path = '';
+  }
+
+  fetch(`${uri}`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ logo: path, label: label, nom: nom, categorie: categorie, mission : mission, composition : composition, renouvellement : renouvellement, duree : duree })
+  })
+
+  let mandats = [];
+  const result = fetch(uri)
+    .then((response) => response.json())
+    .then((response) => {
+      response.forEach(mandat => {
+        mandats.push(mandat)
+      })
+    })
+
+  result.then(r => {
+    if (req.session.loggedin) {
+      res.render('pages/mandats', { mandats: mandats, title: "Mandats", message: `${label} ajoutée` });
+    }
+    else {
+      res.send("Veuillez vous connecter pour accéder à cette page")
+    }
+  })
+});
+
+// modifier un mandat
+app.post('/edit-mandat', (req, res) => {
+  let label = req.body.label;
+  let nom = req.body.nom;
+  let categorie = req.body.categorie;
+  let mission = req.body.mission;
+  let composition = req.body.composition;
+  let renouvellement = req.body.renouvellement;
+  let duree = req.body.duree;
+  if (req.files) {
+    const { image } = req.files;
+    path = label + '_' + image.name
+    image.mv(__dirname + '/public/upload/' + label + '_' + image.name);
+  }
+  else {
+    path = '';
+  }
+  let bodyMandat = {
+    logo : path,
+    label : label,
+    nom : nom,
+    categorie : categorie,
+    mission : mission,
+    composition : composition,
+    renouvellement : renouvellement,
+    duree : duree
+}
+
+console.log(bodyMandat);
+  fetch(`http://localhost:7070/api/mandats/${req.body.id}`, {
+    method: "PUT",
+    headers: {
+      'Accept': 'application/json',
+        'Content-type': 'application/json'
+    },
+    body: JSON.stringify(bodyMandat)
+})
+const uri = `http://localhost:7070/api/mandats/`;
+    let mandats = [];
+    fetch(uri)
+        .then((response) => response.json())
+        .then((response) => {
+            response.forEach(item => {
+                mandats.push(item)
+            });
+            if (req.session.loggedin) {
+                res.render('pages/mandats', { mandats: mandats, title: "Mandats", message : 'Mandat modifié' });
+            }
+            else {
+                res.send("Veuillez vous connecter pour accéder à cette page")
+            }
+
+        })
+});
+
 const PORT = process.env.PORT || 7070
 
 require("./app/routes/adherent.routes.js")(app);

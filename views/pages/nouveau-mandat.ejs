@@ -9,15 +9,19 @@
             <%- include('includes/navbar.ejs') %>
 
                 <div class="layout-content">
-                    <form class="form-flex" onsubmit="addMandat(event)" method="post">
+                    <form class="form-flex" action="/nouveau-mandat" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="image" class="form-label">image</label>
+                            <input type="file" name="image" />
+                        </div>
                         <div class="form-group">
                             <label for="label" class="form-label">Label</label>
-                            <input required id="label" type="text" class="form-input"
+                            <input required name="label" id="label" type="text" class="form-input"
                                 placeholder="Réponse">
                         </div>
                         <div class="form-group">
                             <label for="nom" class="form-label">Nom</label>
-                            <input required type="text" id="nom" class="form-input" placeholder="Réponse">
+                            <input required name="nom" type="text" id="nom" class="form-input" placeholder="Réponse">
                         </div>
                         <div class="form-group">
                             <label for="categorie" class="form-label">Catégorie</label>
@@ -34,19 +38,19 @@
 
                         <div class="form-group">
                             <label for="mission" class="form-label">Mission</label>
-                            <input required type="text" id="mission" class="form-input" placeholder="Réponse">
+                            <input required type="text" name="mission" id="mission" class="form-input" placeholder="Réponse">
                         </div>
                         <div class="form-group">
                             <label for="composition" class="form-label">Composition</label>
-                            <input required type="text" id="composition" class="form-input" placeholder="Réponse">
+                            <input required type="text" name="composition" id="composition" class="form-input" placeholder="Réponse">
                         </div>
                         <div class="form-group">
                             <label for="renouvellement" class="form-label">Renouvellement</label>
-                            <input type="text" id="renouvellement" class="form-input" placeholder="Réponse">
+                            <input type="text" name="renouvellement" id="renouvellement" class="form-input" placeholder="Réponse">
                         </div>
                         <div class="form-group">
                             <label for="duree" class="form-label">Durée</label>
-                            <input type="text" id="duree" class="form-input" placeholder="Réponse">
+                            <input type="text" name="duree" id="duree" class="form-input" placeholder="Réponse">
                         </div>
                         <div class="form-action">
                             <input type="submit" class="cta" value="Confirmer la création">
@@ -79,17 +83,6 @@
                     alert('Mandat ajouté, vous allez être redirigé vers la liste des mandats')
                     document.location.assign(`/mandats`)
                 });
-        }
-
-        function generateCode() {
-            let field = document.getElementById('identifiant');
-            let result = ''
-            var characters = 'ABCDEFGHIJKLMNPQRSTUVWXYZ0123456789';
-            var charactersLength = characters.length;
-            for (var i = 0; i < 5; i++) {
-                result += characters.charAt(Math.floor(Math.random() * charactersLength));
-            }
-            field.value = result;
         }
     </script>
     <script src="/js/index.js"></script>

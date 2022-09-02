@@ -212,15 +212,6 @@ body {
   border-radius: 48px;
 }
 
-
-
-.card-title {
-  font-size: 17px;
-  margin-bottom: 0.5em;
-  font-weight: 700;
-  color: #0a2439;
-}
-
 .card-subtitle {
   font-size: 15px;
   margin-bottom: 1em;
@@ -761,7 +752,7 @@ body {
 }
 
 .index-card {
-  box-shadow: 5px 5px 10px 5px #1fc1c31a;
+  box-shadow: 2px 2px 10px 5px #1fc1c31a;
   background-color: #fff;
   height: 100%;
   width: 100%;
@@ -795,9 +786,13 @@ body {
 .index-last {
     width: 100%;
     height: 100%;
-    box-shadow: 0px 5px 10px 5px #1fc1c31a;
     border-top: 5px solid #0a2439;
-    background-color: #fff;
+    background-color: #fff;  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(6, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 20px;
+  padding-bottom: 20px;
 }
 
 .last-title {
@@ -810,8 +805,6 @@ body {
   text-align: center;
   width: 100%;
   padding: 1em;
-  border-bottom-left-radius:50% 20% ;
-  border-bottom-right-radius:50% 20% ;
 }
 
 .last-row {
@@ -819,10 +812,26 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 90%;
-  border: 3px solid #00c4cc90;
-  margin: 1em auto;
-  height: 45px;
+  box-shadow: 0 2px 5px 3px #00c4cc10;
+  margin: 0 auto;
+  height: 100%;
   padding: 0 1em;
+  position: relative;
+}
+
+.last-row:after {
+  transition: .3s ease-in;
+  position: absolute;
+  content: "";
+  height: 5px;
+  width: 0%;
+  background-color: #00c4cc;
+  left: 0;
+  bottom: 0;
+}
+
+.last-row:hover:after {
+  width: 100%;
 }
 
 .last-row-title {
@@ -931,8 +940,7 @@ body {
   background-color: #0A2439;
   width: 100%;
   margin: 0 auto;
-  border: 5px solid #233a4d;
-  border-bottom: none;
+  border-bottom: 5px solid #00c4cc;
 }
 
 
@@ -945,59 +953,9 @@ body {
   display: block;
 }
 
+/* Card */
 
-/*Adherents*/
-.adherent-card {
-  width: 300px;
-  box-shadow: 0px 2px 10px 3px #20BFC11A;
-  position: relative;
-  background-color: #fff;
-  padding: 0 0 1em 0;
-  margin: 20px 20px 20px 0;
-  border-top: 5px solid #00c4cc;
-}
-
-.adherent-card:hover .card-edit, .adherent-card:hover .card-delete {
-  opacity: 1;
-}
-
-.adherent-card-title {
-  font-size: 18px;
-  margin-bottom: 0.5em;
-  font-weight: 700;
-  color: #0a2439;
-  padding: 1em 5% .3em 5%;
-  text-align: left;
-}
-
-.adherent-card-subtitle {
-  font-weight: 600;
-  padding: 10px 5%;
-  font-size: 16px;
-  color: #0A2439;
-  background-color: #00c4cc50;
-  width: fit-content;
-  position: relative;
-  margin-left: 5%;
-}
-
-.adherent-card-email {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
-  padding: 1em 5% 0 5%;
-  color: #0A2439;
-}
-
-.adherent-card-identifiant {
-  font-weight: 700;
-  font-size: 15px;
-    padding: .5em 5% 0 5%;
-  color: #00c4cc;
-}
-/* Portraits */
-
-.portrait-card {
+.card {
   width: 250px;
   box-shadow: 0px 5px 10px 3px #20BFC11A;
   position: relative;
@@ -1033,33 +991,42 @@ body {
   cursor: pointer;
 }
 
-.portrait-card-title {
+.card-title {
   font-size: 17px;
   margin-bottom: 0.5em;
   font-weight: 700;
   color: #0a2439;
   padding: 0 5% .5em 5%;
   text-align: center;
+  max-height: 45px;
+  overflow: hidden;
 }
 
-.portrait-card-subtitle {
+.index-card-title {
+  font-size: 17px;
+  margin-bottom: 0.5em;
   font-weight: 700;
+  color: #0a2439;
+}
+
+.card-subtitle {
+  font-weight: 600;
   padding: 0 5%;
-  font-size: 15px;
+  font-size: 16px;
 text-align: center;
-  color: #20BFC1;
+  color: #00c4cc;
   position: relative;
   padding-bottom: 5px;
 }
 
-.portrait-card-subtitle:after {
+.card-subtitle:after {
 content: "";
 position: absolute;
 bottom: 0;
 width: 30px;
 left: calc(50% - 15px);
 height: 3px;
-background-color: #00c4cc50;
+background-color: #00c4cc;
 }
 
 
@@ -1094,7 +1061,7 @@ background-color: #00c4cc50;
   cursor: pointer;
 }
 
-.portrait-card:hover .card-delete, .portrait-card:hover .card-edit {
+.card:hover .card-delete, .card:hover .card-edit {
   transition: .3s ease;
   opacity: 1;
 }

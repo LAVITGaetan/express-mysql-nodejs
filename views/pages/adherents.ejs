@@ -2,6 +2,9 @@
 
 
     <body>
+        <%- include('includes/message.ejs') %>
+
+
         <div class="layout">
 
             <div class="layout-header">
@@ -37,20 +40,38 @@
 
                         </div>
                         <div class="listing-table">
-<div class="flex">
-    <% adherents.forEach(adherent => { %>
-        <div class="adherent-card">
-            <h3 class="adherent-card-title js-entreprise"><%= adherent.entreprise %></h3>
-            <h5 class="adherent-card-subtitle js-section"><%= adherent.section %></h5>
-            <p class="adherent-card-email"><%= adherent.email %></p>
-            <p class="adherent-card-identifiant"><%= adherent.identifiant %></p>
-            <a href="/adherent?id=<%= adherent.id %>" class="card-edit"><img src="img/edit.png" width="12px" height="12px" alt="edit"></a>
-            <div onclick="deleteAdherent('<%= adherent.id %>')" class="card-delete"><img src="img/delete.png" width="12px" height="12px" alt="delete"></div>
-        </div>
-    <% }) %>
-</div>
+                            <div class="flex">
+                                <% adherents.forEach(adherent=> { %>
+                                    <div class="adherent card">
+                                        <div class="card-header"></div>
+                                        <div class="card-figure">
+                                            <% if (adherent.logo !=='' ) { %>
+                                                <img class="card-image" src="upload/<%= adherent.logo %>">
+                                                <% }else{ %>
+                                                    <img class="add-photo" width="24px" height="24px"
+                                                        src="img/no-photo.png">
+                                                    <% } %>
 
-                    
+                                        </div>
+                                        <div class="card-title js-entreprise">
+                                            <%= adherent.entreprise %>
+                                        </div>
+                                        <div class="card-subtitle js-section">
+                                            <%= adherent.section %>
+                                        </div>
+                                        <a href="/adherent?id=<%= adherent.id %>" class="no-decoration card-edit">
+                                            <img src="img/edit.png" width="12px" height="12px" alt="edit">
+                                        </a>
+                                        <div class="card-delete" onclick="deleteAdherent('<%= adherent.id %>')">
+                                            <img src="img/delete.png" width="12px" height="12px" alt="delete">
+                                        </div>
+                                    </div>
+                                    <% }) %>
+
+                            </div>
+                            
+
+
 
                         </div>
                     </div>
@@ -60,6 +81,12 @@
 
     </body>
     <script>
+
+function closeModal() {
+            let modal = document.getElementById('modal');
+            modal.style.display = "none";
+        }
+
         function deleteAdherent(id) {
             if (confirm('Voulez-vous vraiment supprimer cette adhérent ?')) {
                 fetch(`http://localhost:7070/api/adherents/${id}`, {
@@ -81,7 +108,7 @@
 
         function searchAdherent() {
             let query = document.getElementById('search').value.toLowerCase();
-            let item = document.getElementsByClassName('adherent-card');
+            let item = document.getElementsByClassName('adherent');
             let length = item.length;
             let filter = document.getElementsByClassName('filter-selected')[0].innerHTML.toLowerCase();
             for (let i = 0; i < length; i++) {

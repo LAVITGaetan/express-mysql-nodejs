@@ -50,7 +50,7 @@
 
 
 
-                            <div class="portrait-card">
+                            <div class="card">
                                 <div class="card-header"></div>
                                 <div class="card-figure">
                                     <% if (portraits.find(el => el.id === representation.id_portrait).image !== '') { %>
@@ -59,11 +59,11 @@
                                     <% } %>
                                     
                                 </div>
-                                <div class="portrait-card-title js-mandataire">
+                                <div class="card-title js-mandataire">
                                     <%= portraits.find(el=> el.id === representation.id_portrait).prenom %> <%=
                                             portraits.find(el=> el.id === representation.id_portrait).nom %> %>
                                 </div>
-                                <div class="portrait-card-subtitle">
+                                <div class="card-subtitle">
                                     <%= representation.titre %>
                                 </div>
                                 <a href="/portrait?id=<%= portraits.find(el => el.id === representation.id_portrait).id %>"
