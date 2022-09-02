@@ -9,93 +9,133 @@
             </div>
             <%- include('includes/navbar.ejs') %>
                 <div class="layout-content">
-                    <div class="cta-container">
-                        <% if (adherent[0].status==0) { %>
-                            <div class="cta" onclick="enableAdherent('<%= adherent[0].id %>')">Activer l' adhérent</div>
-                            <% }else {%>
-                                <div class="ctd" onclick="disableAdherent('<%= adherent[0].id %>')">
-                                    Désactiver l' adhérent</div>
+                    <div class="profil">
+                        <div class="profil-card">
+                            <div class="profil-card-figure">
+                                <% if (adherent[0].logo !=='' ) { %>
+                                    <img class="profil-image" width="128px" height="128px"
+                                        src="upload/<%= adherent[0].logo %>" alt="" class="profil-logo">
+                                    <% } else { %>
+                                        <img class="profil-image" width="64px" height="64px" src="img/no-photo.png"
+                                            alt="" class="profil-logo">
+                                        <% } %>
+                            </div>
 
-                                <%} %>
-                    </div>
-
-                    <div class="cta-container">
-                        <% if (adherent[0].parution==0) { %>
-                            <div class="cta" onclick="enableAnnuaire('<%= adherent[0].id_annuaire %>')">Activer la
-                                parution</div>
-                            <% }else {%>
-                                <div class="ctd" onclick="disableAnnuaire('<%= adherent[0].id_annuaire %>')">
-                                    Désactiver la parution</div>
-
-                                <%} %>
-                    </div>
-
-                    <div class="container">
-                        <div class="container-header">Informations générales</div>
-                        <div class="container-row"><span class="row-label">Raison Sociale : </span>
-                            <%= adherent[0].entreprise %>
+                            <h3 class="profil-card-title">
+                                <%= adherent[0].entreprise %>
+                            </h3>
+                            <p class="profil-card-subtitle">
+                                <%= adherent[0].section %>
+                            </p>
+                            <div onclick="deleteAdherent()" class="profil-card-delete">
+                                <img src="img/delete.png" width="12px" height="12px" alt="Supprimer">
+                            </div>
                         </div>
-                        <div class="container-row"><span class="row-label">Section : </span>
-                            <%= adherent[0].section %>
-                        </div>
-                        <div class="container-row"><span class="row-label">Adresse : </span>
-                            <%= adherent[0].adresse %>
-                        </div>
-                        <div class="container-row"><span class="row-label">Représentant : </span>
-                            <%= adherent[0].prenom %>
-                                <%= adherent[0].nom %>
-                        </div>
-                        <div class="container-row"><span class="row-label">Email : </span>
-                            <%= adherent[0].email %>
-                        </div>
-                        <div class="container-row"><span class="row-label">Téléphone : </span>
-                            <%= adherent[0].telephone %>
-                        </div>
-                        <div class="container-row"><span class="row-label">Identifiant : </span>
-                            <%= adherent[0].identifiant %>
-                        </div>
-                        <div class="container-row"><span class="row-label">Site web : </span>
-                            <%= adherent[0].siteweb %>
+                        <div class="profil-card">
+                            <div class="profil-card-header">Identifiants de connexion</div>
+                            <div class="profil-card-row"><img width="16px" height="16px" src="img/email.png">
+                                <p class="profil-card-label">
+                                    <%= adherent[0].email %>
+                                </p>
+                            </div>
+                            <div class="profil-card-row"><img width="16px" height="16px" src="img/password.png">
+                                <p class="profil-card-label">
+                                    <%= adherent[0].identifiant %>
+                                </p>
+                            </div>
                         </div>
 
-                        <div class="container-action"><a href="/edit-adherent?id=<%= adherent[0].id %>"
-                                class="container-cta">Modifier</div></a>
-                    </div>
-                    <% if (adherent[0].parution == 1) { %>
                         <div class="container">
-                            <div class="container-header">Parution dans l'annuaire</div>
-                            <div class="container-row"><span class="row-label">Logo : </span><a
-                                    href="<%= adherent[0].logo %>">
-                                    <%= adherent[0].logo %>
-                                </a></div>
-                            <div class="container-row"><span class="row-label">Activité : </span>
+                            <div class="container-header">Informations générales</div>
+
+                            <div class="container-row"><span class="row-label">Activité :
+                                </span>
                                 <%= adherent[0].activite %>
                             </div>
-                            <div class="container-row"><span class="row-label">Titre du contact : </span>
-                                <%= adherent[0].contact_titre %>
+                            <div class="container-row"><span class="row-label">Adresse : </span>
+                                <%= adherent[0].adresse %>
                             </div>
-                            <div class="container-row"><span class="row-label">Nom du contact : </span>
-                                <%= adherent[0].contact_nom %>
+                            <div class="container-row"><span class="row-label">Représentant :
+                                </span>
+                                <%= adherent[0].prenom %>
+                                    <%= adherent[0].nom %>
                             </div>
-                            <div class="container-row"><span class="row-label">Prénom du contact : </span>
-                                <%= adherent[0].contact_prenom %>
+                            <div class="container-row"><span class="row-label">Email : </span>
+                                <%= adherent[0].email %>
                             </div>
-                            <div class="container-row"><span class="row-label">Email du contact : </span>
-                                <%= adherent[0].contact_email %>
+                            <div class="container-row"><span class="row-label">Téléphone :
+                                </span>
+                                <%= adherent[0].telephone %>
                             </div>
-                            <div class="container-row"><span class="row-label">Téléphone du contact : </span>
-                                <%= adherent[0].contact_telephone %>
+
+                            <div class="container-row"><span class="row-label">Site web :
+                                </span>
+                                <%= adherent[0].siteweb %>
                             </div>
-                            <div class="container-row"><span class="row-label">Parution : </span>
-                                <%= adherent[0].parution===1 ? 'activée' : 'desactivée' %>
-                            </div>
-                            <div class="container-action"><a href="/edit-annuaire?id=<%= adherent[0].id %>"
+
+                            <div class="container-action"><a href="/edit-adherent?id=<%= adherent[0].id %>"
                                     class="container-cta">Modifier</div></a>
                         </div>
+
+                        <div class="container">
+                            <div class="container-header">Parution dans l' annuaire</div>
+
+                            <div class="container-row"><span class="row-label">Contact Principal
+                                    :
+                                </span>
+                                <%= adherent[0].titre %>
+                            </div>
+                            <div class="container-row"><span class="row-label">Identité :
+                                </span>
+                                <%= adherent[0].prenom %>
+                                    <%= adherent[0].nom %>
+                            </div>
+                            <div class="container-row"><span class="row-label">Email :
+                                    <%= adherent[0].contact_email %>
+                                </span>
+
+                            </div>
+                            <div class="container-row"><span class="row-label">Téléphone :
+                                </span>
+                                <%= adherent[0].contact_telephone %>
+                            </div>
+
+                            <div class="container-row"><span class="row-label">LinkedIn :
+                                </span>
+                                <%= adherent[0].contact_telephone %>
+                            </div>
+                            <div class="container-row"><span class="row-label">Parution :
+                            </span>
+                            <%= adherent[0].parution == 1 ? 'activée' : 'desactivée' %>
+                        </div>
+
+                            <div class="container-action"><a href="/edit-adherent?id=<%= adherent[0].id %>"
+                                    class="container-cta">Modifier</div></a>
+                        </div>
+                        <% if (adherent[0].status==0) { %>
+                            <div onclick="enableAdherent('<%= adherent[0].id %>')" class="profil-cta">Activer l'
+                                adhérent</div>
+
+                            <% }else {%>
+                                <div onclick="disableAdherent('<%= adherent[0].id %>')" class="profil-ctd">Désactiver l'
+                                    adhérent</div>
+                                <%} %>
+
+                                    <% if (adherent[0].parution==0) { %>
+                                        <div class="profil-cta"
+                                            onclick="enableAnnuaire('<%= adherent[0].id_annuaire %>')">Activer la
+                                            parution</div>
+                                        <% }else {%>
+                                            <div class="profil-ctd"
+                                                onclick="disableAnnuaire('<%= adherent[0].id_annuaire %>')">
+                                                Désactiver la parution</div>
+                                            <%} %>
                     </div>
-                    <% } %>
-                    
-        </div>
+
+
+
+
+                </div>
 
     </body>
     <script>
@@ -141,6 +181,18 @@
                     }
                 })
                 document.location.reload();
+            }
+        }
+
+        function deleteAdherent(id) {
+            if (confirm('Voulez-vous vraiment supprimer cette adhérent ?')) {
+                fetch(`http://localhost:7070/api/adherents/<%= adherent[0].id%>`, {
+                    method: "DELETE",
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                })
+                document.location.assign('/adherents');
             }
         }
     </script>
