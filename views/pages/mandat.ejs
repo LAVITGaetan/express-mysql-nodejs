@@ -46,13 +46,24 @@
                                 <%= mandat[0].nom %>
                             </div>
 
-                            <div class="container-row"><span class="row-label">Mission : </span>
-                                <%= mandat[0].mission %>
+                            <div class="container-row">
+                                <div class="row-label-collapse" id="mission" onclick="collapse('mission')">
+                                    Mission : </div>
+                                <div class="row-label-content" id="mission-content" style="display: none;">
+                                    <%= mandat[0].mission %>
+                                </div>
+
                             </div>
 
-                            <div class="container-row"><span class="row-label">Composition : </span>
-                                <%= mandat[0].composition %>
+                            <div class="container-row">
+                                <div class="row-label-collapse" id="composition" onclick="collapse('composition')">
+                                    Composition : </div>
+                                <div class="row-label-content" id="composition-content" style="display: none;">
+                                    <%= mandat[0].composition %>
+                                </div>
+
                             </div>
+                            
                             <div class="container-row"><span class="row-label">Renouvellement : </span>
                                 <%= mandat[0].renouvellement %>
                             </div>
@@ -72,64 +83,80 @@
                                 <% } %>
 
 
-                                <% representations.forEach(representation=> { %>
-                                    <div class="portrait-card">
-                                        <div class="portrait-card-figure">
-                                            <% if (portraits.find(el=> el.id === representation.id_portrait).image !== '') { %>
-                                                <img style="background-color: #fff;" class="card-image" src="upload/<%= portraits.find(el => el.id === representation.id_portrait).image %>">
-                                                <% } else {%>
-                                                    <img src="img/add-photo.png" width="32px" height="32px">
+                                    <% representations.forEach(representation=> { %>
+                                        <div class="portrait-card">
+                                            <div class="portrait-card-figure">
+                                                <% if (portraits.find(el=> el.id === representation.id_portrait).image
+                                                    !== '') { %>
+                                                    <img style="background-color: #fff;" class="card-image"
+                                                        src="upload/<%= portraits.find(el => el.id === representation.id_portrait).image %>">
+                                                    <% } else {%>
+                                                        <img src="img/add-photo.png" width="32px" height="32px">
 
-                                                    <% } %>
-    
-                                        </div>
-                                        <div class="portrait-card-title">
-                                            <%= portraits.find(el=> el.id === representation.id_portrait).prenom %> <%= portraits.find(el=> el.id === representation.id_portrait).nom %> 
-                                        </div>
-                                        <div class="portrait-card-subtitle">
-                                            <%= representation.titre %>
-                                        </div>
-                                        <div class="portrait-card-delete" onclick="deleteRepresentation('<%= representation.id %>')">
-                                            <img src="img/delete.png" width="12px" height="12px" alt="delete">
-                                        </div>
-                                    </div>
-    
-    
-                                    <% }) %>
+                                                        <% } %>
 
-                                    <div class="container-action" onclick="showModal()"><span
-                                            class="container-cta">Associer un portrait</span></div>
+                                            </div>
+                                            <div class="portrait-card-title">
+                                                <%= portraits.find(el=> el.id === representation.id_portrait).prenom %>
+                                                    <%= portraits.find(el=> el.id === representation.id_portrait).nom %>
+                                            </div>
+                                            <div class="portrait-card-subtitle">
+                                                <%= representation.titre %>
+                                            </div>
+                                            <div class="portrait-card-delete"
+                                                onclick="deleteRepresentation('<%= representation.id %>')">
+                                                <img src="img/delete.png" width="12px" height="12px" alt="delete">
+                                            </div>
+                                        </div>
+
+
+                                        <% }) %>
+
+                                            <div class="container-action" onclick="showModal()"><span
+                                                    class="container-cta">Associer un portrait</span></div>
                         </div>
                     </div>
                 </div>
-                </div>
-                <div id="modal">
-                    <h6 id="modal-title">Assignation</h6>
-                    <div id="modal-content">
-                        <select id="titre" class="form-select">
-                            <option value="null">Choisir un titre</option>
-                            <option value="titulaire">Titulaire</option>
-                            <option value="suppléant">Suppléant</option>
-                        </select>
-                        <select class="form-select" id="portrait">
-                            <option value="null">Choisir un portrait</option>
-                            <% portraits.forEach(portrait=> { %>
-                                <option value="<%= portrait.id %> ">
-                                    <%= portrait.prenom %>
-                                        <%= portrait.nom %>
-                                </option>
-                                <% }) %>
-                        </select>
-                    </div>
-                    <div class="flex-between">
-                        <div id="modal-close" onclick="closeModal()">Annuler</div>
-                        <div id="modal-submit" onclick="addRepresentation()">Confirmer</div>
-                    </div>
+        </div>
+        <div id="modal">
+            <h6 id="modal-title">Assignation</h6>
+            <div id="modal-content">
+                <select id="titre" class="form-select">
+                    <option value="null">Choisir un titre</option>
+                    <option value="titulaire">Titulaire</option>
+                    <option value="suppléant">Suppléant</option>
+                </select>
+                <select class="form-select" id="portrait">
+                    <option value="null">Choisir un portrait</option>
+                    <% portraits.forEach(portrait=> { %>
+                        <option value="<%= portrait.id %> ">
+                            <%= portrait.prenom %>
+                                <%= portrait.nom %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+            <div class="flex-between">
+                <div id="modal-close" onclick="closeModal()">Annuler</div>
+                <div id="modal-submit" onclick="addRepresentation()">Confirmer</div>
+            </div>
 
-                </div>
+        </div>
 
     </body>
     <script>
+
+        function collapse(item) {
+            let collapse = document.getElementById(item)
+            let content = document.getElementById(`${item}-content`)
+            if (content.style.display === "none") {
+                content.style.display = "block"
+            }
+            else {
+                content.style.display = "none"
+
+            }
+        }
 
         function deleteMandat() {
             if (confirm('Voulez-vous vraiment supprimer ce mandat ?')) {

@@ -528,8 +528,6 @@ body {
 .container-row {
   margin-bottom: 1em;
   padding: 0 5%;
-  max-height: 152px;
-  overflow: auto;
 }
 
 .container-action {
@@ -1257,4 +1255,14 @@ padding: 16px 32px 8px 0;
   font-weight: 600;
 font-size: 15px;
 color: #0A2439;
+}
+
+.row-label-collapse {
+  background-color: #0A243910;
+  padding: 1em;
+  cursor: pointer;
+}
+
+.row-label-content {
+  padding: 1em;
 }
