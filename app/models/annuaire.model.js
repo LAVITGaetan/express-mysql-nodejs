@@ -3,8 +3,6 @@ const sql = require("./db.js");
 // Constructeur
 const Annuaire = function (annuaire) {
     this.id_adherent = annuaire.id_adherent;
-    this.logo = annuaire.logo;
-    this.activite = annuaire.activite;
     this.contact_titre = annuaire.contact_titre;
     this.contact_nom = annuaire.contact_nom;
     this.contact_prenom = annuaire.contact_prenom;
@@ -91,8 +89,8 @@ Annuaire.getActive = (result) => {
 // Mettre à jour un annuaire
 Annuaire.updateById = (id, annuaire, result) => {
     sql.query(
-        "UPDATE annuaire SET logo = ?, activite = ?, contact_titre = ?, contact_nom = ?, contact_prenom = ?, contact_email = ?, contact_telephone = ?, parution = ? WHERE id = ?",
-        [annuaire.logo, annuaire.activite, annuaire.contact_titre, annuaire.contact_nom, annuaire.contact_prenom, annuaire.contact_email, annuaire.contact_telephone, annuaire.parution, id],
+        "UPDATE annuaire SET contact_titre = ?, contact_nom = ?, contact_prenom = ?, contact_email = ?, contact_telephone = ?, parution = ? WHERE id = ?",
+        [annuaire.contact_titre, annuaire.contact_nom, annuaire.contact_prenom, annuaire.contact_email, annuaire.contact_telephone, annuaire.parution, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);

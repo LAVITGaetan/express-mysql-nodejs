@@ -186,6 +186,7 @@ app.post('/nouvel-adherent', (req, res) => {
   const uri = `http://localhost:7070/api/adherents/`;
   let entreprise = req.body.entreprise;
   let section = req.body.section;
+  let activite = req.body.activite;
   let adresse = req.body.adresse;
   let nom = req.body.nom;
   let prenom = req.body.prenom;
@@ -208,7 +209,7 @@ app.post('/nouvel-adherent', (req, res) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ logo: path, entreprise: entreprise, section: section, adresse : adresse, nom : nom, prenom : prenom, email : email, telephone, telephone, identifiant : identifiant, siteweb : siteweb, status : 1  })
+    body: JSON.stringify({ logo: path, entreprise: entreprise, section: section,activite : activite, adresse : adresse, nom : nom, prenom : prenom, email : email, telephone, telephone, identifiant : identifiant, siteweb : siteweb, status : 1  })
   })
 
   let adherents = [];
@@ -235,6 +236,7 @@ app.post('/nouvel-adherent', (req, res) => {
 app.post('/edit-adherent', (req, res) => {
   let entreprise = req.body.entreprise;
   let section = req.body.section;
+  let activite = req.body.activite;
   let adresse = req.body.adresse;
   let nom = req.body.nom;
   let prenom = req.body.prenom;
@@ -255,6 +257,7 @@ app.post('/edit-adherent', (req, res) => {
     entreprise : entreprise,
     section : section,
     adresse : adresse,
+    activite : activite,
     nom : nom,
     prenom : prenom,
     email : email,
@@ -272,6 +275,8 @@ app.post('/edit-adherent', (req, res) => {
     },
     body: JSON.stringify(bodyAdherent)
 })
+
+console.log(bodyAdherent);
 const uri = `http://localhost:7070/api/annuaires/all/${req.body.id}`;
 let adherent = [];
 fetch(uri)

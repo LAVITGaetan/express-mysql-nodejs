@@ -5,6 +5,7 @@ const Adherent = function (adherent) {
     this.logo = adherent.logo;
     this.entreprise = adherent.entreprise;
     this.section = adherent.section;
+    this.activite = adherent.activite;
     this.adresse = adherent.adresse;
     this.nom = adherent.nom;
     this.prenom = adherent.prenom;
@@ -83,8 +84,8 @@ Adherent.getActive = (result) => {
 // Mettre à jour un adhérent
 Adherent.updateById = (id, adherent, result) => {
     sql.query(
-        "UPDATE adherent SET logo = ?, entreprise = ?, section = ?, adresse = ?, nom = ?, prenom = ?, email = ?, telephone = ?, identifiant = ?, siteweb = ?, status = ? WHERE id = ?",
-        [adherent.logo, adherent.entreprise, adherent.section, adherent.adresse, adherent.nom, adherent.prenom, adherent.email, adherent.telephone, adherent.identifiant, adherent.siteweb, adherent.status, id],
+        "UPDATE adherent SET logo = ?, entreprise = ?, section = ?, activite = ?, adresse = ?, nom = ?, prenom = ?, email = ?, telephone = ?, identifiant = ?, siteweb = ?, status = ? WHERE id = ?",
+        [adherent.logo, adherent.entreprise, adherent.section, adherent.activite, adherent.adresse, adherent.nom, adherent.prenom, adherent.email, adherent.telephone, adherent.identifiant, adherent.siteweb, adherent.status, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);

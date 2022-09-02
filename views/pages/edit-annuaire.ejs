@@ -11,16 +11,6 @@
                 <div class="layout-content">
                     <form class="form-flex" onsubmit="editAnnuaire(event)" method="post">
                         <div class="form-group">
-                            <label for="logo" class="form-label">Logo</label>
-                            <input name="logo" id="logo" type="text" class="form-input" placeholder="Réponse"
-                                value="<%= annuaire[0].logo %>">
-                        </div>
-                        <div class="form-group">
-                            <label for="activite" class="form-label">Activité</label>
-                            <input name="activite" id="activite" type="text" class="form-input" placeholder="Réponse"
-                                value="<%= annuaire[0].activite %>">
-                        </div>
-                        <div class="form-group">
                             <label for="titre" class="form-label">Titre du contact</label>
                             <input type="text" id="titre" class="form-input" placeholder="Réponse"
                                 value="<%= annuaire[0].contact_titre %>">
@@ -57,8 +47,6 @@
             event.preventDefault();
             let id = '<%= annuaire[0].id_annuaire %>';
             let annuaire = {
-                logo: document.getElementById('logo').value,
-                activite: document.getElementById('activite').value,
                 contact_titre: document.getElementById('titre').value,
                 contact_nom: document.getElementById('nom').value,
                 contact_prenom: document.getElementById('prenom').value,
