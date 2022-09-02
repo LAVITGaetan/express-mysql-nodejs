@@ -9,38 +9,39 @@
             </div>
             <%- include('includes/navbar.ejs') %>
                 <div class="layout-content">
-                    <div class="ctd" onclick="deletePortrait('<%= portrait[0].id %>')">Supprimer le portrait</div>
-                    <div class="container">
-                        <div class="container-header">Informations générales</div>
-                        <div class="container-row">
-                            <% if (portrait[0].image !=='' ) { %>
-                                <img width="128px" height="128px" class="row-image" src="upload/<%= portrait[0].image %>">
+                    <div class="profil">
+                        <div class="container">
+                            <div class="container-header">Informations générales</div>
+                            <div class="container-row">
+                                <% if (portrait[0].image !=='' ) { %>
+                                    <img width="128px" height="128px" class="row-image"
+                                        src="upload/<%= portrait[0].image %>">
 
-                                <% } else {%>
-                                    <div class="empty-image">
-                                        <img class="add-photo" width="64px" height="64px" src="img/no-photo.png">
-                                    </div>
-<%}%>
+                                    <% } else {%>
+                                        <div class="empty-image">
+                                            <img class="add-photo" width="64px" height="64px" src="img/no-photo.png">
+                                        </div>
+                                        <%}%>
 
-                        </div>
-                        <div class="container-row">
-                            <span class="row-label">
-                                <%= portrait[0].prenom %>
-                                    <%= portrait[0].nom %>
-                            </span>
-
-                        </div>
-                        <div class="container-row">
-                            <div class="row-label">Mandats : <%= representations.length %>
                             </div>
+                            <div class="container-row">
+                                <span class="row-label">
+                                    <%= portrait[0].prenom %>
+                                        <%= portrait[0].nom %>
+                                </span>
+
+                            </div>
+                            <div class="container-row">
+                                <div class="row-label">Mandats : <%= representations.length %>
+                                </div>
+                            </div>
+                            <div class="container-action"><a href="/edit-portrait?id=<%= portrait[0].id %>"
+                                    class="container-cta">Modifier</div></a>
                         </div>
-                        <div class="container-action"><a href="/edit-portrait?id=<%= portrait[0].id %>"
-                                class="container-cta">Modifier</div></a>
-                    </div>
                     
                     <div class="container">
                         <div class="container-header">Mandats</div>
-                        <% if (representations.length > 0) { %>
+                        <% if (representations.length> 0) { %>
                             <% representations.forEach(representation=> { %>
                                 <div class="container-item">
                                     <p class="row-label">
@@ -52,14 +53,19 @@
                                     </div>
                                 </div>
                                 <% }) %>
-                        <% }else {%>
-                            <div class="container-row">Ce portrait est assigné à aucun mandat</div>
-                        <%} %>
-                        
-                                <div class="container-action">
-                                    <div class="container-cta" onclick="showModal()">Lier un mandat</div>
-                                </div>
+                                    <% }else {%>
+                                        <div class="container-row">Ce portrait est assigné à aucun mandat</div>
+                                        <%} %>
+
+                                            <div class="container-action">
+                                                <div class="container-cta" onclick="showModal()">Lier un mandat</div>
+                                            </div>
                     </div>
+                    <div class="profil-ctd" onclick="deletePortrait('<%= portrait[0].id %>')">Supprimer le portrait
+                    </div>
+
+                </div>
+
                 </div>
         </div>
         <div id="modal">

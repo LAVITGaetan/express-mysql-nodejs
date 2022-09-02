@@ -16,7 +16,7 @@
                                     <img class="profil-image" width="128px" height="128px"
                                         src="upload/<%= adherent[0].logo %>" alt="" class="profil-logo">
                                     <% } else { %>
-                                        <img class="profil-image" width="64px" height="64px" src="img/no-photo.png"
+                                        <img class="profil-image" width="48px" height="48px" src="img/add-photo.png"
                                             alt="" class="profil-logo">
                                         <% } %>
                             </div>
@@ -109,7 +109,7 @@
                             <%= adherent[0].parution == 1 ? 'activée' : 'desactivée' %>
                         </div>
 
-                            <div class="container-action"><a href="/edit-adherent?id=<%= adherent[0].id %>"
+                            <div class="container-action"><a href="/edit-annuaire?id=<%= adherent[0].id %>"
                                     class="container-cta">Modifier</div></a>
                         </div>
                         <% if (adherent[0].status==0) { %>
